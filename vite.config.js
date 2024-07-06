@@ -11,6 +11,7 @@ export default defineConfig({
         tailwindcss,
         autoprefixer,
       ],
+      base: '/gallery/'
     },
   },
 });
