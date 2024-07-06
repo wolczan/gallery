@@ -5,13 +5,13 @@ import autoprefixer from 'autoprefixer';
 
 export default defineConfig({
   plugins: [react()],
+  base: '/gallery/', // Replace with your actual repository name
   css: {
     postcss: {
       plugins: [
         tailwindcss,
         autoprefixer,
       ],
-      base: '/gallery/'
     },
   },
 });
