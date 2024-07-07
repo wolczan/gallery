@@ -5,7 +5,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Ensure Bootstrap CSS is imported
 import './App.css'; // Adjust the path based on your file structure
 
-const API = '/assets/video/api.json';
+const API = '/gallery/video/api.json';
 
 function App() {
   const [videos, setVideos] = useState([]);
@@ -14,6 +14,7 @@ function App() {
   const videoRef = useRef();
 
   useEffect(() => {
+    console.log('Fetching videos from API...');
     fetch(API)
       .then(response => response.json())
       .then(data => setVideos(data));
