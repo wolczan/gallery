@@ -5,7 +5,7 @@ import autoprefixer from 'autoprefixer';
 
 export default defineConfig({
   plugins: [react()],
-  base: '/gallery/', // Replace with your actual repository name
+  base: '/gallery/', // Ensure this matches your GitHub repository name
   css: {
     postcss: {
       plugins: [
@@ -14,4 +14,7 @@ export default defineConfig({
       ],
     },
   },
+  build: {
+    outDir: 'dist'
+  }
 });
