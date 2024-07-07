@@ -14,6 +14,7 @@ function App() {
   const videoRef = useRef();
 
   useEffect(() => {
+    console.log('Fetching videos from API...');
     fetch(API)
       .then(response => response.json())
       .then(data => setVideos(data));
