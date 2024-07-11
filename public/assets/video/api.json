@@ -5,7 +5,7 @@
       "description": "Description of Movie 1",
       "trailerUrl": "https://www.example.com/trailers/movie1.mp4",
       "video": "/src/assets/cytrynka.mp4",
-      "cover" : "/src/assets/pic1.jpg"
+      "cover" : "/assets/video/pic2.jpg"
     },
     {
       "id": 2,
