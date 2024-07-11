@@ -36,20 +36,24 @@ function App() {
 
   return (
     <>
-      <Navbar bg="dark" variant="dark" expand="lg" className="navbar-custom">
+      <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect className="navbar-custom">
         <Container className="justify-content-between">
-          <Navbar.Brand href="#home"> <img src="/logo.svg" width="80" height="80" className="d-inline-block " alt="Netflix Logo"/> Library</Navbar.Brand>
-          <Nav className="">
-            <Nav.Link href="#home" className="nav-link-custom">Home</Nav.Link>
-            <Nav.Link href="#home" className="nav-link-custom">About</Nav.Link>
-            <Nav.Link href="#pricing" className="nav-link-custom">Films</Nav.Link>
-            <Nav.Link href="#features" className="nav-link-custom">Images</Nav.Link>
-            <Nav.Link href="#pricing" className="nav-link-custom">My List</Nav.Link>
-            <Nav.Link href="#pricing" className="nav-link-custom">Latest</Nav.Link>
-            <Nav.Link href="#pricing" className="nav-link-custom">Contact</Nav.Link>
-            <Nav.Link href="#signin" className="nav-link-custom btn btn-custom">Sign In</Nav.Link>
-            <Nav.Link href="#signup" className="nav-link-custom btn btn-custom">Sign Up</Nav.Link>
-          </Nav>
+          <Navbar.Brand href="#home"> <img src="public/logo.svg" width="80" height="70"  className="d-inline-block " alt="Netflix Logo"/> Library
+          </Navbar.Brand>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav">
+            <Nav className="mx-auto">
+              <Nav.Link href="#home" className="nav-link-custom">Home</Nav.Link>
+              <Nav.Link href="#home" className="nav-link-custom">About</Nav.Link>
+              <Nav.Link href="#pricing" className="nav-link-custom">Films</Nav.Link>
+              <Nav.Link href="#features" className="nav-link-custom">Images</Nav.Link>
+              <Nav.Link href="#pricing" className="nav-link-custom">My List</Nav.Link>
+              <Nav.Link href="#pricing" className="nav-link-custom">Latest</Nav.Link>
+              <Nav.Link href="#pricing" className="nav-link-custom">Contact</Nav.Link>
+              <Nav.Link href="#signin" className="nav-link-custom btn btn-custom">Sign In</Nav.Link>
+              <Nav.Link href="#signup" className="nav-link-custom btn btn-custom">Sign Up</Nav.Link>
+            </Nav>
+            </Navbar.Collapse>
         </Container>
       </Navbar>
 
