@@ -38,7 +38,7 @@ function App() {
     <>
       <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect className="navbar-custom">
         <Container className="justify-content-between">
-          <Navbar.Brand href="#home"> <img src="public/logo.svg" width="80" height="70"  className="d-inline-block " alt="Netflix Logo"/> Library
+          <Navbar.Brand href="#home"> <img src="/logo.svg" width="80" height="70"  className="d-inline-block " alt="Netflix Logo"/> Library
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
