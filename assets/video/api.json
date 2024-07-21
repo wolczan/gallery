@@ -13,7 +13,8 @@
       "description": "Description of Movie 2",
       "trailerUrl": "https://www.example.com/trailers/movie2.mp4",
       "video": "/src/assets/miki.mp4",
-      "cover" : "/src/assets/pic2.jpg"
+      "cover" : "https://raw.githubusercontent.com/wolczan/gallery/main/assets/video/pic2.jpg"
+
     },
     {
       "id": 3,
