@@ -5,7 +5,7 @@
       "description": "Description of Movie 1",
       "trailerUrl": "https://www.example.com/trailers/movie1.mp4",
       "video": "/src/assets/cytrynka.mp4",
-      "cover" : "/assets/video/pic2.jpg"
+      "cover" : "https://raw.githubusercontent.com/wolczan/gallery/main/assets/video/pic1.jpg"
     },
     {
       "id": 2,
@@ -22,7 +22,7 @@
       "description": "Busta Rhymes",
       "trailerUrl": "https://www.example.com/trailers/kon1.mp4",
       "video": "/src/assets/kon1.mp4",
-      "cover" : "/src/assets/miki2.jpg"
+      "cover" : "https://raw.githubusercontent.com/wolczan/gallery/main/assets/video/pic2.jpg"
     },
     {
       "id": 4,
