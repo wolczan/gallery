@@ -38,8 +38,6 @@
       "title": "Przedszkole Miejskie",
       "description": "Mikołaj dzwoni! Kto jest na liście grzecznych dzieci? Zobacz sam i sprawdz!!!",
       "trailerUrl": "https://www.example.com/trailers/kon1.mp4",
-      "video": "/src/assets/kon1.mp4",
-      "cover" : "https://github.com/wolczan/gallery/blob/main/assets/video/urodziny.jpg",
       "video": "https://raw.githubusercontent.com/wolczan/gallery/main/assets/video/telefon.mp4",
       "cover" : "https://raw.githubusercontent.com/wolczan/gallery/main/assets/video/natus.jpg",
       "altText": "Movie Title 1 cover image"
@@ -49,8 +47,6 @@
       "title": "Maciej Liberadzki",
       "description": "Main image",
       "trailerUrl": "https://www.example.com/trailers/kon1.mp4",
-      "video": "/src/assets/kon1.mp4",
-      "cover" : "https://github.com/wolczan/gallery/blob/main/assets/video/sportowo.jpg",
       "video": "https://raw.githubusercontent.com/wolczan/gallery/main/assets/video/staw.mp4",
       "cover" : "https://raw.githubusercontent.com/wolczan/gallery/main/assets/video/sportowo.jpg",
       "altText": "Movie Title 1 cover image"

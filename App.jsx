@@ -38,7 +38,7 @@ function App() {
     <>
       <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect className="navbar-custom">
         <Container className="justify-content-between">
-          <Navbar.Brand href="#home"> <img src="public/logo.svg" width="80" height="70"  className="d-inline-block " alt="Netflix Logo"/> Library
+          <Navbar.Brand href="#home"> <img src="https://raw.githubusercontent.com/wolczan/gallery/main/logo.svg" width="80" height="70"  className="d-inline-block " alt="Netflix Logo"/> Library
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
@@ -57,18 +57,18 @@ function App() {
         </Container>
       </Navbar>
 
-      <div className='min-h-screen w-full bg-black text-white flex flex-col items-center justify-center '>
-        <section className='relative p-8 text-center  rounded-lg shadow-lg relative min-w-full min-h-[300px]  '>
+      <div className='min-h-screen w-full bg-black text-white flex flex-col items-center justify-center'>
+        <section className='relative p-8 text-center  rounded-lg shadow-lg relative min-w-full min-h-[300px] '>
 
           {!playing && (
-            <img src={videos[selectedVideo].cover} className='centered-image h-full object-contain rounded-lg border-2 border-yellow-500 '/>
+            <img src={videos[selectedVideo].cover} className='centered-image h-full object-contain rounded-lg border-1'/>
           )}
           
           <video ref={videoRef} style={{ height: '250px', width: 'auto' }} className={`border-2  mx-auto w-2/4 object-cover shadow-lg ${playing ? 'opacity-100' : 'opacity-0'}`} controls>
             <source src={videos[selectedVideo].video} type="video/mp4"/>
           </video>
 
-          <div className='mt-4 relative z-10  p-4 rounded'>
+          <div className='mt-4 relative z-10 p-4 rounded  '>
             <h2 className ='text-2xl font-bold text-white'>{videos[selectedVideo].title}</h2>
             <p className='text-white'>
               {videos[selectedVideo].description}
@@ -79,10 +79,10 @@ function App() {
     
         <section>
           <h1 className="text-2xl font-bold mb-4 text-center mt-8">Browse Library</h1>
-          <div className="flex flex-wrap justify-center items-center">
+          <div className="flex flex-wrap justify-center items-center border-3 ">
             {videos.map((video, index) => (
-              <div key={video.id} onClick={() => setSelectedVideo(index)} className={`cursor-pointer ${videos[selectedVideo].id === video.id ? 'border-4 ' : 'border-2 border-gray-200'} m-4 rounded-lg overflow-hidden transition transform hover:scale-105 duration-300 ease-in-out`}>
-                <img src={video.cover} className='w-32 h-48 object-cover rounded-lg' alt='' />
+              <div key={video.id} onClick={() => setSelectedVideo(index)} className={`cursor-pointer ${videos[selectedVideo].id === video.id ? 'border-1 ' : 'border-1 border-gray-200'} m-4 rounded-lg overflow-hidden transition transform hover:scale-105 duration-300 ease-in-out`}>
+                <img src={video.cover} className='w-42 h-48 object-cover rounded-lg' alt='' />
               </div>
             ))}
           </div>
