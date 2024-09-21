@@ -1,0 +1,94 @@
+#root {
+  /*max-width: 1280px; 
+  margin: 0 auto;
+  padding: 2rem; */
+  text-align: center;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.btn-custom {
+  background-color: #b90b14; /* Netflix red background */
+  border-color: #b90b14; /* Netflix red border */
+  color: white; /* White text color */
+}
+.nav-link-custom:hover, .btn-custom:hover {
+  background-color: #e50914; /* Netflix red on hover */
+  color: white; /* White text color */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  transform: scale(1.05); /* Slightly increase size on hover */
+  border-radius: 10px;
+}
+
+.nav-link-custom {
+  margin-right: 1rem; /* Custom margin between links */
+  color: white;
+}
+
+
+.flex-center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative; /* Still needed if overlaying other content */
+  height: 100%; /* Ensure it has a defined height */
+}
+.centered-image {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1); 
+  object-fit: contain; 
+  max-width: 60%; 
+  max-height: 50%; 
+  width: auto;
+  height: auto; 
+  transition: transform 0.3s ease-in-out;
+  transform-origin: center;
+  
+}
+.centered-image:hover {
+  transform: translate(-50%, -50%) scale(1.05); /* Apply scale on hover */
+}
+
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
