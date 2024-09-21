@@ -1,4 +1,0 @@
-[submodule "node_modules/.cache/gh-pages"]
-  path = node_modules/.cache/gh-pages
-  url = https://github.com/wolczan/gallery.git
-  branch = gh-pages
