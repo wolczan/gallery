@@ -1,7 +1,8 @@
 #root {
-  /*max-width: 1280px; 
+ /* max-width: 1280px; 
   margin: 0 auto;
-  padding: 2rem; */
+  padding: 2rem; */ 
+  height: 100%;
   text-align: center;
 }
 
@@ -10,6 +11,7 @@ html, body {
   width: 100%;
   margin: 0;
   padding: 0;
+  overflow-x: hidden; 
 }
 
 .btn-custom {
@@ -38,6 +40,7 @@ html, body {
   position: relative; /* Still needed if overlaying other content */
   height: 100%; /* Ensure it has a defined height */
 }
+
 .centered-image {
   position: absolute;
   top: 30%;
@@ -69,6 +72,14 @@ html, body {
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
+.hover-enlarge {
+  transition: transform 0.2s ease-in-out;
+}
+
+.hover-enlarge:hover {
+  transform: scale(1.05);
+}
+
 
 @keyframes logo-spin {
   from {

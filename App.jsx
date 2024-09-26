@@ -2,8 +2,11 @@ import React, { useState, useEffect, useRef } from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import 'bootstrap/dist/css/bootstrap.min.css'; // Ensure Bootstrap CSS is imported
-import './App.css'; // Adjust the path based on your file structure
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
+import ToDoWrapper from './src/assets/ToDoWrapper';
+import './index.css';
+
 
 const API = '/gallery/assets/video/api.json';
 
@@ -28,7 +31,10 @@ function App() {
     }
   }, [videos, selectedVideo]);
 
-  const handlePlay = () => setPlaying(playing => !playing);
+  const handlePlay = () => {
+    setPlaying(prev => !prev);  // Toggle the playing state
+  };
+  
 
   if (videos.length < 1) {
     return <div>Loading...</div>;
@@ -57,37 +63,100 @@ function App() {
         </Container>
       </Navbar>
 
-      <div className='min-h-screen w-full bg-black text-white flex flex-col items-center justify-center'>
-        <section className='relative p-8 text-center  rounded-lg shadow-lg relative min-w-full min-h-[300px] '>
-
-          {!playing && (
-            <img src={videos[selectedVideo].cover} className='centered-image h-full object-contain rounded-lg border-1'/>
-          )}
-          
-          <video ref={videoRef} style={{ height: '250px', width: 'auto' }} className={`border-2  mx-auto w-2/4 object-cover shadow-lg ${playing ? 'opacity-100' : 'opacity-0'}`} controls>
-            <source src={videos[selectedVideo].video} type="video/mp4"/>
-          </video>
-
-          <div className='mt-4 relative z-10 p-4 rounded  '>
-            <h2 className ='text-2xl font-bold text-white'>{videos[selectedVideo].title}</h2>
-            <p className='text-white'>
-              {videos[selectedVideo].description}
-            </p>
-            <button onClick={handlePlay} className='nt-4 bg-red-500 hover:bg-red-700 py-2 px-4 rounded-full relative z-10'>{playing ? 'STOP' : 'PLAY'}</button>
-          </div>
-        </section>
+      <div className=" min-h-screen bg-black text-white flex items-center justify-center">
+          {/* Outer container */}
+          {/*<div className="w-full max-w-6xl h-[90vh] p-8 flex flex-col items-center justify-center ">
+            Inner container */}
     
-        <section>
-          <h1 className="text-2xl font-bold mb-4 text-center mt-8">Browse Library</h1>
-          <div className="flex flex-wrap justify-center items-center border-3 ">
-            {videos.map((video, index) => (
-              <div key={video.id} onClick={() => setSelectedVideo(index)} className={`cursor-pointer ${videos[selectedVideo].id === video.id ? 'border-1 ' : 'border-1 border-gray-200'} m-4 rounded-lg overflow-hidden transition transform hover:scale-105 duration-300 ease-in-out`}>
-                <img src={video.cover} className='w-42 h-48 object-cover rounded-lg' alt='' />
-              </div>
-            ))}
-          </div>
-        </section>
+    <section
+      className="flex flex-row items-center space-x-4 p-4  w-full" // todo & image
+      style={{ justifyContent: 'space-evenly' }}
+      >
+
+      <ToDoWrapper className="flex-shrink-0 w-[25%] sm:w-[30%] lg:w-[25%] border-1 p-4" />
+  
+        {/* Video or Image next to the ToDoWrapper */}
+        <div className="flex-shrink-0 w-[15%] sm:w-[20%] lg:w-[11%] flex items-center justify-center">
+          {playing && videos.length > 0 ? (
+            <video
+              ref={videoRef}
+              src={videos[selectedVideo]?.video}  // Dynamically load the video source
+              className="object-cover rounded-lg w-full h-full"
+              controls
+              autoPlay  // Start playing automatically
+              style={{ width: '250px', height: '350px' }}
+            />
+          ) : (
+            <img
+              src={videos[selectedVideo]?.cover}  // Dynamically load the image source
+              alt="Video cover"
+              style={{ width: '170px', height: '270px' }}
+              className="hover-enlarge object-cover rounded-lg w-full h-full"
+            />
+          )}
+        </div>
+      </section>
+
+
+  </div>
+
+<div className='relative z-10 p-4 rounded bg-black text-white '>  {/* Description section */}
+  <h2 style={{
+    fontSize: '1.5rem',   // Corresponds to Tailwind's 'text-2xl'
+    fontWeight: 'bold',   // Corresponds to Tailwind's 'font-bold'
+    color: 'white'        // Corresponds to Tailwind's 'text-white'
+  }}
+  className='text-2xl font-bold text-white'>{videos[selectedVideo].title}
+  </h2>
+  
+  <p className='text-white'>
+    {videos[selectedVideo].description}
+  </p>
+  <button
+  onClick={handlePlay}  // Just toggle playing state
+  className='bg-red-700 hover:bg-red-600 active:bg-red-500 py-2 px-4 rounded-full relative z-10'
+  style={{ backgroundColor: playing ? 'green' : 'red', borderRadius: '12px' }}
+  onMouseOver={(e) => e.currentTarget.style.backgroundColor = 'cherryred'}  // On hover, change to cherry red
+  onMouseOut={(e) => e.currentTarget.style.backgroundColor = 'red'}  // On mouse out, change back to normal red
+  onMouseDown={(e) => e.currentTarget.style.backgroundColor = 'darkred'}  // On click, change to darker cherry
+  onMouseUp={(e) => e.currentTarget.style.backgroundColor = 'cherryred'}  // On release, change back to cherry red
+>
+  {playing ? 'STOP' : 'PLAY'}
+</button>
+
+
+</div>
+
+<section className="min-h-screen bg-black flex flex-col items-center">
+  <h1 className="text-2xl font-bold mb-4 text-center mt-8 text-white">Browse Library</h1>
+  <div className="flex flex-wrap justify-center  p-5 gap-0.5 max-w-screen-lg mx-auto">
+    {videos.map((video, index) => (
+      <div 
+        key={video.id} 
+        onClick={() => setSelectedVideo(index)} 
+        className="hover-enlarge border-1 m-4 rounded-lg overflow-hidden cursor-pointer"  // Applying hover-enlarge class
+        style={{ width: '150px', height: '180px', borderRadius: '6px' }}  // Fixed width and height
+      >
+        <img 
+          src={video.cover} 
+          className="object-cover w-full h-full rounded-lg"  // Ensure images fill their containers
+          alt={video.title} 
+        />
       </div>
+    ))}
+  </div>
+</section>
+
+<div className="w-32 h-32 bg-blue-500 transition-transform transform hover:scale-105 duration-100"></div>
+
+
+
+
+
+
+
+
+
     </>
   );
 }

@@ -1,6 +1,12 @@
 /** @type {import('tailwindcss').Config} */
-export const content = ["./src/**/*.{html,js,jsx,ts,tsx}"];
-export const theme = {
-  extend: {},
+const config = {
+  content: ["./src/**/*.{html,js,jsx,ts,tsx}"],
+  theme: {
+    extend: {
+      backgroundColor: ['hover'],
+    },
+  },
+  plugins: [],
 };
-export const plugins = [];
+
+export default config;
