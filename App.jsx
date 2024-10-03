@@ -6,6 +6,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import ToDoWrapper from './src/assets/ToDoWrapper';
 import './index.css';
+import ToDo from './src/assets/ToDo';
+
+
 
 
 const API = '/gallery/assets/video/api.json';
@@ -65,15 +68,13 @@ function App() {
 
       <div className=" min-h-screen bg-black text-white flex items-center justify-center">
           {/* Outer container */}
-          {/*<div className="w-full max-w-6xl h-[90vh] p-8 flex flex-col items-center justify-center ">
-            Inner container */}
-    
-    <section
-      className="flex flex-row items-center space-x-4 p-4  w-full" // todo & image
-      style={{ justifyContent: 'space-evenly' }}
-      >
+          
+        <section
+          className="flex flex-row items-center space-x-4 p-4  w-full" // todo & image
+          style={{ justifyContent: 'space-evenly' }}
+          >
 
-      <ToDoWrapper className="flex-shrink-0 w-[25%] sm:w-[30%] lg:w-[25%] border-1 p-4" />
+          <ToDoWrapper className="flex-shrink-0 w-[25%] sm:w-[30%] lg:w-[25%] border-1 p-4" />
   
         {/* Video or Image next to the ToDoWrapper */}
         <div className="flex-shrink-0 w-[15%] sm:w-[20%] lg:w-[11%] flex items-center justify-center">
@@ -81,7 +82,7 @@ function App() {
             <video
               ref={videoRef}
               src={videos[selectedVideo]?.video}  // Dynamically load the video source
-              className="object-cover rounded-lg w-full h-full"
+              className="object-cover rounded-lg w-full h-full border-1 "
               controls
               autoPlay  // Start playing automatically
               style={{ width: '250px', height: '350px' }}
@@ -148,14 +149,6 @@ function App() {
 </section>
 
 <div className="w-32 h-32 bg-blue-500 transition-transform transform hover:scale-105 duration-100"></div>
-
-
-
-
-
-
-
-
 
     </>
   );

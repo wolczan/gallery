@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';  // Import PropTypes
 
 function ToDoForm({ onSubmit }) {
   const [task, setTask] = useState('');
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault();  //site doesnt load
     if (task.trim()) {
       onSubmit(task);
       setTask('');  // Reset input field
@@ -15,10 +16,10 @@ function ToDoForm({ onSubmit }) {
     <form className="flex flex-col space-y-4 w-[300px] !important" onSubmit={handleSubmit}>
       <input 
         type="text" 
-        className="p-2 border rounded w-full text-black"  // Ensure input is not affected by global styles
+        className="p-2 border rounded w-full text-black"  
         placeholder="What is the task today?"
         value={task}
-        onChange={(e) => setTask(e.target.value)}  // Update state on input change
+        onChange={(e) => setTask(e.target.value)}  
       />
       <button 
         type="submit" 
@@ -28,5 +29,10 @@ function ToDoForm({ onSubmit }) {
     </form>
   );
 }
+
+// Add PropTypes validation
+ToDoForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,  // onSubmit is a required function prop
+};
 
 export default ToDoForm;
