@@ -6,10 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import ToDoWrapper from './src/assets/ToDoWrapper';
 import './index.css';
-import ToDo from './src/assets/ToDo';
-
-
-
+import ToDo from './src/assets/TempToDo';
 
 const API = '/gallery/assets/video/api.json';
 
@@ -74,7 +71,7 @@ function App() {
           style={{ justifyContent: 'space-evenly' }}
           >
 
-          <ToDoWrapper className="flex-shrink-0 w-[25%] sm:w-[30%] lg:w-[25%] border-1 p-4" />
+          <ToDoWrapper className="flex-shrink-0 w-[25%] sm:w-[30%] lg:w-[25%] border-1 p-3" />
   
         {/* Video or Image next to the ToDoWrapper */}
         <div className="flex-shrink-0 w-[15%] sm:w-[20%] lg:w-[11%] flex items-center justify-center">

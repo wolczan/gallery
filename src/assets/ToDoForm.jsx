@@ -13,7 +13,7 @@ function ToDoForm({ onSubmit }) {
   };
 
   return (
-    <form className="flex flex-col space-y-4 w-[300px] !important" onSubmit={handleSubmit}>
+    <form className="flex flex-col space-y-4 w-[220px] !important" onSubmit={handleSubmit}>
       <input 
         type="text" 
         className="p-2 border rounded w-full text-black"  

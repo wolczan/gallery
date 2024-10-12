@@ -28,6 +28,16 @@ html, body {
   display: flex;
   gap: 10px;
 }
+.custom-heading {
+  margin-bottom: 3px;
+  margin-top: -10px;
+}
+.completed {
+  text-decoration: line-through;
+  color: gray;
+}
+
+
 
 /* Optional: Styling for task text */
 .Todo p {
