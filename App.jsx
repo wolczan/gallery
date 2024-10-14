@@ -44,7 +44,7 @@ function App() {
     <>
       <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect className="navbar-custom">
         <Container className="justify-content-between">
-          <Navbar.Brand href="#home"> <img src="https://raw.githubusercontent.com/wolczan/gallery/main/logo.svg" width="80" height="70"  className="d-inline-block " alt="Netflix Logo"/> Library
+          <Navbar.Brand href="#home"> <img src='./napis.webp' width="50" height="60"  className="d-inline-block " alt=""/> Gallery 
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
@@ -71,7 +71,7 @@ function App() {
           style={{ justifyContent: 'space-evenly' }}
           >
 
-          <ToDoWrapper className="flex-shrink-0 w-[25%] sm:w-[30%] lg:w-[25%] border-1 p-3" />
+          <ToDoWrapper className="flex-shrink-0 w-[25%] sm:w-[30%] lg:w-[25%] border-1 p-2" />
   
         {/* Video or Image next to the ToDoWrapper */}
         <div className="flex-shrink-0 w-[15%] sm:w-[20%] lg:w-[11%] flex items-center justify-center">
@@ -133,7 +133,7 @@ function App() {
         key={video.id} 
         onClick={() => setSelectedVideo(index)} 
         className="hover-enlarge border-1 m-4 rounded-lg overflow-hidden cursor-pointer"  // Applying hover-enlarge class
-        style={{ width: '150px', height: '180px', borderRadius: '6px' }}  // Fixed width and height
+        style={{ width: '129px', height: '170px', borderRadius: '6px' }}  // Fixed width and height
       >
         <img 
           src={video.cover} 

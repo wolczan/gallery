@@ -19,14 +19,21 @@ html, body {
   display: flex;
   align-items: center;  /* Align items vertically in the center */
   justify-content: space-between; /* Space between task and icons */
-  padding: 10px;
+  padding: 4px;
   border: 1px solid #ccc;
-  border-radius: 5px;
-  margin: 10px;
+  border-radius: 15px;
+  margin: 4px;
 }
 .icon-container {
   display: flex;
   gap: 10px;
+}
+.edit-input {
+  color: black; /* Ensure the text color is visible */
+  background-color: white; /* Ensure the background color contrasts with the text */
+  border: 1px solid #ccc; /* Optional: make the border more visible */
+  padding: 5px;
+  width: 100%; /* Optional: make the input field fill the container */
 }
 .custom-heading {
   margin-bottom: 3px;

@@ -35,7 +35,7 @@ const ToDo = ({ task, toggleComplete, deleteTodo, editTodo }) => {
           className="edit-input"
         />
       ) : (
-        <p>{task.text}</p>
+        <p onClick={() => toggleComplete(task.id, task.completed)}>{task.text}</p>
       )}
       
       <div className="icon-container">
@@ -79,7 +79,7 @@ const ToDo = ({ task, toggleComplete, deleteTodo, editTodo }) => {
 // Define propTypes to validate props
 ToDo.propTypes = {
   task: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
     completed: PropTypes.bool.isRequired,
   }).isRequired,

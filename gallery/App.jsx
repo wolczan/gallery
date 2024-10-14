@@ -66,7 +66,7 @@ function App() {
             <img src={videos[selectedVideo].cover} className='centered-image h-full object-contain rounded-lg border-2 border-yellow-500 '/>
           )}
           
-          <video ref={videoRef} style={{ height: '250px', width: 'auto' }} className={`border-2  mx-auto w-2/4 object-cover shadow-lg ${playing ? 'opacity-100' : 'opacity-0'}`} controls>
+          <video ref={videoRef} style={{ height: '150px', width: 'auto' }} className={`border-2  mx-auto w-2/4 object-cover shadow-lg ${playing ? 'opacity-100' : 'opacity-0'}`} controls>
             <source src={videos[selectedVideo].video} type="video/mp4"/>
           </video>
 
