@@ -44,7 +44,7 @@ function App() {
     <>
       <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect className="navbar-custom">
         <Container className="justify-content-between">
-          <Navbar.Brand href="#home"> <img src='./napis.webp' width="50" height="60"  className="d-inline-block " alt=""/> Gallery 
+          <Navbar.Brand href="#home"> <img src='https://raw.githubusercontent.com/wolczan/gallery/refs/heads/main/napis.webp' width="50" height="60"  className="d-inline-block " alt=""/> Gallery 
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
@@ -82,7 +82,7 @@ function App() {
               className="object-cover rounded-lg w-full h-full border-1 "
               controls
               autoPlay  // Start playing automatically
-              style={{ width: '250px', height: '350px' }}
+              style={{ width: '', height: '270px' }}
             />
           ) : (
             <img
@@ -98,7 +98,7 @@ function App() {
 
   </div>
 
-<div className='relative z-10 p-4 rounded bg-black text-white '>  {/* Description section */}
+<div className='relative z-10 p-1 rounded bg-black text-white '>  {/* Description section */}
   <h2 style={{
     fontSize: '1.5rem',   // Corresponds to Tailwind's 'text-2xl'
     fontWeight: 'bold',   // Corresponds to Tailwind's 'font-bold'
