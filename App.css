@@ -5,6 +5,23 @@
   height: 100%;
   text-align: center;
 }
+.bottom-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgb(26, 159, 33);
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+  z-index: 1000;  /* Ensures it stays above other content */
+}
+.footer-content {
+  padding: 20px;
+  background-color: #1f35b4;
+  color: white;
+  text-align: center;
+}
 
 
 html, body {
@@ -13,6 +30,7 @@ html, body {
   margin: 0;
   padding: 0;
   overflow-x: hidden; 
+  background-color: black;
 }
 /* Apply Flexbox to the existing .Todo container */
 .Todo {
@@ -33,7 +51,8 @@ html, body {
   background-color: white; /* Ensure the background color contrasts with the text */
   border: 1px solid #ccc; /* Optional: make the border more visible */
   padding: 5px;
-  width: 100%; /* Optional: make the input field fill the container */
+  width: 70%;
+  margin-bottom: 5px; /* Optional: make the input field fill the container */
 }
 .custom-heading {
   margin-bottom: 3px;

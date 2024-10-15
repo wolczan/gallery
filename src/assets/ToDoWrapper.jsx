@@ -75,7 +75,7 @@ const ToDoWrapper = ({ className }) => {
 
   return (
     <div className={`TodoWrapper ${className}`}>
-      <h1 className="mb-[9px] -mt-2">Nasza lista ToDo!</h1>
+      <h1 className="mb-[9px] -mt-0.5">Together We Achieve!</h1>
       <ToDoForm onSubmit={handleSubmit} />
       
       {/* Render TaskList component and pass tasks and handler functions as props */}

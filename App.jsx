@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import ToDoWrapper from './src/assets/ToDoWrapper';
 import './index.css';
-import ToDo from './src/assets/TempToDo';
+import Footer from './Footer.jsx';
 
 const API = '/gallery/assets/video/api.json';
 
@@ -67,14 +67,14 @@ function App() {
           {/* Outer container */}
           
         <section
-          className="flex flex-row items-center space-x-4 p-4  w-full" // todo & image
+          className="flex flex-row items-center space-x-4 p-1  w-full" // todo & image
           style={{ justifyContent: 'space-evenly' }}
           >
 
-          <ToDoWrapper className="flex-shrink-0 w-[25%] sm:w-[30%] lg:w-[25%] border-1 p-2" />
+          <ToDoWrapper className="flex-shrink-0 w-[25%] sm:w-[30%] lg:w-[25%] border-1 p-1 rounded-lg shadow-2xl shadow-white bg-black   " />
   
         {/* Video or Image next to the ToDoWrapper */}
-        <div className="flex-shrink-0 w-[15%] sm:w-[20%] lg:w-[11%] flex items-center justify-center">
+        <div className="flex-shrink-0 w-[15%] sm:w-[20%] lg:w-[11%] flex items-center justify-center border-1 rounded-lg shadow-2xl shadow-white bg-black">
           {playing && videos.length > 0 ? (
             <video
               ref={videoRef}
@@ -112,8 +112,8 @@ function App() {
   </p>
   <button
   onClick={handlePlay}  // Just toggle playing state
-  className='bg-red-700 hover:bg-red-600 active:bg-red-500 py-2 px-4 rounded-full relative z-10'
-  style={{ backgroundColor: playing ? 'green' : 'red', borderRadius: '12px' }}
+  className='bg-red-700 hover:bg-red-600 active:bg-red-500 py-0.5 px-3 rounded-full relative z-10'
+  style={{ backgroundColor: playing ? 'green' : 'red', borderRadius: '19px' }}
   onMouseOver={(e) => e.currentTarget.style.backgroundColor = 'cherryred'}  // On hover, change to cherry red
   onMouseOut={(e) => e.currentTarget.style.backgroundColor = 'red'}  // On mouse out, change back to normal red
   onMouseDown={(e) => e.currentTarget.style.backgroundColor = 'darkred'}  // On click, change to darker cherry
@@ -126,13 +126,16 @@ function App() {
 </div>
 
 <section className="min-h-screen bg-black flex flex-col items-center">
-  <h1 className="text-2xl font-bold mb-4 text-center mt-8 text-white">Browse Library</h1>
-  <div className="flex flex-wrap justify-center  p-5 gap-0.5 max-w-screen-lg mx-auto">
+<h1 className="text-4xl md:text-5xl font-extrabold  text-center mt-12 text-white drop-shadow-lg tracking-wide">
+  Browse Library
+</h1>
+  <div className="flex flex-wrap justify-center items-center p-4 max-w-screen-lg mx-auto min-h-screen">
+
     {videos.map((video, index) => (
       <div 
         key={video.id} 
         onClick={() => setSelectedVideo(index)} 
-        className="hover-enlarge border-1 m-4 rounded-lg overflow-hidden cursor-pointer"  // Applying hover-enlarge class
+        className="hover-enlarge border-1 m-2 rounded-lg overflow-hidden cursor-pointer"  // Applying hover-enlarge class
         style={{ width: '129px', height: '170px', borderRadius: '6px' }}  // Fixed width and height
       >
         <img 
@@ -146,7 +149,7 @@ function App() {
 </section>
 
 <div className="w-32 h-32 bg-blue-500 transition-transform transform hover:scale-105 duration-100"></div>
-
+<Footer />
     </>
   );
 }

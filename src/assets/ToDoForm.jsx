@@ -28,17 +28,17 @@ function ToDoForm() { // Removed onSubmit prop since we handle Firestore directl
   };
 
   return (
-    <form className="flex flex-col space-y-4  !important" onSubmit={handleSubmit}>
+    <form className="flex flex-col space-y-2  !important" onSubmit={handleSubmit}>
       <input 
         type="text" 
-        className="p-0.5 border border-gray-300 rounded-lg w-full text-black focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-shadow shadow-sm hover:shadow-md"  
+        className="mt-[1px] border border-gray-300 rounded-lg w-full text-black focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-shadow shadow-sm hover:shadow-md"  
         placeholder="What is the task today?"
         value={task}
         onChange={(e) => setTask(e.target.value)}  
       />
       <button 
         type="submit" 
-        className="px-4 py-0.5 mb-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition transform hover:scale-105">
+        className="px-4 py-0.5 mb-1 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition transform hover:scale-105">
         Add Task
       </button>
     </form>
