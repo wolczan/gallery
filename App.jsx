@@ -7,6 +7,7 @@ import './App.css';
 import ToDoWrapper from './src/assets/ToDoWrapper';
 import './index.css';
 import Footer from './Footer.jsx';
+import SearchBar from './SearchBar.jsx';
 
 const API = '/gallery/assets/video/api.json';
 
@@ -46,6 +47,9 @@ function App() {
         <Container className="justify-content-between">
           <Navbar.Brand href="#home"> <img src='https://raw.githubusercontent.com/wolczan/gallery/refs/heads/main/napis.webp' width="50" height="60"  className="d-inline-block " alt=""/> Gallery 
           </Navbar.Brand>
+
+          <SearchBar />  {/* Insert the search component */}
+
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="mx-auto">
