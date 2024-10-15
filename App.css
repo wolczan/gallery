@@ -100,7 +100,10 @@ html, body {
   margin-right: 1rem; /* Custom margin between links */
   color: white;
 }
-
+.flex {
+  display:flex;
+  justify-content: center;
+}
 
 .flex-center-container {
   display: flex;

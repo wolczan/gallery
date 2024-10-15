@@ -88,7 +88,7 @@ function App() {
             <img
               src={videos[selectedVideo]?.cover}  // Dynamically load the image source
               alt="Video cover"
-              style={{ width: '170px', height: '270px' }}
+              style={{ width: '150px', height: '270px' }}
               className="hover-enlarge object-cover rounded-lg w-full h-full"
             />
           )}
