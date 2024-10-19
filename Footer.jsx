@@ -2,7 +2,7 @@ import { Container, Row, Col, Stack, Image } from "react-bootstrap";
 
 function Footer() {
   return (
-    <footer className="text-center text-lg-start text-white" style={{ backgroundColor: "#1c2331" }}>
+    <footer className="text-center text-lg-start text-white" style={{ backgroundColor: "" }}>
       {/* Social media section */}
       <section className="d-flex justify-content-between p-4" style={{ backgroundColor: "#6351ce" }}>
         {/* Left */}
@@ -93,7 +93,7 @@ function Footer() {
               <p><i className="fas fa-home mr-3"></i> Srebrzynska Park, Lodz, Poland</p>
               <p><i className="fas fa-envelope mr-3"></i> info@example.com</p>
               <p><i className="fas fa-phone mr-3"></i> + 01 234 567 88</p>
-              <p><i className="fas fa-print mr-3"></i> + 01 234 567 89</p>
+              <p><i className=""></i></p>
             </Col>
           </Row>
         </Container>

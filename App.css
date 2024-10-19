@@ -30,7 +30,11 @@ html, body {
   margin: 0;
   padding: 0;
   overflow-x: hidden; 
-  background-color: black;
+  background-image: url('back.jpg'); /* Path to the image */
+  background-size: cover; /* Make sure the image covers the whole screen */
+  background-position: center; /* Center the background image */
+  background-repeat: no-repeat; /* Prevent repeating the image */
+  min-height: 100vh; /* Ensure the body takes the full viewport height */
 }
 /* Apply Flexbox to the existing .Todo container */
 .Todo {
@@ -81,12 +85,36 @@ html, body {
   cursor: pointer; /* Make the icons clickable */
   font-size: 20px; /* Adjust icon size */
 }
+ .nav-link-custom {
+  display: flex;
+  align-items: center;
+  padding-top: 0;
+  padding-bottom: 0;
+  height: 25px; /* Same as the height of your navbar */
+}
+.navbar-custom {
+
+}
+@media (max-width: 992px) {
+  .custom-margin-top {
+    margin-top: -8px;
+  }
+}
+
 
 
 .btn-custom {
   background-color: #b90b14; /* Netflix red background */
   border-color: #b90b14; /* Netflix red border */
+  
+  line-height: 40px; /* Vertically center the text */
   color: white; /* White text color */
+  padding: 0 10px; /* Horizontal padding */
+  display: flex;
+  align-items: center; /* Ensure the text inside is vertically centered */
+  justify-content: center; /* Center text horizontally */
+  border-radius: 4px; /* Optional: Add slight rounding */
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
 }
 .nav-link-custom:hover, .btn-custom:hover {
   background-color: #e50914; /* Netflix red on hover */
@@ -97,7 +125,7 @@ html, body {
 }
 
 .nav-link-custom {
-  margin-right: 1rem; /* Custom margin between links */
+  margin-right: 0.5rem; /* Custom margin between links */
   color: white;
 }
 .flex {
@@ -174,4 +202,15 @@ html, body {
 
 .read-the-docs {
   color: #888;
+}
+
+@media (max-width: 992px) {
+  .navbar-custom .navbar-toggler {
+    padding-bottom: 20px; /* Add padding or margin to the hamburger menu only at smaller screen sizes */
+  }
+
+  .navbar-custom .navbar-brand,
+  .navbar-custom .search-bar {
+    align-items: center; /* Ensure these items stay centered */
+  }
 }
