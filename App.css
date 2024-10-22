@@ -100,13 +100,10 @@ html, body {
     margin-top: -8px;
   }
 }
-
-
-
+ 
 .btn-custom {
   background-color: #b90b14; /* Netflix red background */
   border-color: #b90b14; /* Netflix red border */
-  
   line-height: 40px; /* Vertically center the text */
   color: white; /* White text color */
   padding: 0 10px; /* Horizontal padding */

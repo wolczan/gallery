@@ -8,6 +8,7 @@ import ToDoWrapper from './src/assets/ToDoWrapper';
 import './index.css';
 import Footer from './Footer.jsx';
 import SearchBar from './SearchBar.jsx';
+//
 
 const API = '/gallery/assets/video/api.json';
 
@@ -61,7 +62,7 @@ function App() {
     <>
       <div
         style={{
-          backgroundImage: `url("/assets/video/back.jpg")`, // Background image from public folder
+          backgroundImage: `url("https://raw.githubusercontent.com/wolczan/gallery/main/public/back.jpg")`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
@@ -73,7 +74,7 @@ function App() {
           style={{ height: '40px' }}
         >
           <Container className="justify-content-between d-flex custom-margin-top" style={{ alignItems: 'baseline' }}>
-            <Navbar.Brand href="#home" style={{  }}>
+            <Navbar.Brand href="#home" style={{ fontSize: '17px' }}>
               <img src='https://raw.githubusercontent.com/wolczan/gallery/refs/heads/main/napis.webp' width="35" height="50" className="d-inline-block" alt=""/> 
               Gallery
             </Navbar.Brand>
@@ -97,8 +98,8 @@ function App() {
           </Container>
         </Navbar>
 
-        <div className="min-h-screen text-white flex items-center justify-center">
-          <section className="flex flex-row items-center space-x-4 p-1 w-full" style={{ justifyContent: 'space-evenly' }}>
+        <div className="min-h-screen text-white flex items-center justify-center  ">
+          <section className="flex flex-row items-center space-x-2 p-1 w-full" style={{ justifyContent: 'space-evenly' }}>
             <ToDoWrapper className="flex-shrink-0 w-[25%] sm:w-[30%] lg:w-[25%] border-1 p-1 rounded-lg shadow-2xl shadow-white" />
             <div className="flex-shrink-0 w-[15%] sm:w-[20%] lg:w-[11%] flex items-center justify-center border-1 rounded-lg shadow-2xl shadow-white bg-black">
               {playing && videos.length > 0 ? (
@@ -108,7 +109,7 @@ function App() {
                   className="object-cover rounded-lg w-full h-full border-1"
                   controls
                   autoPlay
-                  style={{ width: '', height: '270px' }}
+                  style={{ width: '150px', height: '260px' }}
                 />
               ) : (
                 <img
