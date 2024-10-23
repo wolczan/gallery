@@ -23,17 +23,12 @@
   text-align: center;
 }
 
-
 html, body {
   height: 100%;
   width: 100%;
   margin: 0;
   padding: 0;
-  overflow-x: hidden; 
-  background-image: url('back.jpg'); /* Path to the image */
-  background-size: cover; /* Make sure the image covers the whole screen */
-  background-position: center; /* Center the background image */
-  background-repeat: no-repeat; /* Prevent repeating the image */
+  overflow-x: hidden;
   min-height: 100vh; /* Ensure the body takes the full viewport height */
 }
 /* Apply Flexbox to the existing .Todo container */
@@ -66,9 +61,6 @@ html, body {
   text-decoration: line-through;
   color: gray;
 }
-
-
-
 /* Optional: Styling for task text */
 .Todo p {
   margin: 0;

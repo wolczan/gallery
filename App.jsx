@@ -67,7 +67,8 @@ function App() {
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
           minHeight: '100vh', // Ensure it covers the full screen height
-          width: '100%', // Ensure it covers full width
+          width: '100%', 
+          backgroundAttachment: 'fixed',
         }}
       >
         <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect className="navbar-custom"  
@@ -81,7 +82,10 @@ function App() {
 
             <SearchBar />
 
-            <Navbar.Toggle aria-controls="responsive-navbar-nav" style={{ paddingBottom: isMobile ? '20px' : '0px' }} />
+            <Navbar.Toggle aria-controls="responsive-navbar-nav" style={{ paddingBottom: isMobile ? '0px' : '0px',
+              alignItems: 'center',
+              backgroundColor: 'black'
+             }} />
             <Navbar.Collapse id="responsive-navbar-nav">
               <Nav className="mx-auto">
                 <Nav.Link href="#home" className="nav-link-custom">Home</Nav.Link>
@@ -115,7 +119,7 @@ function App() {
                 <img
                   src={videos[selectedVideo]?.cover}
                   alt="Video cover"
-                  style={{ width: '150px', height: '270px' }}
+                  style={{ width: '150px', height: '260px' }}
                   className="hover-enlarge object-cover rounded-lg w-full h-full"
                 />
               )}
@@ -124,7 +128,7 @@ function App() {
         </div>
 
         <div className="relative z-10 p-1 rounded bg-black text-white">
-          <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'white' }} className="text-2xl font-bold text-white">
+          <h2 style={{ fontSize: '1rem', fontWeight: 'bold', color: 'white' }} className="text-2xl font-bold text-white">
             {videos[selectedVideo].title}
           </h2>
           <p className="text-white">
