@@ -5,9 +5,11 @@ import Navbar from 'react-bootstrap/Navbar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import ToDoWrapper from './src/assets/ToDoWrapper';
+import ContactForm from './src/assets/ContactForm.jsx'
 import './index.css';
 import Footer from './Footer.jsx';
 import SearchBar from './SearchBar.jsx';
+
 //
 
 const API = '/gallery/assets/video/api.json';
@@ -164,6 +166,23 @@ function App() {
             ))}
           </div>
         </section>
+        <div className="flex flex-row items-start justify-center p-4 max-w-screen-lg mx-auto space-x-4">
+  <div className="w-1/2 mt-8"> {/* Adjust the top margin as needed */}
+    <ContactForm />
+  </div>
+  <div className="w-1/2 map-container" style={{ padding: '1rem' }}>
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2421.374953124007!2d19.395962676321443!3d51.75924867968213!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471a3460d27d2c89%3A0x4a2f25c77f622a88!2s%C5%81%C3%B3d%C5%BA%2094-203%2C%20Poland!5e0!3m2!1sen!2sus!4v1698609072847!5m2!1sen!2sus"
+      width="100%"
+      height="300"
+      style={{ border: 0 }}
+      allowFullScreen=""
+      loading="lazy"
+      title="Google Map - Łódź 94-203"
+    ></iframe>
+  </div>
+</div>
+
 
         <Footer />
       </div>
