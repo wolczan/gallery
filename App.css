@@ -55,6 +55,10 @@ html, body {
   display: flex;
   gap: 10px;
 }
+.todo-wrapper-shadow {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Delikatny cień */
+}
+
 .edit-input {
   color: black; /* Ensure the text color is visible */
   background-color: white; /* Ensure the background color contrasts with the text */
@@ -82,6 +86,11 @@ html, body {
 .todo-icons {
   display: flex;   /* Arrange icons horizontally */
   gap: 10px;       /* Space between the icons */
+}
+/* Reset inherited styles */
+.heading-reset {
+  font-size: unset;
+  font-weight: unset;
 }
 
 .todo-icons svg {

@@ -9,6 +9,9 @@ import ContactForm from './src/assets/ContactForm.jsx'
 import './index.css';
 import Footer from './Footer.jsx';
 import SearchBar from './SearchBar.jsx';
+import { Circles } from 'react-loader-spinner'; // For loading spinner
+import { FaPlay, FaPause } from 'react-icons/fa'; // For play/pause icons
+
 
 //
 
@@ -20,13 +23,17 @@ function App() {
   const [playing, setPlaying] = useState(false);
   const videoRef = useRef();
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 992);
+  const [loading, setLoading] = useState(true);
+
 
   // Fetching video data from API
   useEffect(() => {
     console.log('Fetching videos from API...');
     fetch(API)
       .then(response => response.json())
-      .then(data => setVideos(data));
+      .then(data => setVideos(data))
+      .catch(error => console.error("Failed to fetch videos:", error))
+      .finally(() => setLoading(false)); // End loading
   }, []);
 
   // Update video source when a new video is selected
@@ -59,8 +66,24 @@ function App() {
   if (videos.length < 1) {
     return <div>Loading...</div>;
   }
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen"
+            style={{ backgroundColor: 'black', color: 'white' }}
+      >
+        <Circles color="#00BFFF" height={80} width={80} />
+      </div>
+    );
+  }
+  
 
   return (
+
+
+
+
+    
+
     <>
       <div
         style={{
@@ -105,8 +128,11 @@ function App() {
         </Navbar>
 
         <div className="min-h-screen text-white flex items-center justify-center  ">
-          <section className="flex flex-row items-center space-x-2 p-1 w-full" style={{ justifyContent: 'space-evenly' }}>
-            <ToDoWrapper className="flex-shrink-0 w-[25%] sm:w-[30%] lg:w-[25%] border-1 p-1 rounded-lg shadow-2xl shadow-white" />
+          <section className="flex flex-row items-center space-x-2 p-1 w-full mt-4 mb-4 " style={{ justifyContent: 'space-evenly' }}>
+          <ToDoWrapper 
+  className="flex-shrink-0 w-[25%] sm:w-[30%] lg:w-[25%] p-1 rounded-lg todo-wrapper-shadow relative z-10" 
+/>
+
             <div className="flex-shrink-0 w-[15%] sm:w-[20%] lg:w-[11%] flex items-center justify-center border-1 rounded-lg shadow-2xl shadow-white bg-black">
               {playing && videos.length > 0 ? (
                 <video
@@ -138,23 +164,27 @@ function App() {
           </p>
           <button
             onClick={handlePlay}
-            className="bg-red-700 hover:bg-red-600 active:bg-red-500 py-0.5 px-3 rounded-full relative z-10"
-            style={{ backgroundColor: playing ? 'green' : 'red', borderRadius: '19px' }}
+            className="bg-red-700 hover:bg-red-600 active:bg-red-500 py-0.5 px-3 rounded-full relative z-10 m-2"
+            style={{ backgroundColor: playing ? 'green' : 'red', borderRadius: '19px', margin: '20px;' }}
           >
-            {playing ? 'STOP' : 'PLAY'}
+            {playing ? <FaPause /> : <FaPlay />}
           </button>
         </div>
 
         <section className="min-h-screen flex flex-col items-center">
-          <h1 className="text-4xl md:text-5xl font-extrabold text-center mt-12 text-white drop-shadow-lg tracking-wide">
+        <h1 className="heading-reset text-4xl md:text-5xl font-extrabold text-center mt-12 text-white drop-shadow-lg tracking-wide">
             Browse Library
           </h1>
+
+
           <div className="flex flex-wrap justify-center items-center p-4 max-w-screen-lg mx-auto min-h-screen">
             {videos.map((video, index) => (
               <div
                 key={video.id}
                 onClick={() => setSelectedVideo(index)}
-                className="hover-enlarge border-1 m-2 rounded-lg overflow-hidden cursor-pointer"
+                className={`hover-enlarge border-1 m-2 rounded-lg overflow-hidden cursor-pointer ${
+                  selectedVideo === index ? 'border-4 border-blue-500' : ''
+                }`}
                 style={{ width: '129px', height: '170px', borderRadius: '6px' }}
               >
                 <img
@@ -164,24 +194,28 @@ function App() {
                 />
               </div>
             ))}
+
           </div>
         </section>
         <div className="flex flex-row items-start justify-center p-4 max-w-screen-lg mx-auto space-x-4">
-  <div className="w-1/2 mt-8"> {/* Adjust the top margin as needed */}
-    <ContactForm />
-  </div>
-  <div className="w-1/2 map-container" style={{ padding: '1rem' }}>
-    <iframe
-      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2421.374953124007!2d19.395962676321443!3d51.75924867968213!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471a3460d27d2c89%3A0x4a2f25c77f622a88!2s%C5%81%C3%B3d%C5%BA%2094-203%2C%20Poland!5e0!3m2!1sen!2sus!4v1698609072847!5m2!1sen!2sus"
-      width="100%"
-      height="300"
-      style={{ border: 0 }}
-      allowFullScreen=""
-      loading="lazy"
-      title="Google Map - Łódź 94-203"
-    ></iframe>
-  </div>
-</div>
+          <div className="w-1/2 mt-8"> {/* Adjust the top margin as needed */}
+            <ContactForm />
+          </div>
+            <div className="w-1/2 map-container" style={{ padding: '1rem' }}>
+            <iframe
+  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2421.374953124007!2d19.395962676321443!3d51.75924867968213!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471a3460d27d2c89%3A0x4a2f25c77f622a88!2s%C5%81%C3%B3d%C5%BA%2094-203%2C%20Poland!5e0!3m2!1sen!2sus!4v1698609072847!5m2!1sen!2sus"
+  width="600"
+  height="450"
+  style={{ border: 0 }}
+  allowFullScreen=""
+  loading="lazy"
+  title="Google Map - Łódź 94-203"
+></iframe>
+
+
+
+            </div>
+        </div>
 
 
         <Footer />
