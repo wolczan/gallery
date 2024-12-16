@@ -155,21 +155,38 @@ function App() {
           </section>
         </div>
 
-        <div className="relative z-10 p-1 rounded bg-black text-white">
-          <h2 style={{ fontSize: '1rem', fontWeight: 'bold', color: 'white' }} className="text-2xl font-bold text-white">
-            {videos[selectedVideo].title}
-          </h2>
-          <p className="text-white">
-            {videos[selectedVideo].description}
-          </p>
-          <button
-            onClick={handlePlay}
-            className="bg-red-700 hover:bg-red-600 active:bg-red-500 py-0.5 px-3 rounded-full relative z-10 m-2"
-            style={{ backgroundColor: playing ? 'green' : 'red', borderRadius: '19px', margin: '20px;' }}
-          >
-            {playing ? <FaPause /> : <FaPlay />}
-          </button>
-        </div>
+       <div
+  className="relative z-10 p-1 rounded bg-black text-white border-2 flex flex-col justify-between"
+  style={{ minHeight: '150px', maxWidth: '400px', width: '100%' }}
+>
+  <div>
+    <h2
+      style={{ fontSize: '1rem', fontWeight: 'bold', color: 'white' }}
+      className="text-2xl font-bold text-white"
+    >
+      {videos[selectedVideo].title}
+    </h2>
+    <p className="text-white">
+      {videos[selectedVideo].description}
+    </p>
+  </div>
+  <div className="flex justify-end mt-auto">
+  <button
+  onClick={handlePlay}
+  className="relative bg-gradient-to-r from-red-600 via-pink-500 to-red-600 hover:from-red-500 hover:via-orange-400 hover:to-red-500 active:from-red-700 active:via-pink-600 active:to-red-700 text-white py-1 px-4 rounded-full m-2 shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95"
+  style={{
+    border: '2px solid rgba(255, 255, 255, 0.4)',
+    boxShadow: '0 0 15px rgba(255, 0, 0, 0.8)',
+    color: 'white',
+  }}
+>
+  {playing ? <FaPause /> : <FaPlay />}
+</button>
+
+
+  </div>
+</div>
+
 
         <section className="min-h-screen flex flex-col items-center">
         <h1 className="heading-reset text-4xl md:text-5xl font-extrabold text-center mt-12 text-white drop-shadow-lg tracking-wide">
