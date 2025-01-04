@@ -28,8 +28,8 @@
       "title": "50 Cent in Concert Atlas Arena Lodz",
       "description": "Busta Rhymes",
       "trailerUrl": "https://www.example.com/trailers/kon1.mp4",
-      "video": "https://github.com/wolczan/gallery/blob/main/assets/video/staw.mp4",
-      "cover" : "https://github.com/wolczan/gallery/blob/main/assets/video/natus.jpg",
+      "video": "https://raw.githubusercontent.com/wolczan/gallery/main/assets/video/staw.mp4",
+      "cover" : "https://raw.githubusercontent.com/wolczan/gallery/main/assets/video/natus.jpg",
       "altText": "Movie Title 1 cover image"
     },
     {

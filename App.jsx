@@ -94,11 +94,9 @@ function App() {
           minHeight: '100vh', // Ensure it covers the full screen height
           width: '100%', 
           backgroundAttachment: 'fixed',
-        }}
-      >
+        }}>
         <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect className="navbar-custom"  
-          style={{ height: '40px' }}
-        >
+          style={{ height: '40px' }}>
           <Container className="justify-content-between d-flex custom-margin-top" style={{ alignItems: 'baseline' }}>
             <Navbar.Brand href="#home" style={{ fontSize: '17px' }}>
               <img src='https://raw.githubusercontent.com/wolczan/gallery/refs/heads/main/napis.webp' width="35" height="50" className="d-inline-block" alt=""/> 
@@ -111,8 +109,13 @@ function App() {
               alignItems: 'center',
               backgroundColor: 'black'
              }} />
-            <Navbar.Collapse id="responsive-navbar-nav">
-              <Nav className="mx-auto">
+            <Navbar.Collapse id="responsive-navbar-nav"
+                style={{
+                  backgroundColor: 'black', // Czarny kolor tła
+                  opacity: 1, // Upewnij się, że nie ma przezroczystości
+                  padding: '10px', // Opcjonalne odstępy wewnętrzne
+                }}>
+              <Nav className="mx-auto border-2">
                 <Nav.Link href="#home" className="nav-link-custom">Home</Nav.Link>
                 <Nav.Link href="#about" className="nav-link-custom">About</Nav.Link>
                 <Nav.Link href="#pricing" className="nav-link-custom">Films</Nav.Link>
@@ -130,8 +133,8 @@ function App() {
         <div className="min-h-screen text-white flex items-center justify-center  ">
           <section className="flex flex-row items-center space-x-2 p-1 w-full mt-4 mb-4 " style={{ justifyContent: 'space-evenly' }}>
           <ToDoWrapper 
-  className="flex-shrink-0 w-[25%] sm:w-[30%] lg:w-[25%] p-1 rounded-lg todo-wrapper-shadow relative z-10" 
-/>
+            className="flex-shrink-0 w-[25%] sm:w-[30%] lg:w-[25%] p-1 rounded-lg todo-wrapper-shadow relative z-10" 
+          />
 
             <div className="flex-shrink-0 w-[15%] sm:w-[20%] lg:w-[11%] flex items-center justify-center border-1 rounded-lg shadow-2xl shadow-white bg-black">
               {playing && videos.length > 0 ? (
@@ -155,37 +158,32 @@ function App() {
           </section>
         </div>
 
-       <div
-  className="relative z-10 p-1 rounded bg-black text-white border-2 flex flex-col justify-between"
-  style={{ minHeight: '150px', maxWidth: '400px', width: '100%' }}
->
-  <div>
-    <h2
-      style={{ fontSize: '1rem', fontWeight: 'bold', color: 'white' }}
-      className="text-2xl font-bold text-white"
-    >
-      {videos[selectedVideo].title}
-    </h2>
-    <p className="text-white">
-      {videos[selectedVideo].description}
-    </p>
-  </div>
-  <div className="flex justify-end mt-auto">
-  <button
-  onClick={handlePlay}
-  className="relative bg-gradient-to-r from-red-600 via-pink-500 to-red-600 hover:from-red-500 hover:via-orange-400 hover:to-red-500 active:from-red-700 active:via-pink-600 active:to-red-700 text-white py-1 px-4 rounded-full m-2 shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95"
-  style={{
-    border: '2px solid rgba(255, 255, 255, 0.4)',
-    boxShadow: '0 0 15px rgba(255, 0, 0, 0.8)',
-    color: 'white',
-  }}
->
-  {playing ? <FaPause /> : <FaPlay />}
-</button>
-
-
-  </div>
-</div>
+       <div className="relative z-10 p-1 rounded bg-black text-white border-1 flex flex-col justify-between"
+         style={{ minHeight: '120px', maxWidth: '400px', width: '100%' , margin: 'auto', boxShadow: '10px 15px 80px -5px rgba(0, 0, 0, 0.7)', }}>
+        <div>
+              <h2
+                style={{ fontSize: '1rem', fontWeight: 'bold', color: 'white' }}
+                className="text-2xl font-bold text-white"
+              >
+                {videos[selectedVideo].title}
+              </h2>
+              <p className="text-white">
+                {videos[selectedVideo].description}
+              </p>
+        </div>
+      <div className="flex justify-end mt-auto">
+        <button
+          onClick={handlePlay}
+          className="relative bg-gradient-to-r from-red-600 via-pink-500 to-red-600 hover:from-red-500 hover:via-orange-400 hover:to-red-500 active:from-red-700 active:via-pink-600 active:to-red-700 text-white py-1 px-4 rounded-full m-2 shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95"
+          style={{
+          border: '2px solid rgba(255, 255, 255, 0.4)',
+          boxShadow: '0 0 15px rgba(255, 0, 0, 0.8)',
+          color: 'white',
+          }}>
+          {playing ? <FaPause /> : <FaPlay />}
+        </button>
+        </div>
+      </div>
 
 
         <section className="min-h-screen flex flex-col items-center">
@@ -214,28 +212,24 @@ function App() {
 
           </div>
         </section>
-        <div className="flex flex-row items-start justify-center p-4 max-w-screen-lg mx-auto space-x-4">
-          <div className="w-1/2 mt-8"> {/* Adjust the top margin as needed */}
+        <div className="p-4 max-w-screen-sm mx-auto  sm:space-x-0 sm:space-y-2 custom-container">
+          <div className="w-full mt-8 mx-auto"> {/* Adjust the top margin as needed */}
             <ContactForm />
           </div>
-            <div className="w-1/2 map-container" style={{ padding: '1rem' }}>
+            <div className="w-full map-container p-5 mx-auto" >
             <iframe
-  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2421.374953124007!2d19.395962676321443!3d51.75924867968213!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471a3460d27d2c89%3A0x4a2f25c77f622a88!2s%C5%81%C3%B3d%C5%BA%2094-203%2C%20Poland!5e0!3m2!1sen!2sus!4v1698609072847!5m2!1sen!2sus"
-  width="600"
-  height="450"
-  style={{ border: 0 }}
-  allowFullScreen=""
-  loading="lazy"
-  title="Google Map - Łódź 94-203"
-></iframe>
-
-
-
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2421.374953124007!2d19.395962676321443!3d51.75924867968213!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471a3460d27d2c89%3A0x4a2f25c77f622a88!2s%C5%81%C3%B3d%C5%BA%2094-203%2C%20Poland!5e0!3m2!1sen!2sus!4v1698609072847!5m2!1sen!2sus"
+              width="350"
+              height="250"
+              style={{ border: 0 }}
+              allowFullScreen=""
+              loading="lazy"
+              title="Google Map - Łódź 94-203"
+            ></iframe>
             </div>
         </div>
-
-
         <Footer />
+
       </div>
     </>
   );

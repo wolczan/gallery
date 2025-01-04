@@ -14,7 +14,11 @@ h1 {
   letter-spacing: 0.05em; /* tracking-wide */
   font-weight: 800; /* font-extrabold */
 }
-
+.custom-container {
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+}
 .bottom-banner {
   position: fixed;
   bottom: 0;
@@ -100,24 +104,15 @@ html, body {
  .nav-link-custom {
   display: flex;
   align-items: center;
+  justify-content: center;
   padding-top: 0;
   padding-bottom: 0;
   height: 25px; /* Same as the height of your navbar */
 }
-.navbar-custom {
-
-}
-@media (max-width: 992px) {
-  .custom-margin-top {
-    margin-top: -8px;
-  }
-}
- 
 .btn-custom {
   background-color: #b90b14; /* Netflix red background */
   border-color: #b90b14; /* Netflix red border */
   line-height: 40px; /* Vertically center the text */
-  color: white; /* White text color */
   padding: 0 10px; /* Horizontal padding */
   display: flex;
   align-items: center; /* Ensure the text inside is vertically centered */
@@ -127,7 +122,6 @@ html, body {
 }
 .nav-link-custom:hover, .btn-custom:hover {
   background-color: #e50914; /* Netflix red on hover */
-  color: white; /* White text color */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
   transform: scale(1.05); /* Slightly increase size on hover */
   border-radius: 10px;
@@ -217,9 +211,17 @@ html, body {
   .navbar-custom .navbar-toggler {
     padding-bottom: 20px; /* Add padding or margin to the hamburger menu only at smaller screen sizes */
   }
-
+  .custom-margin-top {
+    margin-top: -8px;
+  }
   .navbar-custom .navbar-brand,
   .navbar-custom .search-bar {
     align-items: center; /* Ensure these items stay centered */
+  }
+}
+@media (max-width: 560px) {
+  .custom-container {
+    display:flex;
+    flex-direction: column; /* Changes to column layout for smaller screens */
   }
 }
