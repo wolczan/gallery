@@ -3,7 +3,15 @@
       "id": 1,
       "title": "Movie Title 1",
       "description": "Description of Movie 1",
-      "trailerUrl": "https://www.example.com/trailers/movie1.mp4",
+      "trailerUrl": "",
+      "video": "https://github.com/wolczan/gallery/blob/main/src/assets/cytrynka.mp4",
+      "cover": "https://github.com/wolczan/gallery/blob/main/src/assets/pic1.jpg"
+    },
+    {
+      "id": 8,
+      "title": "Movie Title 1",
+      "description": "Description of Movie 1",
+      "trailerUrl": "",
       "video": "https://github.com/wolczan/gallery/blob/main/src/assets/cytrynka.mp4",
       "cover": "https://github.com/wolczan/gallery/blob/main/src/assets/pic1.jpg"
     },
@@ -11,7 +19,7 @@
       "id": 2,
       "title": "Movie Title 2",
       "description": "Description of Movie 2",
-      "trailerUrl": "https://www.example.com/trailers/movie2.mp4",
+      "trailerUrl": "",
       "video": "https://github.com/wolczan/gallery/blob/main/assets/video/manu.mp4",
       "cover" : "/src/assets/pic2.jpg"
     },
@@ -19,15 +27,24 @@
       "id": 3,
       "title": "50 Cent in Concert Atlas Arena Lodz",
       "description": "Busta Rhymes",
-      "trailerUrl": "https://www.example.com/trailers/kon1.mp4",
+      "trailerUrl": "",
       "video": "https://github.com/wolczan/gallery/blob/main/assets/video/miki.mp4",
       "cover" : "https://github.com/wolczan/gallery/blob/main/assets/video/family.jpg"
+    },
+    {
+      "id": 7,
+      "title": "Maciej Liberadzki",
+      "description": "Main image",
+      "trailerUrl": "",
+      "video": "/src/assets/kon1.mp4",
+      "cover" : "https://github.com/wolczan/gallery/blob/main/assets/video/urodziny.jpg",
+      "altText": "Movie Title 1 cover image"
     },
     {
       "id": 4,
       "title": "50 Cent in Concert Atlas Arena Lodz",
       "description": "Busta Rhymes",
-      "trailerUrl": "https://www.example.com/trailers/kon1.mp4",
+      "trailerUrl": "",
       "video": "https://github.com/wolczan/gallery/blob/main/assets/video/staw.mp4",
       "cover" : "https://github.com/wolczan/gallery/blob/main/assets/video/natus.jpg",
       "altText": "Movie Title 1 cover image"
@@ -36,7 +53,7 @@
       "id": 5,
       "title": "Przedszkole Miejskie",
       "description": "Grupa Bombelków",
-      "trailerUrl": "https://www.example.com/trailers/kon1.mp4",
+      "trailerUrl": "",
       "video": "https://github.com/wolczan/gallery/blob/main/assets/video/telefon.mp4",
       "cover" : "https://github.com/wolczan/gallery/blob/main/assets/video/sportowo.jpg",
       "altText": "Movie Title 1 cover image"
@@ -45,7 +62,7 @@
       "id": 6,
       "title": "Maciej Liberadzki",
       "description": "Main image",
-      "trailerUrl": "https://www.example.com/trailers/kon1.mp4",
+      "trailerUrl": "",
       "video": "/src/assets/kon1.mp4",
       "cover" : "https://github.com/wolczan/gallery/blob/main/assets/video/urodziny.jpg",
       "altText": "Movie Title 1 cover image"

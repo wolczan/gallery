@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';  // Import PropTypes
+import PropTypes from 'prop-types';  // validation of data 
 import { db } from '../../firebase'; // Import Firestore
 import { collection, addDoc } from 'firebase/firestore';
 

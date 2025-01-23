@@ -91,7 +91,7 @@ function Footer() {
               <h6 className="text-uppercase fw-bold">Contact</h6>
               <hr className="mb-4 mt-0 d-inline-block mx-auto" style={{ width: "60px", backgroundColor: "#7c4dff", height: "2px" }} />
               <p><i className="fas fa-home mr-3"></i> Srebrzynska Park, Lodz, Poland</p>
-              <p><i className="fas fa-envelope mr-3"></i> info@example.com</p>
+              <p><i className="fas fa-envelope mr-3"></i> LoremIpsum</p>
               <p><i className="fas fa-phone mr-3"></i> + 01 234 567 88</p>
               <p><i className=""></i></p>
             </Col>

@@ -11,9 +11,8 @@ import Footer from './Footer.jsx';
 import SearchBar from './SearchBar.jsx';
 import { Circles } from 'react-loader-spinner'; // For loading spinner
 import { FaPlay, FaPause } from 'react-icons/fa'; // For play/pause icons
-
-
-//
+import RecentPosts from './src/RecentPosts.jsx';
+import "./firebase.js";
 
 const API = '/gallery/assets/video/api.json';
 
@@ -24,7 +23,6 @@ function App() {
   const videoRef = useRef();
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 992);
   const [loading, setLoading] = useState(true);
-
 
   // Fetching video data from API
   useEffect(() => {
@@ -79,11 +77,6 @@ function App() {
 
   return (
 
-
-
-
-    
-
     <>
       <div
         style={{
@@ -95,9 +88,10 @@ function App() {
           width: '100%', 
           backgroundAttachment: 'fixed',
         }}>
+          
         <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect className="navbar-custom"  
-          style={{ height: '40px' }}>
-          <Container className="justify-content-between d-flex custom-margin-top" style={{ alignItems: 'baseline' }}>
+          style={{ height: '40px' , backgroundColor: 'black' }}>
+          <Container className="justify-content-between d-flex custom-margin-top" style={{ alignItems: 'baseline', backgroundColor: '' }}>
             <Navbar.Brand href="#home" style={{ fontSize: '17px' }}>
               <img src='https://raw.githubusercontent.com/wolczan/gallery/refs/heads/main/napis.webp' width="35" height="50" className="d-inline-block" alt=""/> 
               Gallery
@@ -115,7 +109,7 @@ function App() {
                   opacity: 1, // Upewnij się, że nie ma przezroczystości
                   padding: '10px', // Opcjonalne odstępy wewnętrzne
                 }}>
-              <Nav className="mx-auto border-2">
+              <Nav className="mx-auto">
                 <Nav.Link href="#home" className="nav-link-custom">Home</Nav.Link>
                 <Nav.Link href="#about" className="nav-link-custom">About</Nav.Link>
                 <Nav.Link href="#pricing" className="nav-link-custom">Films</Nav.Link>
@@ -130,7 +124,7 @@ function App() {
           </Container>
         </Navbar>
 
-        <div className="min-h-screen text-white flex items-center justify-center  ">
+        <div className="min-h-screen text-white flex items-center justify-center border-2 ">
           <section className="flex flex-row items-center space-x-2 p-1 w-full mt-4 mb-4 " style={{ justifyContent: 'space-evenly' }}>
           <ToDoWrapper 
             className="flex-shrink-0 w-[25%] sm:w-[30%] lg:w-[25%] p-1 rounded-lg todo-wrapper-shadow relative z-10" 
@@ -154,8 +148,11 @@ function App() {
                   className="hover-enlarge object-cover rounded-lg w-full h-full"
                 />
               )}
+              
             </div>
+            
           </section>
+          
         </div>
 
        <div className="relative z-10 p-1 rounded bg-black text-white border-1 flex flex-col justify-between"
@@ -228,6 +225,7 @@ function App() {
             ></iframe>
             </div>
         </div>
+        <RecentPosts />
         <Footer />
 
       </div>
