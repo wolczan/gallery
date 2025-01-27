@@ -1,33 +1,24 @@
-// Import the functions you need from the SDKs you need
+// Import the functions you need from the SDKs
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// Firebase configuration using environment variables
 const firebaseConfig = {
-  apiKey: "AIzaSyB5QFjl6jvIKBCRn12esrOba58STMP9dM0",
-  authDomain: "galeriazdjec-f4180.firebaseapp.com",
-  projectId: "galeriazdjec-f4180",
-  storageBucket: "galeriazdjec-f4180.appspot.com",
-  messagingSenderId: "789024046392",
-  appId: "1:789024046392:web:26d9e3195917ed28e515cd",
-  measurementId: "G-WX9ZBHXLSD"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY || "default-key",
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || "default-auth-domain",
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || "default-project-id",
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET || "default-storage-bucket",
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID || "default-sender-id",
+  appId: import.meta.env.VITE_FIREBASE_APP_ID || "default-app-id",
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID || "default-measurement-id",
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
+const db = getFirestore(app);
+const auth = getAuth(app);
 
-// Initialize Firestore and export it
-
-console.log("Firebase App Initialized:", app);
-
-
-const db = getFirestore(app); // Initialize Firestore
-export { db };
-export const auth = getAuth(app);
-export { app, analytics };
+export { app, analytics, db, auth };

@@ -243,6 +243,7 @@ html, body {
 @media (max-width: 992px) {
   .navbar-custom .navbar-toggler {
     padding-bottom: 20px; /* Add padding or margin to the hamburger menu only at smaller screen sizes */
+    color: white;
   }
   .custom-margin-top {
     margin-top: -8px;

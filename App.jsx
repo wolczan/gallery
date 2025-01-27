@@ -13,6 +13,7 @@ import { Circles } from 'react-loader-spinner'; // For loading spinner
 import { FaPlay, FaPause } from 'react-icons/fa'; // For play/pause icons
 import RecentPosts from './src/RecentPosts.jsx';
 import "./firebase.js";
+import ImageUploader from './src/assets/components/ImageUploader.jsx';
 
 const API = '/gallery/assets/video/api.json';
 
@@ -89,10 +90,10 @@ function App() {
           backgroundAttachment: 'fixed',
         }}>
           
-        <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect className="navbar-custom"  
-          style={{ height: '40px' , backgroundColor: 'black' }}>
+        <Navbar  expand="lg" collapseOnSelect className="navbar-custom"  
+          style={{ height: '40px' , backgroundColor: 'black', color:'white' }}>
           <Container className="justify-content-between d-flex custom-margin-top" style={{ alignItems: 'baseline', backgroundColor: '' }}>
-            <Navbar.Brand href="#home" style={{ fontSize: '17px' }}>
+            <Navbar.Brand href="#home" style={{ fontSize: '17px' , color: 'white' }}>
               <img src='https://raw.githubusercontent.com/wolczan/gallery/refs/heads/main/napis.webp' width="35" height="50" className="d-inline-block" alt=""/> 
               Gallery
             </Navbar.Brand>
@@ -101,13 +102,14 @@ function App() {
 
             <Navbar.Toggle aria-controls="responsive-navbar-nav" style={{ paddingBottom: isMobile ? '0px' : '0px',
               alignItems: 'center',
-              backgroundColor: 'black'
+              backgroundColor: 'white'
              }} />
             <Navbar.Collapse id="responsive-navbar-nav"
                 style={{
                   backgroundColor: 'black', // Czarny kolor tła
                   opacity: 1, // Upewnij się, że nie ma przezroczystości
-                  padding: '10px', // Opcjonalne odstępy wewnętrzne
+                  padding: '0px', // Opcjonalne odstępy wewnętrzne
+
                 }}>
               <Nav className="mx-auto">
                 <Nav.Link href="#home" className="nav-link-custom">Home</Nav.Link>
@@ -124,7 +126,7 @@ function App() {
           </Container>
         </Navbar>
 
-        <div className="min-h-screen text-white flex items-center justify-center border-2 ">
+        <div className="min-h-screen text-white flex items-center justify-center">
           <section className="flex flex-row items-center space-x-2 p-1 w-full mt-4 mb-4 " style={{ justifyContent: 'space-evenly' }}>
           <ToDoWrapper 
             className="flex-shrink-0 w-[25%] sm:w-[30%] lg:w-[25%] p-1 rounded-lg todo-wrapper-shadow relative z-10" 
@@ -225,6 +227,7 @@ function App() {
             ></iframe>
             </div>
         </div>
+        <ImageUploader />
         <RecentPosts />
         <Footer />
 

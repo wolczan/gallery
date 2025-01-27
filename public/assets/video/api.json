@@ -29,7 +29,7 @@
       "title": "„Każda chwila wyjątkowa – urodziny Natana w pełnym blasku!”",
       "description": "„Wspomnienia – momenty, które zostaną na zawsze!”",
       "trailerUrl": "",
-      "video": "",
+      "video": "https://raw.githubusercontent.com/wolczan/gallery/main/assets/video/rower2.mp4",
       "cover" : "https://raw.githubusercontent.com/wolczan/gallery/main/assets/video/urodziny.jpg",
       "altText": "Movie Title 1 cover image"
     },
@@ -44,6 +44,24 @@
     },
     {
       "id": 6,
+      "title": "„Śmiech i kreatywność: Dziecięce przebrania”",
+      "description": "„Szczęście w najprostszych chwilach”",
+      "trailerUrl": "",
+      "video": "https://raw.githubusercontent.com/wolczan/gallery/main/assets/video/staw.mp4",
+      "cover" : "https://raw.githubusercontent.com/wolczan/gallery/main/assets/video/sportowo.jpg",
+      "altText": "Movie Title 1 cover image"
+    },
+    {
+      "id": 7,
+      "title": "„Śmiech i kreatywność: Dziecięce przebrania”",
+      "description": "„Szczęście w najprostszych chwilach”",
+      "trailerUrl": "",
+      "video": "https://raw.githubusercontent.com/wolczan/gallery/main/assets/video/staw.mp4",
+      "cover" : "https://raw.githubusercontent.com/wolczan/gallery/main/assets/video/sportowo.jpg",
+      "altText": "Movie Title 1 cover image"
+    },
+    {
+      "id": 8,
       "title": "„Śmiech i kreatywność: Dziecięce przebrania”",
       "description": "„Szczęście w najprostszych chwilach”",
       "trailerUrl": "",
