@@ -12,8 +12,10 @@ import SearchBar from './SearchBar.jsx';
 import { Circles } from 'react-loader-spinner'; // For loading spinner
 import { FaPlay, FaPause } from 'react-icons/fa'; // For play/pause icons
 import RecentPosts from './src/RecentPosts.jsx';
-import "./firebase.js";
-import ImageUploader from './src/assets/components/ImageUploader.jsx';
+import "./firebase.jsx";
+import ImageUploader from "./src/assets/components/ImageUploader.jsx";
+//import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import Login from './src/assets/components/Login.jsx';
 
 const API = '/gallery/assets/video/api.json';
 
@@ -24,6 +26,7 @@ function App() {
   const videoRef = useRef();
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 992);
   const [loading, setLoading] = useState(true);
+  const [showLogin, setShowLogin] = useState(false);
 
   // Fetching video data from API
   useEffect(() => {
@@ -33,6 +36,8 @@ function App() {
       .then(data => setVideos(data))
       .catch(error => console.error("Failed to fetch videos:", error))
       .finally(() => setLoading(false)); // End loading
+      console.log("Firebase API Key:", import.meta.env.VITE_FIREBASE_API_KEY);
+      console.log("All env variables:", import.meta.env);
   }, []);
 
   // Update video source when a new video is selected
@@ -75,7 +80,13 @@ function App() {
     );
   }
   
-
+  console.log("Firebase API Key:", import.meta.env.VITE_FIREBASE_API_KEY);
+  console.log("Firebase Config:", {
+    apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID
+  });
+  
   return (
 
     <>
@@ -119,12 +130,17 @@ function App() {
                 <Nav.Link href="#pricing" className="nav-link-custom">My List</Nav.Link>
                 <Nav.Link href="#pricing" className="nav-link-custom">Latest</Nav.Link>
                 <Nav.Link href="#pricing" className="nav-link-custom">Contact</Nav.Link>
-                <Nav.Link href="#signin" className="nav-link-custom btn btn-custom">Sign In</Nav.Link>
+                
+                {/* PRZYCISKI SIGN IN & SIGN UP */}
+                <Nav.Link onClick={() => setShowLogin(true)} className="nav-link-custom btn btn-custom">Sign In</Nav.Link>
                 <Nav.Link href="#signup" className="nav-link-custom btn btn-custom">Sign Up</Nav.Link>
               </Nav>
+
             </Navbar.Collapse>
           </Container>
         </Navbar>
+
+        {showLogin && <Login onClose={() => setShowLogin(false)} />}
 
         <div className="min-h-screen text-white flex items-center justify-center">
           <section className="flex flex-row items-center space-x-2 p-1 w-full mt-4 mb-4 " style={{ justifyContent: 'space-evenly' }}>
@@ -227,6 +243,7 @@ function App() {
             ></iframe>
             </div>
         </div>
+        
         <ImageUploader />
         <RecentPosts />
         <Footer />

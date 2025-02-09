@@ -1,108 +1,61 @@
-import React, { useState, useEffect } from 'react';
-import { getStorage, ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
-import { getFirestore, collection, addDoc } from "firebase/firestore";
+import React, { useState, useEffect } from "react";
+import { uploadImageToFirestore, getImagesFromFirestore } from "../../services/firestoreService";
 
 const ImageUploader = () => {
-  const [image, setImage] = useState(null); // Stan wybranego pliku
-  const [isUploading, setIsUploading] = useState(false); // Stan przesyłania
-  const [progress, setProgress] = useState(0); // Procent przesyłania
+  const [image, setImage] = useState(null);
+  const [uploadedImages, setUploadedImages] = useState([]);
 
-  const storage = getStorage(); // Firebase Storage
-  const db = getFirestore(); // Firebase Firestore
-
-  // Debugowanie zmiany stanu przesyłania
+  // Pobieranie obrazów przy starcie komponentu
   useEffect(() => {
-    console.log("isUploading zmieniony na:", isUploading);
-  }, [isUploading]);
+    fetchImages();
+  }, []);
 
-  const handleImageChange = (e) => {
-    if (e.target.files[0]) {
-      const selectedFile = e.target.files[0];
-      console.log("Wybrano plik:", selectedFile.name);
-      console.log("Rozmiar pliku:", selectedFile.size);
-      console.log("Typ pliku:", selectedFile.type);
-      setImage(selectedFile);
-    } else {
-      console.error("Nie wybrano żadnego pliku!");
+  // Funkcja do pobierania obrazów zapisanych w Firestore
+  const fetchImages = async () => {
+    try {
+      const images = await getImagesFromFirestore();
+      setUploadedImages(images);
+    } catch (error) {
+      console.error("❌ Błąd pobierania obrazów:", error);
     }
   };
 
+  // Obsługa wyboru pliku
+  const handleImageChange = (e) => {
+    if (e.target.files[0]) {
+      setImage(e.target.files[0]); // ✅ Przechowujemy plik, a nie Base64
+    }
+  };
+
+  // Przesyłanie obrazu do Firebase Storage i zapis URL w Firestore
   const handleUpload = async () => {
-    console.log("Funkcja handleUpload została wywołana.");
     if (!image) {
       console.error("Brak wybranego pliku do przesłania!");
       return;
     }
 
-    setIsUploading(true); // Rozpoczęcie przesyłania
-    const storageRef = ref(storage, `images/${image.name}`);
-    console.log("Przygotowano StorageRef:", storageRef.fullPath);
-
-    // Rozpoczęcie przesyłania z monitorowaniem postępu
-    const uploadTask = uploadBytesResumable(storageRef, image);
-
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => {
-        // Monitorowanie postępu przesyłania
-        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        setProgress(progress.toFixed(2));
-        console.log(`Postęp przesyłania: ${progress.toFixed(2)}%`);
-      },
-      (error) => {
-        // Obsługa błędów podczas przesyłania
-        console.error("Błąd podczas przesyłania pliku:", error);
-        setIsUploading(false);
-      },
-      async () => {
-        // Po zakończeniu przesyłania
-        try {
-          const url = await getDownloadURL(uploadTask.snapshot.ref);
-          console.log("Plik przesłany! URL:", url);
-
-          // Zapis URL do Firestore
-          await addDoc(collection(db, "pictures"), {
-            url: url,
-            name: image.name,
-            createdAt: new Date(),
-          });
-          console.log("Dane zapisane w Firestore pomyślnie!");
-          alert("Zdjęcie zostało przesłane pomyślnie!");
-        } catch (firestoreError) {
-          console.error("Błąd podczas zapisywania danych w Firestore:", firestoreError);
-        } finally {
-          setIsUploading(false); // Zakończenie przesyłania
-          setProgress(0); // Reset postępu
-        }
-      }
-    );
+    try {
+      const imageUrl = await uploadImageToFirestore(image); // ✅ Przesyłamy plik do Storage
+      alert("Obraz przesłany! URL: " + imageUrl);
+      fetchImages(); // Odśwież listę obrazów
+    } catch (error) {
+      console.error("❌ Błąd przesyłania obrazu:", error);
+    }
   };
 
   return (
-    <div style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}>
+    <div>
       <h1>Prześlij zdjęcie</h1>
       <input type="file" onChange={handleImageChange} />
-      <br />
-      {progress > 0 && (
-        <p style={{ margin: "10px 0" }}>
-          Postęp przesyłania: <strong>{progress}%</strong>
-        </p>
-      )}
-      <button
-        onClick={handleUpload}
-        disabled={isUploading}
-        style={{
-          padding: "10px 20px",
-          backgroundColor: isUploading ? "gray" : "blue",
-          color: "white",
-          border: "none",
-          borderRadius: "5px",
-          cursor: isUploading ? "not-allowed" : "pointer",
-          marginTop: "10px",
-        }}
-      >
-        {isUploading ? "Przesyłanie..." : "Prześlij"}
-      </button>
+      <button onClick={handleUpload} className="upload-btn">Prześlij</button>
+
+      <h2>Zapisane obrazy:</h2>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
+        {uploadedImages.map((img) => (
+          <img key={img.id} src={img.imageUrl} alt="Zapisany obraz"
+            style={{ width: "100px", height: "100px", objectFit: "cover", borderRadius: "5px" }} />
+        ))}
+      </div>
     </div>
   );
 };
