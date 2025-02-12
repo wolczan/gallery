@@ -1,41 +1,33 @@
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { storage } from "../../firebase";
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
-const uploadFile = (file, setProgress) => {
-  return new Promise((resolve, reject) => {
-    if (!file || !file.name) {
-      console.error("❌ Niepoprawny plik!", file);
-      reject("❌ Niepoprawny plik");
-      return;
-    }
+export async function uploadFile(file) {
+  if (!file) {
+    console.error("❌ Brak pliku do przesłania!");
+    return;
+  }
 
-    const sanitizedFileName = encodeURIComponent(file.name.replace(/[^a-zA-Z0-9.-]/g, "_"));
-    const storageRef = ref(storage, `images/${sanitizedFileName}`);
+  const storage = getStorage(); // ✅ Pobieramy `storage`
+  const filePath = `uploads/${file.name}`; // ✅ Upewnij się, że to STRING
+  const storageRef = ref(storage, filePath); // ✅ Poprawna referencja
 
-    console.log("🔥 Storage instance:", storage);
-    console.log("🔥 StorageRef:", storageRef);
-    console.log("🔥 Uploading to Firebase Storage:", storageRef.fullPath);
+  try {
+    const uploadTask = uploadBytesResumable(storageRef, file);
 
-    const metadata = { contentType: file.type };
-    try {
-      const uploadTask = uploadBytesResumable(storageRef, file, metadata);
-      console.log("🔥 Upload task:", uploadTask); // Sprawdź, czy upload w ogóle startuje
-
+    return new Promise((resolve, reject) => {
       uploadTask.on(
         "state_changed",
         (snapshot) => {
           const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log(`🚀 Upload is ${progress}% done`);
-          if (setProgress) setProgress(progress);
+          console.log(`📡 Upload ${progress.toFixed(2)}% done`);
         },
         (error) => {
-          console.error("❌ Błąd podczas przesyłania pliku:", error);
+          console.error("❌ Błąd przesyłania pliku:", error);
           reject(error);
         },
         async () => {
           try {
             const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-            console.log("✅ Plik przesłany pomyślnie. URL:", downloadURL);
+            console.log("✅ Plik przesłany! URL:", downloadURL);
             resolve(downloadURL);
           } catch (error) {
             console.error("❌ Błąd pobierania URL:", error);
@@ -43,10 +35,8 @@ const uploadFile = (file, setProgress) => {
           }
         }
       );
-    } catch (error) {
-      console.error("❌ Błąd tworzenia `uploadTask`:", error);
-    }
-  });
-};
-
-export default uploadFile;
+    });
+  } catch (error) {
+    console.error("❌ Błąd inicjalizacji przesyłania:", error);
+  }
+}

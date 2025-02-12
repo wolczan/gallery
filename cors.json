@@ -1,15 +1,8 @@
 [
   {
     "origin": ["http://localhost:5173", "https://wolczan.github.io"],
-    "method": ["GET", "POST", "PUT","DELETE", "OPTIONS"],
+    "method": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     "maxAgeSeconds": 3600,
-    "responseHeader": [
-      "Content-Type",
-      "Authorization",
-      "X-Firebase-Storage-Version",
-      "X-Goog-Upload-Command",
-      "X-Goog-Upload-Header-Content-Length",
-      "X-Goog-Upload-Protocol"
-    ]
+    "responseHeader": ["*"]
   }
 ]
