@@ -41,6 +41,7 @@ iframe {
   display:flex;
   flex-direction: row;
   justify-content: center;
+  gap: 5px;
 }
 .bottom-banner {
   position: fixed;

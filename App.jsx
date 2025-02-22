@@ -224,16 +224,24 @@ function App() {
  
          
 
-          <div className="flex rounded-lg shadow-lg p-5 ">
+          <div className="flex rounded-lg shadow-lg p-1 ">
 
             {/*Lewa połowa ekranu */}
           
-                <div className="flex min-h-screen  md:flex-row custom-flex">
-                    <div className="bg-gray-900 rounded-lg shadow-lg p-1 text-white">
-                      <ToDoWrapper />
-                    </div>
-                    <ImageUploader />
+            <div className="flex min-h-screen md:flex-row custom-flex justify-center">
+  
+                {/* Wrapper for ToDoWrapper to center it */}
+                <div className="flex justify-center w-full">
+                  <div className=" rounded-lg shadow-lg p-1 text-white">
+                    <ToDoWrapper />
+                  </div>
                 </div>
+
+                {/* ImageUploader (Not Centered) */}
+                <ImageUploader />
+
+              </div>
+
           </div>
 
             
