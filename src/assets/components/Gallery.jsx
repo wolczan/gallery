@@ -28,16 +28,32 @@ const Gallery = () => {
   };
 
   return (
-    <div>
-      <h2>📷 Moja Galeria</h2>
-      <input type="file" onChange={handleUpload} accept="image/*" />
-      {images.length > 0 ? (
-        images.map((image) => (
-          <img key={image.id} src={image.imageUrl} alt="Obraz" width="200" />
-        ))
-      ) : (
-        <p>Brak obrazów do wyświetlenia.</p>
-      )}
+    <div className="flex items-center justify-center ">
+      <div className=" border-gray-300 rounded-lg p-6 shadow-md 
+        w-full text-center ">
+        <h2 className="text-xl font-bold mb-4 text-white ">📷 Moja Galeria</h2>
+        <input
+          type="file"
+          onChange={handleUpload}
+          accept="image/*"
+          className="mb-4 p-2 border border-gray-300 rounded color-white bg-white"
+        />
+        <div className="flex flex-wrap justify-center gap-4 ">
+          {images.length > 0 ? (
+            images.map((image) => (
+              <img
+                key={image.id}
+                src={image.imageUrl}
+                alt="Obraz"
+                width="140"
+                className="rounded-md shadow-md border border-gray-200"
+              />
+            ))
+          ) : (
+            <p className="text-gray-500">Brak obrazów do wyświetlenia.</p>
+          )}
+        </div>
+      </div>
     </div>
   );
 };

@@ -26,8 +26,8 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* Full viewport height */
-  margin-top:-5%;
+ 
+  
 }
 
 iframe {
@@ -59,24 +59,21 @@ iframe {
   color: white;
   text-align: center;
 }
-
 html, body {
   height: 100%;
   width: 100%;
   margin: 0;
   padding: 0;
   overflow-x: hidden;
- 
 }
-/* Apply Flexbox to the existing .Todo container */
 .Todo {
   display: flex;
   align-items: center;  /* Align items vertically in the center */
   justify-content: space-between; /* Space between task and icons */
-  padding: 4px;
+  padding: 2px;
   border: 1px solid #ccc;
   border-radius: 15px;
-  margin: 4px;
+  margin: 2px;
 }
 .icon-container {
   display: flex;
@@ -159,6 +156,7 @@ html, body {
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+
 .upload-btn {
   display: block;
   margin-top: 10px;
@@ -181,6 +179,32 @@ html, body {
 .flex {
   display:flex;
   justify-content: center;
+  
+}
+/* Klasa odpowiedzialna za siatkę (grid) całego kontenera */
+.container {
+  display: grid;
+  grid-template-columns: auto 1fr; /* Lewa kolumna – video i info, prawa kolumna – galeria */
+  grid-template-rows: auto auto;   /* Dwa wiersze: jeden dla video, drugi dla info */
+  gap: 20px;
+}
+
+/* Pozycjonowanie pierwszego diva (wideo) */
+.video-container {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+/* Pozycjonowanie drugiego diva (informacje) */
+.info-container {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+/* Galeria zajmuje drugą kolumnę, rozciągając się na oba wiersze */
+.gallery-container {
+  grid-column: 2;
+  grid-row: 1 / span 2;
 }
 
 .flex-center-container {
@@ -262,6 +286,11 @@ html, body {
 .recent-posts a:hover {
   text-decoration: underline;
 }
+.gallery-container > div img {
+  width: 100%;
+  height: auto;
+}
+
 
 
 @keyframes logo-spin {
@@ -300,9 +329,34 @@ html, body {
     align-items: center; /* Ensure these items stay centered */
   }
 }
+
 @media (max-width: 560px) {
   .custom-container {
-    display:flex;
+    display: flex;
     flex-direction: column; /* Changes to column layout for smaller screens */
   }
+  .custom-flex {
+    flex-direction: column;
+  }
 }
+
+@media (max-width: 768px) {
+  .container {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto; /* Każdy element zajmuje osobny wiersz */
+  }
+  .video-container,
+  .info-container,
+  .gallery-container {
+    grid-column: 1; /* Wszystkie elementy w jednej kolumnie */
+  }
+  /* Galeria pojawi się jako ostatnia */
+  .gallery-container {
+    grid-row: 3;
+    /* Zmiana układu galerii na grid z 3 kolumnami */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px; /* Odstęp między obrazkami */
+  }
+}
+

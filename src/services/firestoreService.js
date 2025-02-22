@@ -7,6 +7,8 @@ import { addDoc } from "firebase/firestore";
 
 
 // ✅ Funkcja pobierania obrazów z Firestore
+import { query, where } from "firebase/firestore";
+
 export async function getImagesFromFirestore() {
   try {
     const auth = getAuth();
@@ -16,11 +18,11 @@ export async function getImagesFromFirestore() {
       return [];
     }
 
-    // Pobranie wszystkich zdjęć użytkownika
-    const querySnapshot = await getDocs(collection(db, "images"));
-    const images = querySnapshot.docs
-      .filter((doc) => doc.data().userId === user.uid)
-      .map((doc) => ({ id: doc.id, ...doc.data() }));
+    // 🔍 Pobieranie tylko zdjęć zalogowanego użytkownika bez dodatkowego filtrowania
+    const q = query(collection(db, "images"), where("userId", "==", user.uid));
+    const querySnapshot = await getDocs(q);
+
+    const images = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
 
     console.log("📸 Zdjęcia pobrane z Firestore:", images);
     return images;
@@ -29,6 +31,7 @@ export async function getImagesFromFirestore() {
     return [];
   }
 }
+
 
 // ✅ Funkcja przesyłania obrazu do Firebase Storage i zapis do Firestore
 export async function uploadImageToFirestore(file) {

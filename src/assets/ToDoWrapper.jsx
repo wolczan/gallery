@@ -10,14 +10,14 @@ const ToDoWrapper = ({ className }) => {
 
   // Fetch tasks from Firestore on component mount
   useEffect(() => {
-    const tasksCollection = collection(db, "tasks"); // Access the 'tasks' collection
-    const q = query(tasksCollection, orderBy("timestamp", "desc")); // Query for ordered tasks by timestamp
+    const tasksCollection = collection(db, "tasks"); 
+    const q = query(tasksCollection, orderBy("timestamp", "desc")); 
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const fetchedTasks = snapshot.docs.map(doc => ({
         id: doc.id,
         ...doc.data(),
       }));
-      setTasks(fetchedTasks); // Update state with tasks from Firestore
+      setTasks(fetchedTasks);
     });
 
     // Cleanup the subscription on unmount
@@ -33,7 +33,7 @@ const ToDoWrapper = ({ className }) => {
     };
     
     try {
-      await addDoc(collection(db, "tasks"), newTask); // Add new task to Firestore
+      await addDoc(collection(db, "tasks"), newTask);
       console.log('Task added:', newTask);
     } catch (error) {
       console.error('Error adding task:', error);
@@ -43,8 +43,8 @@ const ToDoWrapper = ({ className }) => {
   // Function to toggle completion status in Firestore
   const toggleComplete = async (id, completed) => {
     try {
-      const taskRef = doc(db, "tasks", id); // Get the task document reference
-      await updateDoc(taskRef, { completed: !completed }); // Update task's 'completed' field
+      const taskRef = doc(db, "tasks", id);
+      await updateDoc(taskRef, { completed: !completed });
       console.log('Task updated:', id);
     } catch (error) {
       console.error('Error updating task:', error);
@@ -54,8 +54,8 @@ const ToDoWrapper = ({ className }) => {
   // Function to delete a task from Firestore
   const deleteTodo = async (id) => {
     try {
-      const taskRef = doc(db, "tasks", id); // Get the task document reference
-      await deleteDoc(taskRef); // Delete the task
+      const taskRef = doc(db, "tasks", id);
+      await deleteDoc(taskRef);
       console.log('Task deleted:', id);
     } catch (error) {
       console.error('Error deleting task:', error);
@@ -65,8 +65,8 @@ const ToDoWrapper = ({ className }) => {
   // Function to edit a task's text in Firestore
   const editTodo = async (id, newText) => {
     try {
-      const taskRef = doc(db, "tasks", id); // Get the task document reference
-      await updateDoc(taskRef, { text: newText }); // Update the task's text
+      const taskRef = doc(db, "tasks", id);
+      await updateDoc(taskRef, { text: newText });
       console.log('Task edited:', id);
     } catch (error) {
       console.error('Error editing task:', error);
@@ -74,11 +74,32 @@ const ToDoWrapper = ({ className }) => {
   };
 
   return (
-    <div className={`TodoWrapper ${className}`}>
-      <h1 className="mb-[9px] -mt-0.5">Together We Achieve!</h1>
+    <div className={`TodoWrapper ${className} mr-24`}>
+      {/* Zamiast zwykłego nagłówka, dodajemy blok opisu działania */}
+      <div className="mb-4 p-4 bg-gray-800 text-white rounded-lg shadow-md">
+  <h2 className="text-xl font-bold mb-2">Jak działa nasza lista zadań?</h2>
+  <p className="mb-2">
+  useState i useEffect – do obsługi stanu i efektów ubocznych.
+PropTypes – do walidacji właściwości (className).
+ToDoForm – formularz dodawania nowych zadań.
+TaskList – komponent wyświetlający listę zadań.
+firebase/firestore – metody do operacji na bazie danych.
+  </p>
+  <p className="mb-2">
+    
+  </p>
+  <p>
+    
+  </p>
+</div>
+
+<h1 className="mb-[9px] -mt-0.5 flex items-center">
+  Together We Achieve! <span className="text-red-500 ml-2">❤️</span>
+</h1>
+
+
       <ToDoForm onSubmit={handleSubmit} />
-      
-      {/* Render TaskList component and pass tasks and handler functions as props */}
+
       <TaskList
         tasks={tasks}
         toggleComplete={toggleComplete}
