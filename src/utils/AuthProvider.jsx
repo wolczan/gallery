@@ -1,6 +1,5 @@
-// AuthProvider.jsx
 import { useEffect, useState } from "react";
-import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut as firebaseSignOut } from "firebase/auth"; 
 import PropTypes from "prop-types";
 import AuthContext from "./authContext"; // ✅ Importujemy kontekst
 
@@ -27,22 +26,24 @@ export function AuthProvider({ children }) {
     }
   };
 
-  const signOutUser = async () => {
-    console.log("🔍 Wylogowanie użytkownika...");
+  const signOut = async () => {
+    console.log("🔍 Próba wylogowania...");
     try {
-      await signOut(auth);
-      console.log("🚪 Wylogowano!");
+      await firebaseSignOut(auth);
+      console.log("🚪 Użytkownik powinien być wylogowany!");
+      setUser(null); // Resetowanie użytkownika
     } catch (error) {
       console.error("❌ Błąd wylogowania:", error.message);
     }
   };
+  
 
-  console.log("✅ Przekazywane wartości w AuthProvider:", { user, signIn, signOutUser });
+  console.log("✅ Przekazywane wartości w AuthProvider:", { user, signIn, signOut });
   console.log("✅ AuthProvider renderuje się! user:", user);
-  console.log("✅ AuthProvider przekazuje: ", { user, signIn, signOutUser });
+  console.log("✅ AuthProvider przekazuje: ", { user, signIn, signOut });
 
   return (
-    <AuthContext.Provider value={{ user, signIn, signOutUser }}>
+    <AuthContext.Provider value={{ user, signIn, signOut }}> {/* ✅ Przekazujemy poprawnie */}
       {children}
     </AuthContext.Provider>
   );

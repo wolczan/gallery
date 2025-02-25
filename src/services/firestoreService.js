@@ -1,4 +1,4 @@
-import { getFirestore, collection, getDocs } from "firebase/firestore";
+import { getFirestore, collection, onSnapshot, getDocs } from "firebase/firestore";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { getAuth } from "firebase/auth";
 import { v4 as uuidv4 } from "uuid";
@@ -9,28 +9,28 @@ import { addDoc } from "firebase/firestore";
 // ✅ Funkcja pobierania obrazów z Firestore
 import { query, where } from "firebase/firestore";
 
-export async function getImagesFromFirestore() {
-  try {
-    const auth = getAuth();
-    const user = auth.currentUser;
-    if (!user) {
-      console.warn("⚠ Użytkownik nie jest zalogowany, zwracam pustą listę.");
-      return [];
-    }
+export const getImagesFromFirestore = (callback) => {
+  const auth = getAuth();
+  const user = auth.currentUser;
 
-    // 🔍 Pobieranie tylko zdjęć zalogowanego użytkownika bez dodatkowego filtrowania
-    const q = query(collection(db, "images"), where("userId", "==", user.uid));
-    const querySnapshot = await getDocs(q);
-
-    const images = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-
-    console.log("📸 Zdjęcia pobrane z Firestore:", images);
-    return images;
-  } catch (error) {
-    console.error("❌ Błąd pobierania obrazów:", error);
-    return [];
+  if (!user) {
+    console.warn("⚠ Użytkownik nie jest zalogowany, pobieram wszystkie zdjęcia.");
   }
-}
+
+  // 🔍 Pobieramy zdjęcia TYLKO danego użytkownika, jeśli jest zalogowany
+  const imagesRef = collection(db, "images");
+  const q = user ? query(imagesRef, where("userId", "==", user.uid)) : query(imagesRef);
+
+  const unsubscribe = onSnapshot(q, (querySnapshot) => {
+    const imagesList = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+    callback(imagesList);
+  });
+
+  return unsubscribe; // ✅ Zwracamy funkcję odsubskrybowania
+};
 
 
 // ✅ Funkcja przesyłania obrazu do Firebase Storage i zapis do Firestore

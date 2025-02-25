@@ -74,29 +74,28 @@ const ToDoWrapper = ({ className }) => {
   };
 
   return (
-    <div className="flex justify-center min-h-screen">
-    <div className={`TodoWrapper ${className}  `}>
-      
+    <div className="galeria   ">
+    <div className={`TodoWrapper ${className} `}>
       <div className="mb-4 p-4 bg-gray-800 text-white rounded-lg shadow-md ">
-  <h2 className="text-xl font-bold mb-2"> Jak dziala lista zadań?</h2>
-  <p className="mb-2">
-  useState i useEffect – do obsługi stanu i efektów ubocznych.
-PropTypes – do walidacji właściwości (className).
-ToDoForm – formularz dodawania nowych zadań.
-TaskList – komponent wyświetlający listę zadań.
-firebase/firestore – metody do operacji na bazie danych.
-  </p>
-  <p className="mb-2 border-1"></p>
-    <p>Aaplikacja wykorzystuje Firebase jako bazę danych do przechowywania zadań oraz Firebase Authentication do zarządzania użytkownikami. Integruje Firebase Storage lub Firestore do przechowywania i wyświetlania zdjęć zalogowanemu użytkownikowi.</p>
-    
-  
-  <p>
+        <h2 className="text-xl font-bold mb-2"> Jak dziala lista zadań?</h2>
+        <p className="mb-2">
+                useState i useEffect - do obsługi stanu i efektów ubocznych.
+              PropTypes – do walidacji właściwości (className).
+              ToDoForm – formularz dodawania nowych zadań.
+              TaskList – komponent wyświetlający listę zadań.
+              firebase/firestore – metody do operacji na bazie danych.
+        </p>
+        <p className="mb-2 border-1"></p>
+          <p>Aplikacja wykorzystuje Firebase jako bazę danych do przechowywania zadań oraz Firebase Authentication do zarządzania użytkownikami. Integruje Firebase Storage lub Firestore do przechowywania i wyświetlania zdjęć zalogowanemu użytkownikowi.</p>
+          
+        
+        <p>
     
   </p>
 </div>
 
-<h1 className="mb-[9px] -mt-0.5 flex items-center">
-  Together We Achieve! <span className="text-red-500 ml-2">❤️</span>
+<h1 className="mb-[9px] -mt-0.5  ">
+  Together We Achieve! <span className="text-red-500 ml-2 ">❤️</span>
 </h1>
 
 

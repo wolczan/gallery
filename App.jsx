@@ -146,8 +146,8 @@ function App() {
  
         {showLogin && <Login onClose={() => setShowLogin(false)} />}
 
-        <div className="container">
-            <div className="video-container flex-shrink-0 w-[15%] sm:w-[20%] lg:w-[11%] flex items-center justify-center rounded-lg shadow-2xl shadow-white">
+          <div className="container fix-a">
+                <div className="video-container flex-shrink-0 w-[15%] sm:w-[20%] lg:w-[11%] mx-auto justify-center rounded-lg shadow-2xl shadow-white">
                   {playing && videos.length > 0 ? (
                     <video
                       ref={videoRef}
@@ -175,7 +175,7 @@ function App() {
                 </div>
 
 
-                <div className="info-container relative z-10 p-2 rounded bg-black text-white flex flex-col justify-between"
+                <div className="info-container relative z-10 p-2 rounded bg-black/60 text-white flex flex-col justify-between"
                 style={{ minHeight: '120px', maxWidth: '400px', width: '100%' , margin: 'auto', boxShadow: '10px 15px 80px -5px rgba(0, 0, 0, 0.7)', }}>
 
                   <div>
@@ -188,7 +188,7 @@ function App() {
                           {videos[selectedVideo].description}
                         </p>
                   </div>
-                  <div className="flex justify-end mt-auto ">
+                  <div className=" mt-auto ">
                     <button
                       onClick={handlePlay}
                       className="relative bg-gradient-to-r from-red-600 via-pink-500 to-red-600 hover:from-red-500 hover:via-orange-400 hover:to-red-500 active:from-red-700 active:via-pink-600 active:to-red-700 text-white py-1 px-4 rounded-full m-2 shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95"
@@ -196,80 +196,65 @@ function App() {
                       border: '2px solid rgba(255, 255, 255, 0.4)',
                       boxShadow: '0 0 15px rgba(221, 13, 13, 0.8)',
                       color: 'white',
+                      margin: '0 auto',
                       }}>
                       {playing ? <FaPause /> : <FaPlay />}
                     </button>
                   </div>
                 </div>
 
-            <div className="gallery-container flex flex-wrap justify-center items-center p-1 max-w-screen-lg mx-auto rounded-lg">
-                {videos.map((video, index) => (
-                  <div
-                    key={video.id}
-                    onClick={() => setSelectedVideo(index)}
-                    className={`hover-enlarge border-1 m-2 rounded-lg overflow-hidden cursor-pointer ${
-                      selectedVideo === index ? ' border-blue-500' : ''
-                    }`}
-                    style={{ width: '109px', height: '140px', borderRadius: '6px' }}
-                  >
-                    <img
-                      src={video.cover}
-                      className="object-cover w-full h-full rounded-lg"
-                      alt={video.title}
-                    />
-                  </div>
-                ))}
+                <div className="gallery-container flex flex-wrap justify-center items-center p-1 max-w-screen-lg mx-auto rounded-lg">
+                      {videos.map((video, index) => (
+                        <div
+                          key={video.id}
+                          onClick={() => setSelectedVideo(index)}
+                          className={`hover-enlarge border-1 m-2 rounded-lg overflow-hidden cursor-pointer ${
+                            selectedVideo === index ? ' border-blue-500' : ''
+                          }`}
+                          style={{ width: '109px', height: '140px', borderRadius: '6px' }}
+                        >
+                          <img
+                            src={video.cover}
+                            className="object-cover w-full h-full rounded-lg"
+                            alt={video.title}
+                          />
+                        </div>
+                      ))}
+                    </div>
               </div>
-              </div>
- 
-         
 
-          <div className="flex rounded-lg shadow-lg p-1 ">
-
-            {/*Lewa połowa ekranu */}
-          
-            <div className="flex min-h-screen md:flex-row custom-flex justify-center">
-  
-                {/* Wrapper for ToDoWrapper to center it */}
-                <div className="flex justify-center w-full">
-                  <div className=" rounded-lg shadow-lg p-1 text-white">
-                    <ToDoWrapper />
-                  </div>
+              <div className="container fix-a">
+                <div className="video-container flex-shrink-0 w-[15%] sm:w-[20%] lg:w-[11%] mx-auto justify-center rounded-lg shadow-2xl shadow-white">
+                <ToDoWrapper />
                 </div>
 
-                {/* ImageUploader (Not Centered) */}
+                <div className="gallery-container flex flex-wrap justify-center items-center p-1 max-w-screen-lg mx-auto rounded-lg">
                 <ImageUploader />
-
+                    </div>
               </div>
 
-          </div>
-
-            
-          
-               
                 <Gallery />
                 <RecentPosts />
 
                 <div className="p-4 max-w-screen-sm mx-auto  sm:space-x-0 sm:space-y-1 custom-container text-white">
-              <div className="w-full mt-4 mx-auto"> {/* Adjust the top margin as needed */}
-                <ContactForm />
-              </div>
-                <div className="w-full map-container  mx-auto" >
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2421.374953124007!2d19.395962676321443!3d51.75924867968213!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471a3460d27d2c89%3A0x4a2f25c77f622a88!2s%C5%81%C3%B3d%C5%BA%2094-203%2C%20Poland!5e0!3m2!1sen!2sus!4v1698609072847!5m2!1sen!2sus"
-                  width="450"
-                  height="380"
-                  style={{ border: 0 }}
-                  allowFullScreen=""
-                  loading="lazy"
-                  title="Google Map - Łódź 94-203"
-                  
-                ></iframe>
+                  <div className="w-full mt-4 mx-auto"> {/* Adjust the top margin as needed */}
+                    <ContactForm />
+                  </div>
+                  <div className="w-full map-container  mx-auto" >
+                    <iframe
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2421.374953124007!2d19.395962676321443!3d51.75924867968213!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471a3460d27d2c89%3A0x4a2f25c77f622a88!2s%C5%81%C3%B3d%C5%BA%2094-203%2C%20Poland!5e0!3m2!1sen!2sus!4v1698609072847!5m2!1sen!2sus"
+                      width="450"
+                      height="380"
+                      style={{ border: 0 }}
+                      allowFullScreen=""
+                      loading="lazy"
+                      title="Google Map - Łódź 94-203"
+                    ></iframe>
+                  </div>
                 </div>
-            </div>
                 <Footer />
             </div>
-              </AuthProvider>
+                    </AuthProvider>
           
       );
     }

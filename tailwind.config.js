@@ -4,6 +4,10 @@ const config = {
   theme: {
     extend: {
       backgroundColor: ['hover'],
+      screens: {
+        'custom': '560px',
+      }
+      
     },
   },
   plugins: [],

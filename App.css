@@ -177,17 +177,38 @@ html, body {
   margin-right: 0.5rem; /* Custom margin between links */
   color: white;
 }
-.flex {
-  display:flex;
-  justify-content: center;
+.galeria {
+  display: flex;
+  flex-direction: row;
+  
+  max-width: 600px; 
+  padding: 1px;
+  color: white;
+}
+.flex{
+  max-width: rem;
+  display: flex;
   
 }
-/* Klasa odpowiedzialna za siatkę (grid) całego kontenera */
-.container {
+
+.square {
+  width: 30%;
+  margin: 10px;
+}
+
+.fix-a{
+  display:flex;
+  justify-content: center;
+  width: 100%;
+  padding: 1px;
+  margin: 10px;
+  color: white; 
+ 
+  margin: 0 auto;
   display: grid;
   grid-template-columns: auto 1fr; /* Lewa kolumna – video i info, prawa kolumna – galeria */
   grid-template-rows: auto auto;   /* Dwa wiersze: jeden dla video, drugi dla info */
-  gap: 20px;
+  gap: 10px;
 }
 
 /* Pozycjonowanie pierwszego diva (wideo) */
@@ -288,8 +309,9 @@ html, body {
   text-decoration: underline;
 }
 .gallery-container > div img {
-  width: 100%;
+  
   height: auto;
+  
 }
 
 
@@ -339,6 +361,11 @@ html, body {
   .custom-flex {
     flex-direction: column;
   }
+  .mobile {
+  display: flex;
+  flex-direction: column;
+  background-color: aqua;
+} 
 }
 
 @media (max-width: 768px) {
