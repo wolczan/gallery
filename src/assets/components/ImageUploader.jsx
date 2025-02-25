@@ -5,13 +5,13 @@ import { useAuth } from "../../utils/useAuth";
 const ImageUploader = () => {
   const { user } = useAuth();
   const [image, setImage] = useState(null);
-  const [uploadedImages, setUploadedImages] = useState([]); // ✅ Lista zdjęć
+  const [uploadedImages, setUploadedImages] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null); // ✅ Powiększone zdjęcie
 
-  // 🔄 Pobieranie zdjęć przy pierwszym renderze
   useEffect(() => {
     const unsubscribe = getImagesFromFirestore((imagesList) => {
-      setUploadedImages(imagesList); // ✅ Pobieramy WSZYSTKIE zdjęcia
+      setUploadedImages(imagesList);
     });
 
     return () => {
@@ -43,9 +43,7 @@ const ImageUploader = () => {
       const imageUrl = await uploadImageToFirestore(image);
       const newImage = { id: Date.now().toString(), imageUrl };
 
-      // ✅ Teraz dodajemy nowy obraz do listy ZAMIAST ją nadpisywać
       setUploadedImages((prev) => [...prev, newImage]);
-
       setImage(null);
       alert("🎉 Obraz przesłany!");
     } catch (error) {
@@ -85,13 +83,30 @@ const ImageUploader = () => {
               key={img.id}
               src={img.imageUrl}
               alt="Zapisany obraz"
-              className="w-24 h-24 object-cover rounded-md border-white shadow-lg"
+              className="w-24 h-26 object-cover rounded-md border-white shadow-lg cursor-pointer transition-transform hover:scale-105"
+              onClick={() => setSelectedImage(img.imageUrl)} // ✅ Kliknięcie otwiera powiększenie
             />
           ))
         ) : (
           <p className="text-white-300 text-1xl">Brak zapisanych obrazów...</p>
         )}
       </div>
+
+      {/* 🔹 Powiększone zdjęcie jako Lightbox */}
+      {selectedImage && (
+        <div
+          className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-80 flex items-center justify-center z-50"
+          onClick={() => setSelectedImage(null)}
+        >
+          <img src={selectedImage} alt="Powiększony obraz" className="max-w-[90%] max-h-[90%] rounded-lg shadow-lg" />
+          <button
+            className="absolute top-4 right-4 bg-red-500 text-white px-4 py-2 rounded-full"
+            onClick={() => setSelectedImage(null)}
+          >
+            ❌ Zamknij
+          </button>
+        </div>
+      )}
     </div>
   );
 };
