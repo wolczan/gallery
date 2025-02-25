@@ -36,7 +36,7 @@ const Gallery = () => {
   };
 
   return (
-    <div className="border-gray-300 rounded-lg p-6 shadow-md text-center bg-black/60 w-5/6 mx-auto">
+    <div className="border-gray-300 rounded-lg p-6 shadow-md text-center bg-black/60 w-6/7 mx-auto">
       <h2 className="text-xl font-bold mb-4 text-white">📷 Moja Galeria</h2>
 
       {user && (
@@ -48,14 +48,14 @@ const Gallery = () => {
         />
       )}
 
-      <div className="flex flex-wrap gap-4 justify-center">
+      <div className="flex flex-wrap gap-2 justify-center">
         {images.length > 0 ? (
           images.map((image) => (
             <img
               key={image.id}
               src={image.imageUrl}
               alt="Obraz"
-              className="rounded-md shadow-md border border-gray-200 object-cover w-40 h-40"
+              className="rounded-md shadow-md border border-gray-200 object-cover w-28 h-30"
             />
           ))
         ) : (

@@ -184,6 +184,8 @@ html, body {
   max-width: 600px; 
   padding: 1px;
   color: white;
+  width: 95%;
+  margin: 0 auto;
 }
 .flex{
   max-width: rem;
@@ -276,13 +278,14 @@ html, body {
   transform: scale(1.05);
 }
 .recent-posts {
-  padding: 20px;
   background-color: #f5f5f5;
   border: 1px solid #ddd;
   border-radius: 8px;
-  max-width: 400px;
+  max-width: 40rem;
   margin: 20px auto;
   font-family: Arial, sans-serif;
+  padding: 10px;
+  max-width: 40rem;
 }
 
 .recent-posts h3 {
@@ -357,6 +360,7 @@ html, body {
   .custom-container {
     display: flex;
     flex-direction: column; /* Changes to column layout for smaller screens */
+
   }
   .custom-flex {
     flex-direction: column;
@@ -366,6 +370,10 @@ html, body {
   flex-direction: column;
   background-color: aqua;
 } 
+.recent-posts {
+  padding: 20px;
+  width: 95%;
+}
 }
 
 @media (max-width: 768px) {

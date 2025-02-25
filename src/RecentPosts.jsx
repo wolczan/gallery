@@ -95,7 +95,8 @@ const fetchThumbnail = async (url) => {
   };
 
   return (
-    <div className="recent-posts">
+    <div className="recent-posts p-4 sm:p-6 md:p-8">
+
       {/* Formularz do dodawania postów */}
       <h3>Dodaj nowy post</h3>
       <form onSubmit={handleAddPost}>

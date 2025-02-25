@@ -85,7 +85,7 @@ const ImageUploader = () => {
               key={img.id}
               src={img.imageUrl}
               alt="Zapisany obraz"
-              className="w-40 h-40 object-cover rounded-md border-white shadow-lg"
+              className="w-24 h-24 object-cover rounded-md border-white shadow-lg"
             />
           ))
         ) : (
