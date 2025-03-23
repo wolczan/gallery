@@ -223,6 +223,11 @@ html, body {
 .info-container {
   grid-column: 1;
   grid-row: 2;
+  min-height: '170px';
+  max-height: '170px';
+  width: '400px';
+  margin: 'auto';
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 /* Galeria zajmuje drugą kolumnę, rozciągając się na oba wiersze */

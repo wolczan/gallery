@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { collection, getDocs, addDoc } from "firebase/firestore";
+import { collection, getDocs, addDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase"; // Importuj swoją inicjalizację Firestore
+import { motion } from "framer-motion";
+import { doc, updateDoc, increment } from "firebase/firestore";
+
+
 
 function RecentPosts() {
   const [posts, setPosts] = useState([]);
@@ -75,15 +79,19 @@ const fetchThumbnail = async (url) => {
       alert("Proszę wypełnić oba pola!");
       return;
     }
+    
 
     setLoading(true);
     try {
       const thumbnail = await fetchThumbnail(link); // Pobierz miniaturkę
-      const docRef = await addDoc(collection(db, "posts"), { title, link, thumbnail });
-      setPosts((prevPosts) => [
-        ...prevPosts,
-        { id: docRef.id, title, link, thumbnail },
-      ]);
+      await addDoc(collection(db, "posts"), { title, link, thumbnail, createdAt: serverTimestamp(), likes: 0 });
+      const updatedSnapshot = await getDocs(collection(db, "posts"));
+      const updatedPosts = updatedSnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setPosts(updatedPosts);
+
       setTitle(""); // Czyści pole tytułu
       setLink(""); // Czyści pole linku
       alert("Post został dodany!");
@@ -94,70 +102,111 @@ const fetchThumbnail = async (url) => {
     }
   };
 
+  const handleLike = async (postId) => {
+  try {
+    const postRef = doc(db, "posts", postId);
+    await updateDoc(postRef, {
+      likes: increment(1),
+    });
+
+    // Odśwież dane po kliknięciu serduszka
+    const updatedSnapshot = await getDocs(collection(db, "posts"));
+    const updatedPosts = updatedSnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+    setPosts(updatedPosts);
+  } catch (error) {
+    console.error("Błąd podczas aktualizacji liczby polubień:", error);
+  }
+};
+
+  
+
   return (
-    <div className="recent-posts p-4 sm:p-6 md:p-8">
+    <div className="recent-posts max-w-3xl mx-auto px-4 sm:px-6 py-6">
 
       {/* Formularz do dodawania postów */}
       <h3>Dodaj nowy post</h3>
-      <form onSubmit={handleAddPost}>
-        <input
-          type="text"
-          placeholder="Tytuł posta"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          required
-        />
-        <input
-          type="url"
-          placeholder="Link do posta"
-          value={link}
-          onChange={(e) => setLink(e.target.value)}
-          required
-        />
-        <button type="submit" disabled={loading}>
-          {loading ? "Dodawanie..." : "Dodaj post"}
-        </button>
-      </form>
+      <form onSubmit={handleAddPost} className="flex flex-col sm:flex-row gap-2 my-4">
+  <input
+    className="border rounded px-2 py-2 w-full sm:w-1/3"
+    type="text"
+    placeholder="Tytuł posta"
+    value={title}
+    onChange={(e) => setTitle(e.target.value)}
+    required
+  />
+  <input
+    className="border rounded px-3 py-2 w-full sm:w-1/3"
+    type="url"
+    placeholder="Link do posta"
+    value={link}
+    onChange={(e) => setLink(e.target.value)}
+    required
+  />
+  <button
+    type="submit"
+    disabled={loading}
+    className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+  >
+    {loading ? "Dodawanie..." : "Dodaj post"}
+  </button>
+</form>
 
-      {/* Lista ostatnich postów */}
-      <h3>Ostatnie posty</h3>
-      <ul>
-        {posts.map((post) => (
-          <li
-              key={post.id}
-              style={{
-                display: "flex", // Ustawia elastyczny układ
-                alignItems: "center", // Wyrównuje miniaturkę i tekst w pionie
-                marginBottom: "15px", // Dodaje odstęp między elementami listy
-              }}
+
+  {/* Lista ostatnich postów */}
+<h3>Ostatnie posty</h3>
+<ul className="space-y-4 mt-6">
+  {posts.map((post, index) => {
+    console.log("POST:", post); // 👈 podgląd danych
+
+    return (
+      <motion.li
+        key={post.id}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, delay: index * 0.1 }}
+        className="w-full flex items-center bg-white p-4 rounded-lg shadow hover:shadow-lg transition-all duration-300 ease-in-out"
+      >
+        {post.thumbnail && (
+          <img
+            src={post.thumbnail}
+            alt={post.title}
+            className="w-[100px] h-[100px] object-cover rounded mr-4"
+          />
+        )}
+
+        <div className="flex flex-col">
+          <p className="text-left text-sm text-black leading-snug">
+            {post.title}
+          </p>
+
+          {/* DATA */}
+          {post.createdAt && (
+            <p className="text-xs text-gray-500 mt-1">
+              Dodano: {new Date(post.createdAt.seconds * 1000).toLocaleString()}
+            </p>
+          )}
+
+          {/* ❤️ POLUBIENIE */}
+          <div className="flex items-center gap-2 mt-2">
+            <button
+              onClick={() => handleLike(post.id)}
+              className="text-red-500 text-xl hover:scale-110 transition"
             >
-            {post.thumbnail && (
-              <img
-                src={post.thumbnail}
-                alt={post.title}
-                style={{
-                  width: "100px",
-                  height: "100px",
-                  objectFit: "cover",
-                  marginRight: "10px", // Odstęp między miniaturką a tekstem
-                  borderRadius: "8px", // Opcjonalnie zaokrąglenie rogów
-                }}
-              />
-            )}
-            <a
-              href={post.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                textDecoration: "none",
-                color: "black",
-              }}
-            >
-              <h4 style={{ margin: 0 }}>{post.title}</h4>
-            </a>
-          </li>
-        ))}
-      </ul>
+              ❤️
+            </button>
+            <span className="text-sm text-gray-600">{post.likes || 0}</span>
+          </div>
+        </div>
+      </motion.li>
+    );
+  })}
+</ul>
+
+
+
 
     </div>
   );

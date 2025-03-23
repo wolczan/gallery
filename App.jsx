@@ -159,7 +159,7 @@ function App() {
                       playsInline
                       poster={videos[selectedVideo]?.cover}
                       preload="metadata"
-                      style={{ width: '150px', height: '260px' }}
+                      style={{ width: '180px', height: '260px' }}
                     >
                       Twoja przeglądarka nie obsługuje elementu video.
                     </video>
@@ -167,7 +167,7 @@ function App() {
                     <img
                       src={videos[selectedVideo]?.cover}
                       alt="Video cover"
-                      style={{ width: '150px', height: '260px' }}
+                      style={{ width: '170px', height: '260px' }}
                       className="hover-enlarge object-cover rounded-lg w-full h-full"
                     />
                   )}
@@ -175,8 +175,8 @@ function App() {
                 </div>
 
 
-                <div className="info-container relative z-10 p-2 rounded bg-black/60 text-white flex flex-col justify-between"
-                style={{ minHeight: '120px', maxWidth: '400px', width: '100%' , margin: 'auto', boxShadow: '10px 15px 80px -5px rgba(0, 0, 0, 0.7)', }}>
+                <div className="info-container relative z-10 p-2 rounded bg-gray-600 text-white flex flex-col justify-between mb-3"
+                style={{ minHeight: '150px', maxHeight: '170px', width: '450px' , margin: 'auto', boxShadow: '10px 15px 80px -5px rgba(0, 0, 0, 0.7)', }}>
 
                   <div>
                         <h2
@@ -193,7 +193,7 @@ function App() {
                       onClick={handlePlay}
                       className="relative bg-gradient-to-r from-red-600 via-pink-500 to-red-600 hover:from-red-500 hover:via-orange-400 hover:to-red-500 active:from-red-700 active:via-pink-600 active:to-red-700 text-white py-1 px-4 rounded-full m-2 shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95"
                       style={{
-                      border: '2px solid rgba(255, 255, 255, 0.4)',
+                      border: '2px solid red',
                       boxShadow: '0 0 15px rgba(221, 13, 13, 0.8)',
                       color: 'white',
                       margin: '0 auto',
