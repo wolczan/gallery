@@ -6,7 +6,7 @@ A simple React + Firebase application that lets users manage tasks and posts in 
 
 - Add and delete tasks
 - User authentication (login/logout)
-- Add and display posts with thumbnail previews (Open Graph)
+- Add and display posts with automatically generated thumbnails using Open Graph data
 - Real-time data sync with Firestore
 - Context-based user session handling
 - Responsive UI using Tailwind CSS
@@ -29,7 +29,7 @@ Authentication is handled via a custom `AuthProvider` using React Context API:
 
 - Fetches posts from the `posts` collection
 - Allows submitting new posts to Firestore
-- Auto-generates post thumbnails via Open Graph data
+- Automatically fetches Open Graph metadata (title, image) based on submitted URLs
 - Real-time synchronization of tasks and posts across users/devices
 
 ## ⚙️ Installation
