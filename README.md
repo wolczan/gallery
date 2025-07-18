@@ -1,8 +1,8 @@
-# 📌 Task & Post Manager App
+Task & Post Manager App
 
-A simple React + Firebase application that lets users manage tasks and posts in real-time, with user authentication and responsive design.
+React + Firebase app that lets users manage tasks and posts in real-time, with user authentication and responsive design.
 
-## 🚀 Features
+Features
 
 - Add and delete tasks
 - User authentication (login/logout)
