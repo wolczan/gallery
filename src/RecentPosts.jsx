@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { collection, getDocs, addDoc, serverTimestamp } from "firebase/firestore";
-import { db } from "../firebase"; // Importuj swoją inicjalizację Firestore
+//import { db } from "../firebase"; // Importuj swoją inicjalizację Firestore
+import { db } from "@/firebase"; // Importuj swoją inicjalizację Firestore
+
 import { motion } from "framer-motion";
 import { doc, updateDoc, increment } from "firebase/firestore";
 

@@ -1,4 +1,6 @@
-import { Container, Row, Col, Stack, Image } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import "./App.css";
 
 function Footer() {
   return (
@@ -39,71 +41,95 @@ function Footer() {
           <Row className="mt-3">
             {/* Column 1 */}
             <Col md={3} lg={4} xl={3} className="mx-auto mb-4">
-              <h6 className="text-uppercase fw-bold">Maciej Liberadzki Gallery</h6>
+             <h6 className="flowdoc-brand">Flowdoc Gallery</h6>
+
               <hr className="mb-4 mt-0 d-inline-block mx-auto" style={{ width: "60px", backgroundColor: "#7c4dff", height: "2px" }} />
-              <p>The family gallery is a collection of cherished photos and memories that capture the most important moments of family life.</p>
+            <p>Flowdoc is a modern digital lifestyle platform for families.
+            We combine photography, parenting, personal finance and AI tools to help people live better, smarter and more calmly.</p>
             </Col>
 
             {/* Column 2 */}
             <Col md={2} lg={2} xl={2} className="mx-auto mb-4">
-              <h6 className="text-uppercase fw-bold">Technologies used</h6>
+              <h6 className="text-uppercase fw-bold">Kategorie</h6>
               <hr className="mb-4 mt-0 d-inline-block mx-auto" style={{ width: "60px", backgroundColor: "#7c4dff", height: "2px" }} />
+
               <p>
-                <a href="#!" className="text-white">CSS/Tailwind</a>
+                <Link to="/plakaty" className="text-white text-decoration-none">
+                  Plakaty
+                </Link>
               </p>
               <p>
-                <a href="#!" className="text-white">React</a>
+                <Link to="/fotografia" className="text-white text-decoration-none">
+                  Fotografia
+                </Link>
               </p>
               <p>
-                <a href="#!" className="text-white">Firebase</a>
-              </p>
-              <p>
-                <a href="#!" className="text-white">Bootstrap</a>
-              </p>
-              <p>
-                <a href="#!" className="text-white">Node.js</a>
+                <Link to="/blog" className="text-white text-decoration-none">
+                  Blog
+                </Link>
               </p>
             </Col>
 
-            {/* Column 3 */}
-            <Col md={3} lg={2} xl={2} className="mx-auto mb-4">
-              <h6 className="text-uppercase fw-bold">Services</h6>
-              <hr className="mb-4 mt-0 d-inline-block mx-auto" style={{ width: "60px", backgroundColor: "#7c4dff", height: "2px" }} />
-              <p>
-                <a href="#!" className="text-white">Support</a>
-              </p>
-              <p>
-                <a href="#!" className="text-white">Website Maintenence</a>
-              </p>
-              <p>
-                <a href="#!" className="text-white">Responsive Design</a>
-              </p>
-              <p>
-                <a href="#!" className="text-white">Web Hosting Service</a>
-              </p>
-              <p>
-                <a href="#!" className="text-white">Tailor-made solutions</a>
-              </p>
-            </Col>
+              {/* Column 3 */}
+              <Col md={3} lg={2} xl={2} className="mx-auto mb-4">
+                <h6 className="text-uppercase fw-bold">Pomoc</h6>
+                <hr className="mb-4 mt-0 d-inline-block mx-auto" style={{ width: "60px", backgroundColor: "#7c4dff", height: "2px" }} />
+
+                <p>
+                  <Link to="/dostawa" className="text-white text-decoration-none">
+                    Dostawa
+                  </Link>
+                </p>
+            {/*}
+                <p>
+                  <Link to="/zwroty" className="text-white text-decoration-none">
+                    Zwroty i reklamacje
+                  </Link>
+                </p>
+
+                <p>
+                  <Link to="/faq" className="text-white text-decoration-none">
+                    FAQ
+                  </Link>
+                </p>
+        */}
+                <p>
+                  <Link to="/polityka-prywatnosci" className="text-white text-decoration-none">
+                    Polityka prywatności
+                  </Link>
+                </p>
+                <p>
+                  <Link to="/cookies" className="text-white text-decoration-none">
+                    Polityka cookies
+                  </Link>
+                </p>
+
+                <p>
+                  <Link to="/regulamin" className="text-white text-decoration-none">
+                    Regulamin
+                  </Link>
+                </p>
+              </Col>
 
             {/* Column 4 */}
             <Col md={4} lg={3} xl={3} className="mx-auto mb-md-0 mb-4">
-              <h6 className="text-uppercase fw-bold">Contact</h6>
+              <h6 className="text-uppercase fw-bold">Sprzedawca</h6>
               <hr className="mb-4 mt-0 d-inline-block mx-auto" style={{ width: "60px", backgroundColor: "#7c4dff", height: "2px" }} />
-              <p><i className="fas fa-home mr-3"></i> Srebrzynska Park, Lodz, Poland</p>
-              <p><i className="fas fa-envelope mr-3"></i> LoremIpsum</p>
-              <p><i className="fas fa-phone mr-3"></i> + 01 234 567 88</p>
-              <p><i className=""></i></p>
+
+             <p><i className="fas fa-user me-2"></i> Maciej Liberadzki</p>
+              <p><i className="fas fa-envelope me-2"></i> kontakt@twojadomena.pl</p>
+              <p className="small">
+                Sprzedaż prowadzona w ramach działalności nierejestrowanej
+              </p>
             </Col>
           </Row>
         </Container>
       </section>
 
       {/* Copyright section */}
-      <div className="text-center p-3" style={{ backgroundColor: "rgba(0, 0, 0, 0.2)" }}>
-        © 2024 Designed by me
-        <a className="text-white" href=""></a>
-      </div>
+     <div className="text-center p-3" style={{ backgroundColor: "rgba(0, 0, 0, 0.2)" }}>
+  © 2026 Flowdoc Galeria
+</div>
     </footer>
   );
 }

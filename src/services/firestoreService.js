@@ -2,10 +2,9 @@ import { getFirestore, collection, onSnapshot, getDocs } from "firebase/firestor
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { getAuth } from "firebase/auth";
 import { v4 as uuidv4 } from "uuid";
-import { db } from "../../firebase"; 
+//import { db } from "../../firebase"; 
+import { db } from "@/firebase";
 import { addDoc } from "firebase/firestore";
-
-
 // ✅ Funkcja pobierania obrazów z Firestore
 import { query, where } from "firebase/firestore";
 

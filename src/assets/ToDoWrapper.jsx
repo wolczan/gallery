@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';  
 import ToDoForm from './ToDoForm';
 import TaskList from './Tasklist'; // Import TaskList component
-import { db } from '../../firebase'; // Import Firestore
+//import { db } from '../../firebase'; // Import Firestore
+import { db } from "@/firebase";
+
 import { collection, onSnapshot, orderBy, query, addDoc, doc, updateDoc, deleteDoc } from "firebase/firestore"; // Import Firestore methods
 
 const ToDoWrapper = ({ className }) => {

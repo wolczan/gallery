@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';  // validation of data 
-import { db } from '../../firebase'; // Import Firestore
+//import { db } from '../../firebase'; // Import Firestore
+import { db } from "@/firebase";
+
 import { collection, addDoc } from 'firebase/firestore';
 
 function ToDoForm() { // Removed onSubmit prop since we handle Firestore directly

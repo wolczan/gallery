@@ -1,3 +1,98 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+/* --- Overlay z Play --- */
+.play-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;                 /* desktop domyślnie ukryty */
+  transition: opacity 0.25s ease;
+  pointer-events: none;       /* nie blokuje kliku */
+  z-index: 20;
+}
+
+.group:hover .play-overlay,
+.group:focus-within .play-overlay {
+  opacity: 1;                 /* desktop: hover/focus pokaż */
+}
+
+/* mobile: brak hover -> pokaż zawsze lekko */
+@media (hover: none) {
+  .play-overlay { opacity: 1; }
+}
+
+/* Sam przycisk Play (glass + cień) */
+.play-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 9999px;
+  background: rgba(255,255,255,0.25);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+  transform: scale(1);
+  transition: transform 0.15s ease-in-out, background 0.15s ease-in-out;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.45);
+}
+
+.group:hover .play-button,
+.group:focus-within .play-button {
+  transform: scale(1.06);
+  background: rgba(255,255,255,0.32);
+}
+
+/* Ikona w środku (SVG) */
+.play-button svg {
+  width: 22px;
+  height: 22px;
+  display: block;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.35));
+}
+
+/* Badge tytułu – czytelny na zdjęciu */
+.card-title-badge {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  z-index: 30;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 6px 10px;
+  border-radius: 10px;
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.55),
+    rgba(0,0,0,0.25)
+  );
+  backdrop-filter: blur(2px);
+  box-shadow: 0 4px 18px rgba(0,0,0,0.35);
+  border: 1px solid rgba(255,255,255,0.15);
+  max-width: calc(100% - 24px);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Drobny badge „HD” / „Nowość” */
+.card-pill {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 30;
+  padding: 4px 8px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+  border-radius: 9999px;
+  background: rgba(0,0,0,0.45);
+  border: 1px solid rgba(255,255,255,0.25);
+  letter-spacing: .2px;
+}

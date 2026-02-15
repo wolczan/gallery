@@ -75,22 +75,30 @@ const ImageUploader = () => {
         </div>
       )}
 
-      <h2 className="text-l font-bold text-white mt-4">🖼 Zapisane obrazy:</h2>
+     <h2 className="text-l font-bold text-white mt-4">🖼 Zapisane obrazy:</h2>
       <div className="flex flex-wrap gap-2 mt-4 justify-center">
-        {uploadedImages.length > 0 ? (
-          uploadedImages.map((img) => (
+       {uploadedImages.length > 0 ? (
+          uploadedImages.slice(0, 10).map((img) => (
             <img
               key={img.id}
               src={img.imageUrl}
               alt="Zapisany obraz"
-              className="w-24 h-26 object-cover rounded-md border-white shadow-lg cursor-pointer transition-transform hover:scale-105"
-              onClick={() => setSelectedImage(img.imageUrl)} // ✅ Kliknięcie otwiera powiększenie
+              loading="lazy"
+              decoding="async"
+              width={96}
+              height={104}
+              sizes="(max-width: 640px) 96px, 96px"
+             className="w-32 h-36 object-cover rounded-md border-white shadow-lg cursor-pointer transition-transform hover:scale-105"
+
+              onClick={() => setSelectedImage(img.imageUrl)}
             />
           ))
         ) : (
           <p className="text-white-300 text-1xl">Brak zapisanych obrazów...</p>
         )}
+
       </div>
+
 
       {/* 🔹 Powiększone zdjęcie jako Lightbox */}
       {selectedImage && (
