@@ -1,74 +1,65 @@
 [
-    {
-      "id": 1,
-      "title": "„Cytryna nie jest taka zla„",
-      "description": "„Mały smakosz cytryny - zdrowo i z uśmiechem! smak dzieciństwa pełen witamin!!!”",
-      "trailerUrl": "Mały smakosz cytryny - zdrowo i z uśmiechem!xxx”",
-      "video": "https://raw.githubusercontent.com/wolczan/gallery/main/assets/video/cytrynka.mp4",
-      "cover" : "https://raw.githubusercontent.com/wolczan/gallery/main/assets/video/pic1.jpg"
-    },
-    {
-      "id": 2,
-      "title": "„Przyłapany na gorącym uczynku: Zabawne odkrycia malucha”",
-      "description": "„Trzymaj się mocno: Małe wyzwania dnia codziennego”",
-      "trailerUrl": "",
-      "video": "https://raw.githubusercontent.com/wolczan/gallery/main/assets/video/manu.mp4",
-      "cover" : "https://raw.githubusercontent.com/wolczan/gallery/main/assets/video/pic2.jpg"
-
-    },
-    {
-      "id": 3,
-      "title": "„Miłość zaczyna się w rodzinie”",
-      "description": "„Cztery uśmiechy, jedna miłość – rodzina to wszystko.”",
-      "trailerUrl": "",
-      "video": "https://raw.githubusercontent.com/wolczan/gallery/main/assets/video/miki.mp4",
-      "cover" : "https://raw.githubusercontent.com/wolczan/gallery/main/assets/video/family.jpg"
-    },
-    {
-      "id": 4,
-      "title": "„Każda chwila wyjątkowa – urodziny Natana w pełnym blasku!”",
-      "description": "„Wspomnienia – momenty, które zostaną na zawsze!”",
-      "trailerUrl": "",
-      "video": "https://raw.githubusercontent.com/wolczan/gallery/main/assets/video/rower2.mp4",
-      "cover" : "https://raw.githubusercontent.com/wolczan/gallery/main/assets/video/urodziny.jpg",
-      "altText": "Movie Title 1 cover image"
-    },
-    {
-      "id": 5,
-      "title": "„Chwila triumfu: Dziecięca pasja wędkarska”",
-      "description": "„Wędkarstwo pełne przygód i radości”",
-      "trailerUrl": "",
-      "video": "https://raw.githubusercontent.com/wolczan/gallery/main/assets/video/telefon.mp4",
-      "cover" : "https://raw.githubusercontent.com/wolczan/gallery/main/assets/video/natus.jpg",
-      "altText": "Movie Title 1 cover image"
-    },
-    {
-      "id": 6,
-      "title": "„Śmiech i kreatywność: Dziecięce przebrania”",
-      "description": "„Szczęście w najprostszych chwilach”",
-      "trailerUrl": "",
-      "video": "https://raw.githubusercontent.com/wolczan/gallery/main/assets/video/staw.mp4",
-      "cover" : "https://raw.githubusercontent.com/wolczan/gallery/main/assets/video/sportowo.jpg",
-      "altText": "Movie Title 1 cover image"
-    },
-    {
-      "id": 7,
-      "title": "„Śmiech i kreatywność: Dziecięce przebrania”",
-      "description": "„Szczęście w najprostszych chwilach”",
-      "trailerUrl": "",
-      "video": "https://raw.githubusercontent.com/wolczan/gallery/main/assets/video/staw.mp4",
-      "cover" : "https://raw.githubusercontent.com/wolczan/gallery/main/assets/video/sportowo.jpg",
-      "altText": "Movie Title 1 cover image"
-    },
-    {
-      "id": 8,
-      "title": "„Śmiech i kreatywność: Dziecięce przebrania”",
-      "description": "„Szczęście w najprostszych chwilach”",
-      "trailerUrl": "",
-      "video": "https://raw.githubusercontent.com/wolczan/gallery/main/assets/video/staw.mp4",
-      "cover" : "https://raw.githubusercontent.com/wolczan/gallery/main/assets/video/sportowo.jpg",
-      "altText": "Movie Title 1 cover image"
-    }
-
-  ]
-  
+  {
+    "id": 1,
+    "title": "Cytryna nie jest taka zła",
+    "description": "Mały smakosz cytryny — zdrowo i z uśmiechem! Smak dzieciństwa pełen witamin!",
+    "trailerUrl": "Mały smakosz cytryny — zdrowo i z uśmiechem!",
+    "video": "https://raw.githubusercontent.com/wolczan/gallery/main/assets/video/cytrynka.mp4",
+    "cover": "https://raw.githubusercontent.com/wolczan/gallery/main/assets/video/pic1.jpg",
+    "altText": "Chłopiec jedzący cytrynę"
+  },
+  {
+    "id": 2,
+    "title": "Przyłapany na gorącym uczynku: zabawne odkrycia malucha",
+    "description": "Trzymaj się mocno — małe wyzwania dnia codziennego",
+    "trailerUrl": "",
+    "video": "https://raw.githubusercontent.com/wolczan/gallery/main/assets/video/manu.mp4",
+    "cover": "https://raw.githubusercontent.com/wolczan/gallery/main/assets/video/pic2.jpg",
+    "altText": "Rozbawione dziecko"
+  },
+  {
+    "id": 3,
+    "title": "Miłość zaczyna się w rodzinie",
+    "description": "Cztery uśmiechy, jedna miłość — rodzina to wszystko.",
+    "trailerUrl": "",
+    "video": "https://raw.githubusercontent.com/wolczan/gallery/main/assets/video/miki.mp4",
+    "cover": "https://raw.githubusercontent.com/wolczan/gallery/main/assets/video/family.jpg",
+    "altText": "Rodzinne zdjęcie"
+  },
+  {
+    "id": 4,
+    "title": "Każda chwila wyjątkowa – urodziny Natana",
+    "description": "Wspomnienia — momenty, które zostaną na zawsze!",
+    "trailerUrl": "",
+    "video": "https://raw.githubusercontent.com/wolczan/gallery/main/assets/video/rower2.mp4",
+    "cover": "https://raw.githubusercontent.com/wolczan/gallery/main/assets/video/urodziny.jpg",
+    "altText": "Urodziny dziecka"
+  },
+  {
+    "id": 5,
+    "title": "Chwila triumfu: dziecięca pasja wędkarska",
+    "description": "Wędkarstwo pełne przygód i radości",
+    "trailerUrl": "",
+    "video": "https://raw.githubusercontent.com/wolczan/gallery/main/assets/video/telefon.mp4",
+    "cover": "https://raw.githubusercontent.com/wolczan/gallery/main/assets/video/natus.jpg",
+    "altText": "Dziecko z rybą"
+  },
+  {
+    "id": 6,
+    "title": "Śmiech i kreatywność: dziecięce przebrania",
+    "description": "Szczęście w najprostszych chwilach",
+    "trailerUrl": "",
+    "video": "https://raw.githubusercontent.com/wolczan/gallery/main/assets/video/staw.mp4",
+    "cover": "https://raw.githubusercontent.com/wolczan/gallery/main/assets/video/sportowo.jpg",
+    "altText": "Bawiące się dziecko"
+  },
+  {
+    "id": 7,
+    "title": "Pierwszy skok do wody",
+    "description": "Wielkie emocje w małym ciele",
+    "trailerUrl": "",
+    "video": "https://firebasestorage.googleapis.com/v0/b/galeriazdjec-f4180.firebasestorage.app/o/videos%2FVID_20250711_212538.mp4?alt=media&token=58362023-42fc-4c61-a264-b02dca716867",
+    "cover": "https://raw.githubusercontent.com/wolczan/gallery/main/assets/video/sportowo.jpg",
+    "altText": "Skok do wody"
+  }
+]
