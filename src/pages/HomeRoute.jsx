@@ -28,7 +28,7 @@ export default function HomeRoute({
 
       {showLogin && <Login onClose={() => setShowLogin(false)} />}
 
-      <div className="container fix-a rounded-lg shadow-2xl shadow-white my-4 p-4">
+      <div className="border-1 container fix-a rounded-lg shadow-2xl shadow-white my-4 p-4">
         <div
           className="video-container flex-shrink-0 mx-auto justify-center rounded-lg shadow-2xl shadow-white"
           //  style={{ border: "2px solid yellow", background: "rgba(255,0,0,0.1)" }}  // Glowny film wybrany z listy
@@ -81,7 +81,7 @@ export default function HomeRoute({
         </div>
 
         <div
-          className="info-container relative z-10 p-2 rounded bg-gray-600 text-white flex flex-col justify-between mb-3"
+          className="info-container relative z-10 p-2 rounded border-1 text-white flex flex-col justify-between mb-3"
           style={{
             minHeight: "150px",
             maxHeight: "170px",
@@ -103,10 +103,10 @@ export default function HomeRoute({
           <div className="mt-auto">
             <button
               onClick={handlePlay}
-              className="relative bg-gradient-to-r from-red-600 via-pink-500 to-red-600 hover:from-red-500 hover:via-orange-400 hover:to-red-500 active:from-red-700 active:via-pink-600 active:to-red-700 text-white py-1 px-4 rounded-full m-2 shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95"
+              className="relative bg-gradient-to-r from-red-300 via-pink-500 to-red-600 hover:from-red-500 hover:via-orange-400 hover:to-red-500 active:from-red-700 active:via-pink-600 active:to-red-700 text-white py-1 px-4 rounded-full m-2 shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95"
               style={{
                 border: "2px solid red",
-                boxShadow: "0 0 15px rgba(27, 124, 64, 0.8)",
+                boxShadow: "0 0 15px rgba(112, 111, 167, 0.8)",
                 color: "white",
                 margin: "0 auto",
               }}
@@ -116,7 +116,7 @@ export default function HomeRoute({
           </div>
         </div>
 
-        <div className="gallery-container flex flex-wrap justify-center items-center p-1 max-w-screen-lg mx-auto rounded-lg">
+        <div className=" gallery-container flex flex-wrap justify-center items-center p-1 max-w-screen-lg mx-auto rounded-lg">
           {videos.map((video, index) => {
             const webpSrcSet = [
               video.thumbWebp320 && `${video.thumbWebp320} 320w`,
@@ -185,15 +185,18 @@ export default function HomeRoute({
 
       <ToDoWrapper />
 
-      <div className="fix-a">
-        <div className="video-container rounded-lg shadow-2xl shadow-white"></div>
+      <div className="max-w-screen-xl mx-auto my-6 px-4">
+      <div className="flex flex-col lg:flex-row gap-6 items-start">
+        <div className="w-full lg:w-80">
+          <ImageUploader />
+        </div>
+
+        <div className="w-full lg:flex-1">
+          <Gallery />
+        </div>
       </div>
+    </div>
 
-      <div className="gallery-container p-1 rounded-lg"></div>
-
-      <ImageUploader />
-
-      <Gallery />
 
       <RecentPosts />
 

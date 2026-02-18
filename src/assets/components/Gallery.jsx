@@ -1,123 +1,220 @@
-import { useState, useEffect } from "react";
-import { getImagesFromFirestore, uploadImageToFirestore } from "../../services/firestoreService";
+import { useEffect, useMemo, useState, useCallback } from "react";
+import { subscribeImagesPage, loadMoreImages } from "../../services/firestoreService";
 import { useAuth } from "../../utils/useAuth";
+import "../components/Gallery.css"; // opcjonalnie, dla dodatkowych stylów galerii
+
+const PAGE_SIZE = 9;
 
 const Gallery = () => {
+  const { user } = useAuth(); // opcjonalnie pod przyszłe feature (delete, etc.)
   const [images, setImages] = useState([]);
-  const { user } = useAuth();
-  const [selectedIndex, setSelectedIndex] = useState(null); // używamy indeksu
+  const [lastDoc, setLastDoc] = useState(null);
+
+  const [loading, setLoading] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
+
+  // Lightbox stabilniej po ID
+  const [selectedId, setSelectedId] = useState(null);
 
   useEffect(() => {
-    const unsubscribe = getImagesFromFirestore((imagesList) => {
-      setImages(imagesList);
+    setLoading(true);
+
+    const unsubscribe = subscribeImagesPage({
+      pageSize: PAGE_SIZE,
+      callback: ({ items, lastDoc }) => {
+        setImages(items || []);
+        setLastDoc(lastDoc || null);
+        setLoading(false);
+      },
     });
-    return () => { if (typeof unsubscribe === "function") unsubscribe(); };
+
+    return () => unsubscribe?.();
   }, []);
 
-  const handleUpload = async (event) => {
-    if (!user) {
-      alert("Musisz być zalogowany, aby przesłać obraz!");
-      return;
-    }
-    const file = event.target.files[0];
-    if (!file) return;
+  const selectedIndex = useMemo(() => {
+    if (!selectedId) return -1;
+    return images.findIndex((img) => img.id === selectedId);
+  }, [selectedId, images]);
+
+  const selected = selectedIndex >= 0 ? images[selectedIndex] : null;
+
+  const close = useCallback(() => setSelectedId(null), []);
+
+  const prev = useCallback(() => {
+    if (!images.length) return;
+    const i = selectedIndex <= 0 ? images.length - 1 : selectedIndex - 1;
+    setSelectedId(images[i].id);
+  }, [images, selectedIndex]);
+
+  const next = useCallback(() => {
+    if (!images.length) return;
+    const i = selectedIndex >= images.length - 1 ? 0 : selectedIndex + 1;
+    setSelectedId(images[i].id);
+  }, [images, selectedIndex]);
+
+  // Klawiatura: ESC, strzałki
+  useEffect(() => {
+    if (!selectedId) return;
+
+    const onKeyDown = (e) => {
+      if (e.key === "Escape") close();
+      if (e.key === "ArrowLeft") prev();
+      if (e.key === "ArrowRight") next();
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [selectedId, close, prev, next]);
+
+  const onLoadMore = async () => {
+    if (!lastDoc || loadingMore) return;
+
+    setLoadingMore(true);
     try {
-      await uploadImageToFirestore(file);
-      console.log("✅ Nowy obraz dodany");
-    } catch (error) {
-      console.error("❌ Błąd przesyłania pliku:", error);
+      const res = await loadMoreImages({ lastDoc, pageSize: PAGE_SIZE });
+      setImages((prevList) => [...prevList, ...(res.items || [])]);
+      setLastDoc(res.lastDoc || null);
+    } catch (e) {
+      console.error("❌ Błąd loadMoreImages:", e);
+    } finally {
+      setLoadingMore(false);
     }
   };
 
-  // ⬇️ jedna, wspólna lista widocznych elementów (pierwsza 10)
-  const visible = images.slice(0, 10);
-
   return (
-    <>
-      <div className="w-full max-w-7xl mx-auto px-6 py-8 rounded-3xl shadow-[0_10px_25px_rgba(0,0,0,0.15)] bg-gradient-to-br from-[#fefaf5] via-[#fdf6f0] to-[#f9ece3] backdrop-blur-sm border border-white/30">
-  <h2 className="text-2xl font-semibold mb-6 text-gray-800 drop-shadow-sm">📷 Moja Galeria</h2>
+    <div className="w-full max-w-4xl mx-auto px-6 py-8">
 
-  {user && (
-    <input
-      type="file"
-      onChange={handleUpload}
-      accept="image/*"
-      className="mb-6 p-2 border border-gray-300 rounded-lg bg-white shadow-sm cursor-pointer hover:shadow-md transition-shadow duration-100"
-    />
-  )}
+      <div className="flex items-center justify-between gap-4 mb-6">
+        <h2 className="text-2xl font-semibold text-gray-800 drop-shadow-sm">📷 Moja Galeria</h2>
 
-  <div className="flex flex-wrap gap-2 sm:gap-3 justify-center">
-    {visible.length > 0 ? (
-      visible.map((image, index) => (
-        <img
-          key={image.id}
-          src={image.imageUrl}
-          alt="Obraz"
-          loading="lazy"
-          decoding="async"
-          className="rounded-lg shadow-md border border-gray-200 object-cover 
-             w-36 h-40 sm:w-44 sm:h-48 md:w-52 md:h-56 cursor-pointer 
-             transform transition-transform duration-200 ease-out 
-             hover:scale-[1.03] hover:-translate-y-[2px]
-             hover:shadow-[0_6px_18px_rgba(0,0,0,0.2)] 
-             will-change-transform"
-          onClick={() => setSelectedIndex(index)}
-        />
-      ))
-    ) : (
-      <p className="text-gray-500">Brak obrazów do wyświetlenia.</p>
-    )}
-  </div>
-</div>
+        <div className="text-sm text-gray-600">
+          {images.length > 0 ? (
+            <>
+              Załadowane <span className="font-semibold">{images.length}</span>
+              {lastDoc ? " (możesz dociągnąć więcej)" : " (to już wszystko)"}
+            </>
+          ) : (
+            "—"
+          )}
+        </div>
+      </div>
 
+      {/* Skeleton loading */}
+      {loading && (
+       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
 
-      {/* 🔹 Lightbox na indeksie + strzałki */}
-      {selectedIndex !== null && visible[selectedIndex] && (
-        <div
-          className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-80 flex items-center justify-center z-50 cursor-pointer"
-          onClick={() => setSelectedIndex(null)}
-        >
-          <div className="relative flex items-center justify-center w-full h-full">
+          {Array.from({ length: 1 }).map((_, i) => (
+            <div
+              key={i}
+              className="mb-3 break-inside-avoid rounded-xl bg-white/70 border border-white/60 shadow-sm overflow-hidden"
+            >
+              <div className="animate-pulse h-44 sm:h-52 md:h-60 w-full bg-gray-200" />
+              <div className="p-3">
+                <div className="animate-pulse h-3 w-2/3 bg-gray-200 rounded" />
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {!loading && images.length === 0 && <p className="text-gray-500">Brak obrazów do wyświetlenia.</p>}
+
+      {!loading && images.length > 0 && (
+        <>
+          {/* Masonry */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+            {images.map((img) => (
+              <button
+                key={img.id}
+                type="button"
+                className="w-full group text-left"
+                onClick={() => setSelectedId(img.id)}
+              >
+                <div className="rounded-2xl overflow-hidden bg-white/5 border border-white/10 shadow-sm backdrop-blur ...">
+                  <img
+                    src={img.imageUrl}
+                    alt={img.title || "Obraz"}
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-40 object-cover"
+                  />
+
+                  {/* BLOG: tytuł + opis */}
+                  <div className="p-3">
+                    <div className="text-xs text-white/60 line-clamp-2 mt-1">
+                      {img.title || "Tytuł wpisu"}
+                    </div>
+                    <div className="text-xs text-gray-500 line-clamp-2 mt-1">
+                      {img.description || "Krótki opis wpisu…"}
+                    </div>
+                  </div>
+                </div>
+
+              </button>
+            ))}
+          </div>
+
+          {/* Load more */}
+          <div className="mt-6 flex justify-center">
+            <button
+              className="px-5 py-2 rounded-full bg-white border border-gray-200 shadow-sm hover:shadow-md transition disabled:opacity-60"
+              onClick={onLoadMore}
+              disabled={!lastDoc || loadingMore}
+            >
+              {loadingMore ? "⏳ Dociągam..." : lastDoc ? "Pokaż więcej" : "To już wszystko"}
+            </button>
+          </div>
+        </>
+      )}
+
+      {/* Lightbox */}
+      {selected && (
+        <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50" onClick={close} role="dialog" aria-modal="true">
+          <div className="relative w-full h-full flex items-center justify-center px-4">
             <img
-              src={visible[selectedIndex].imageUrl}
+              src={selected.imageUrl}
               alt="Powiększony obraz"
-              className="max-w-[90%] max-h-[90%] rounded-lg shadow-lg"
+              className="max-w-[92vw] max-h-[88vh] rounded-2xl shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             />
 
-            {/* ⬅ Poprzednie */}
             <button
-              className="absolute left-8 text-white text-4xl font-bold select-none"
+              className="absolute left-4 sm:left-8 text-white text-4xl font-bold select-none px-3 py-2 rounded-full hover:bg-white/10"
               onClick={(e) => {
                 e.stopPropagation();
-                setSelectedIndex((prev) => (prev === 0 ? visible.length - 1 : prev - 1));
+                prev();
               }}
+              aria-label="Poprzednie"
             >
-              ⬅
+              ‹
             </button>
 
-            {/* ➡ Następne */}
             <button
-              className="absolute right-8 text-white text-4xl font-bold select-none"
+              className="absolute right-4 sm:right-8 text-white text-4xl font-bold select-none px-3 py-2 rounded-full hover:bg-white/10"
               onClick={(e) => {
                 e.stopPropagation();
-                setSelectedIndex((prev) => (prev === visible.length - 1 ? 0 : prev + 1));
+                next();
               }}
+              aria-label="Następne"
             >
-              ➡
+              ›
             </button>
 
-            {/* ❌ Zamknij */}
             <button
-              className="absolute top-4 right-4 bg-red-500 text-white px-4 py-2 rounded-full"
-              onClick={() => setSelectedIndex(null)}
+              className="absolute top-4 right-4 bg-white/10 text-white px-4 py-2 rounded-full hover:bg-white/20 transition"
+              onClick={(e) => {
+                e.stopPropagation();
+                close();
+              }}
             >
-              ❌ Zamknij
+              ✕ Zamknij
             </button>
+
+            <div className="absolute bottom-4 text-white/70 text-sm hidden sm:block">ESC zamyka • ← → przewija</div>
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

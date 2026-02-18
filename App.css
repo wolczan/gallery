@@ -342,9 +342,9 @@ video {
   width: 100%;
   max-width: 1280px;  /* kontrola szerokości całego obszaru */
   margin: 0 auto;
-  padding: 12px;
+  padding: 42px;
   
-  color: white;
+  color: rgb(26, 28, 134);
 }
 
 .video-container {
@@ -387,7 +387,6 @@ video {
 .gallery-container {
   grid-column: 2;
   grid-row: 1 / span 2;
-  border: 5px solid rgb(226, 33, 33);
 }
 
 .flex-center-container {
