@@ -1,7 +1,6 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect,} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import ToDoWrapper from './src/assets/ToDoWrapper';
 import ContactForm from './src/assets/ContactForm.jsx';
 import './index.css';
 import Footer from './Footer.jsx';
@@ -16,7 +15,6 @@ import Gallery from "./src/assets/components/Gallery.jsx";
 import VideoGallery from './src/assets/components/VideoGallery.jsx';  
 import { fetchVideos } from "./src/services/videos";
 import { Routes, Route, NavLink, useLocation } from 'react-router-dom';  
-import { AnimatePresence, motion } from 'framer-motion';
 import MainNavbar from './src/components/MainNavbar.jsx';
 import BuyPrintPage from "./src/pages/BuyPrintPage.jsx";
 import Plakaty from "./src/pages/Plakaty.jsx";
@@ -30,66 +28,18 @@ import Regulamin from "./src/pages/Regulamin.jsx";
 import HomePage from "./src/pages/HomePage.jsx";
 import CookieBanner from './src/assets/components/CookieBanner.jsx';
 import Cookies from './src/pages/Cookies.jsx';
-import ContactSection from './src/assets/components/ContactSection.jsx';
 import HomeRoute from './src/pages/HomeRoute.jsx';
+import { useVideos } from "./src/hooks/useVideos.js";
+import { useVideoPlayer } from "./src/hooks/useVideoPlayer";
 
 function App() {
-  // --- STANY (wszystkie na górze) ---
-  const [videos, setVideos] = useState([]);
-  const [selectedVideo, setSelectedVideo] = useState(0);
-  const [playing, setPlaying] = useState(false);
-  const videoRef = useRef(null);
+  const { videos, loading, error } = useVideos();
+  const { selectedVideo, setSelectedVideo, playing, setPlaying, videoRef, videoSrc, posterSrc, hasSource, handlePlay, current } = useVideoPlayer(videos);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 992);
-  const [loading, setLoading] = useState(true);
   const [showLogin, setShowLogin] = useState(false);
   const [user, setUser] = useState(null);
-  const [error, setError] = useState(null);
   const auth = getAuth();
  
-
-  // --- POBIERANIE DANYCH: JEDEN useEffect ---
-    useEffect(() => {
-      let isMounted = true; // flaga na wypadek odmontowania komponentu
-
-      (async () => {
-        try {
-          setLoading(true);
-          setError(null);
-
-          const data = await fetchVideos({ source: "App" });
-
-          if (!isMounted) return;
-          setVideos(Array.isArray(data) ? data : []);
-        } catch (err) {
-          console.error("❌ Błąd ładowania filmów:", err);
-          if (!isMounted) return;
-          setError(err);
-          setVideos([]);
-        } finally {
-          if (!isMounted) return;
-          setLoading(false);
-        }
-      })();
-
-      return () => {
-        isMounted = false;
-      };
-    }, []);
-
-
-
-
-// --- RESET PO ZMIANIE WYBORU: pokaż poster, nie graj od razu ---
-useEffect(() => {
-  const v = videoRef.current;
-  if (!v) return;
-  v.pause();
-  v.load();          // przeładowanie nowego src -> poster widoczny
-  v.currentTime = 0;
-  setPlaying(false);
-}, [videos,selectedVideo]);
-
-
   // --- RESPONSYWNOŚĆ ---
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth <= 992);
@@ -97,13 +47,6 @@ useEffect(() => {
     handleResize();
     return () => window.removeEventListener('resize', handleResize);
   }, []);
-
-  const handlePlay = () => {
-  const v = videoRef.current;
-  if (!v) return;
-  if (v.paused) v.play(); else v.pause();
-};
-
 
   // --- PRIORYTETY RENDERU (spinner > błąd > brak danych) ---
   if (loading) {
@@ -131,31 +74,6 @@ useEffect(() => {
   if (!videos || videos.length === 0) {
     return <div className="p-4">Brak filmów do wyświetlenia.</div>;
   }
-
- // --- wyliczenia dla playera ---
-const current = videos?.[selectedVideo] ?? null;
-
-const videoSrc =
-  current?.video ??
-  current?.videoUrl ??
-  current?.src ??
-  "";
-
-const posterSrc =
-  current?.cover ||
-  current?.thumbWebp1280 ||
-  current?.thumbWebp640 ||
-  current?.thumb ||
-  current?.image ||
-  "/images/default-poster.jpg";
-
-const hasSource = Boolean(videoSrc);
-
-console.log("DBG current:", current);
-console.log("DBG videoSrc:", videoSrc);
-console.log("DBG posterSrc:", posterSrc);
-
-
 
   return (
     <AuthProvider>
