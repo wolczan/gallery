@@ -70,13 +70,13 @@ const secondRow = videos?.slice(Math.ceil(videos.length / 2)) ?? [];
 
                 {/* TREŚĆ NA VIDEO */}
                 <div className="absolute inset-0 flex items-end">
-                <div className="w-full p-5 sm:p-7 lg:p-10">
+                <div className="w-full p-3 sm:p-6 lg:p-10">
                     <div className="max-w-lg text-left">
                       <span className="inline-flex rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-medium text-white/90 backdrop-blur">
                         Wideo {selectedVideo + 1} / {videos.length}
                       </span>
 
-                      <h2 className="mt-3 text-xl font-bold leading-tight text-white sm:text-2xl lg:text-3xl">
+                      <h2 className="mt-1 max-w-[220px] text-base font-bold leading-snug text-white sm:mt-3 sm:max-w-md sm:text-lg lg:max-w-lg lg:text-xl">
                         {current?.title ?? "—"}
                       </h2>
 
@@ -89,7 +89,7 @@ const secondRow = videos?.slice(Math.ceil(videos.length / 2)) ?? [];
                           onClick={handlePlay}
                           whileHover={{ scale: 1.03 }}
                           whileTap={{ scale: 0.96 }}
-                         className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-4 py-2.5 text-sm font-semibold text-black shadow-lg"
+                         className="inline-flex items-center justify-center gap-1.5 rounded-full bg-white px-3 py-1 text-xs font-semibold text-black shadow-lg transition sm:gap-2 sm:px-5 sm:py-3 sm:text-sm"
                         >
                           {playing ? <FaPause /> : <FaPlay />}
                           {playing ? "Pauza" : "Odtwórz"}
@@ -97,7 +97,7 @@ const secondRow = videos?.slice(Math.ceil(videos.length / 2)) ?? [];
 
                         <button
                           type="button"
-                          className="inline-flex items-center justify-center rounded-full border border-white/20 bg-black/35 px-4 py-2.5 text-sm font-semibold text-white backdrop-blur"
+                          className="inline-flex items-center justify-center rounded-full border border-white/20 bg-black/35 px-3 py-1 text-xs font-semibold text-white backdrop-blur sm:px-5 sm:py-3 sm:text-sm"
                         >
                           Szczegóły
                         </button>
