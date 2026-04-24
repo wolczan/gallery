@@ -5,6 +5,14 @@
   height: 100%;
   text-align: center;
 }
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
 .page-content {
   padding-top: 62px; /* dostosuj: 60–80px w zależności od wysokości navbara */
 }
