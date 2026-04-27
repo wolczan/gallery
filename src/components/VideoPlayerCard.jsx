@@ -1,6 +1,6 @@
 import { FaPlay, FaPause } from "react-icons/fa";
 import { AnimatePresence, motion } from "framer-motion";
-import { useRef , useState} from "react";
+import { useState} from "react";
 
 export default function VideoPlayerCard({
   videos,
@@ -15,30 +15,39 @@ export default function VideoPlayerCard({
   hasSource,
 }) {
   const current = videos?.[selectedVideo] ?? null;
+  const firstRow = videos?.slice(0, Math.ceil(videos.length / 2)) ?? [];
+  const secondRow = videos?.slice(Math.ceil(videos.length / 2)) ?? [];
+  const [scrollState, setScrollState] = useState({
+    row1: { left: false, right: true },
+    row2: { left: false, right: true },
+  });
 
-const firstRow = videos?.slice(0, Math.ceil(videos.length / 2)) ?? [];
-const secondRow = videos?.slice(Math.ceil(videos.length / 2)) ?? [];
-const scrollRef = useRef(null);
-const scrollLeft = () => {
-  scrollRef.current?.scrollBy({ left: -300, behavior: "smooth" });
-};
-
-const scrollRight = () => {
-  scrollRef.current?.scrollBy({ left: 300, behavior: "smooth" });
-};
-const [canScrollLeft1, setCanScrollLeft1] = useState(false);
-const [canScrollRight1, setCanScrollRight1] = useState(true);
-
-const handleScroll1 = () => {
-  const el = document.getElementById("video-row-1");
+  const updateScrollState = (rowId, key) => {
+  const el = document.getElementById(rowId);
   if (!el) return;
 
   const { scrollLeft, scrollWidth, clientWidth } = el;
 
-  setCanScrollLeft1(scrollLeft > 5);
-  setCanScrollRight1(scrollLeft + clientWidth < scrollWidth - 5);
+  setScrollState((prev) => ({
+    ...prev,
+    [key]: {
+      left: scrollLeft > 5,
+      right: scrollLeft + clientWidth < scrollWidth - 5,
+    },
+  }));
 };
 
+  const scrollRow = (rowId, key, amount) => {
+    const el = document.getElementById(rowId);
+    if (!el) return;
+
+    el.scrollBy({ left: amount, behavior: "smooth" });
+
+    setTimeout(() => {
+      updateScrollState(rowId, key);
+    }, 350);
+  };
+ 
   return (
     <section className="mx-auto max-w-[1000px] px-0.5 lg:px-8 py-2 ">
       <div className="relative overflow-hidden rounded-xl bg-black border-none shadow-[0_20px_80px_-20px_rgba(0,0,0,0.6)] ">
@@ -141,11 +150,26 @@ const handleScroll1 = () => {
                 {/* PIERWSZY RZĄD */}
                 <div className="relative">
 
-                          <div
-                            id="video-row-1"
-                            onScroll={handleScroll1}
-                            className="flex gap-0.5 overflow-x-auto pb-2 no-scrollbar scroll-smooth"
-                          >
+                        <div
+  id="video-row-1"
+  onScroll={() => updateScrollState("video-row-1", "row1")}
+  className="flex gap-0.5 overflow-x-auto pb-2 no-scrollbar scroll-smooth"
+>
+  {scrollState.row1.left && (
+  <button
+    type="button"
+    onClick={() => scrollRow("video-row-1", "row1", -300)}
+    className="absolute left-0 top-0 z-20 h-full w-14 bg-gradient-to-r from-black to-transparent"
+  />
+)}
+
+{scrollState.row1.right && (
+  <button
+    type="button"
+    onClick={() => scrollRow("video-row-1", "row1", 300)}
+    className="absolute right-0 top-0 z-20 h-full w-14 bg-gradient-to-l from-black to-transparent"
+  />
+)}
                     {firstRow.map((video, index) => {
                       const webpSrcSet = [
                         video.thumbWebp320 && `${video.thumbWebp320} 320w`,
@@ -196,14 +220,14 @@ const handleScroll1 = () => {
           );
         })}
       </div>
-      {canScrollLeft1 && (
+      {scrollState.row2.left && (
       <div className="pointer-events-none absolute left-0 top-0 h-full w-10 bg-gradient-to-r from-black to-transparent" />
       )}
 
 <button
   type="button"
   onClick={() => {
-    const row = document.getElementById("video-row-2");
+    const row = document.getElementById("video-row-1");
     row?.scrollBy({ left: 300, behavior: "smooth" });
   }}
   className="absolute right-0 top-0 z-20 h-full w-14 bg-gradient-to-l from-black to-transparent"
@@ -212,10 +236,11 @@ const handleScroll1 = () => {
 
     {/* DRUGI RZĄD */}
     <div className="relative">
-    <div
-  id="video-row-2"
-  className="flex gap-0.5 overflow-x-auto pb-2 no-scrollbar scroll-smooth"
->
+   <div
+      id="video-row-2"
+      onScroll={() => updateScrollState("video-row-2", "row2")}
+      className="flex gap-0.5 overflow-x-auto pb-2 no-scrollbar scroll-smooth"
+    >
         {secondRow.map((video, rowIndex) => {
           const realIndex = rowIndex + firstRow.length;
 
@@ -269,8 +294,10 @@ const handleScroll1 = () => {
         })}
       </div>
 
-     <div className="pointer-events-none absolute left-0 top-0 h-full w-10 bg-gradient-to-r from-black to-transparent" />
-        {canScrollRight1 && (
+     {scrollState.row2.left && (
+  <div className="pointer-events-none absolute left-0 top-0 h-full w-10 bg-gradient-to-r from-black to-transparent" />
+)}
+        {scrollState.row2.right && (
       <button
         type="button"
         onClick={() => {
