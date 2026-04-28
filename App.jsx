@@ -101,7 +101,7 @@ function App() {
             <Route path="/polityka-prywatnosci" element={<PolitykaPrywatnosci />} />
             <Route path="/regulamin" element={<Regulamin />} />
             <Route path="/cookies" element={<Cookies />} />
-            <Route path="/about" element={<HomePage />} />
+            <Route path="/about" element={<HomePage videos={videos} />} />
             <Route path="/buy/:id" element={<BuyPrintPage videos={videos} />} />
            <Route path="/"element={
                       <HomeRoute

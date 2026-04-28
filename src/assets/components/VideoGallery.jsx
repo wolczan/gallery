@@ -3,6 +3,8 @@ import { FiHeart, FiShare2, FiTrendingUp, FiMessageSquare } from "react-icons/fi
 import { FiCamera, FiVideo, FiImage } from "react-icons/fi";
 import { FaFacebook, FaInstagram, FaYoutube, FaTiktok } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
+import { FiX } from "react-icons/fi";
 
 
 export default function VideoGallery({ videos }) {
@@ -33,8 +35,15 @@ export default function VideoGallery({ videos }) {
 
   const closeModal = () => {
     if (videoRef.current) {
-      try { videoRef.current.pause(); } catch {}
+      try {
+        videoRef.current.pause();
+        videoRef.current.removeAttribute("src");
+        videoRef.current.load();
+      } catch (error) {
+        console.warn("Video cleanup failed:", error);
+      }
     }
+
     setIsPlaying(false);
     setSelectedVideo(null);
   };
@@ -46,6 +55,19 @@ export default function VideoGallery({ videos }) {
       setIsPlaying(true);
     }
   };
+
+  VideoGallery.propTypes = {
+  videos: PropTypes.arrayOf(
+    PropTypes.shape({
+      thumbWebp640: PropTypes.string,
+      cover: PropTypes.string,
+      thumb: PropTypes.string,
+      posterUrl: PropTypes.string,
+      src: PropTypes.string,
+      title: PropTypes.string,
+    })
+  ).isRequired,
+};
 
 
   return (
@@ -159,7 +181,7 @@ export default function VideoGallery({ videos }) {
     <article
       key={v.id ?? i}
       onClick={() => openModal(v)}
-      className="group w-full max-w-[240px] rounded-lg overflow-hidden bg-white shadow-sm hover:shadow-md hover:shadow-lg transition-transform duration-300 cursor-pointer "
+      className="group w-full max-w-[240px] rounded-lg overflow-hidden bg-white shadow-sm hover:shadow-lg transition-transform duration-300 cursor-pointer "
     >
       <div className="relative w-full aspect-[16/10] bg-gray-100">
         <picture>
@@ -251,14 +273,14 @@ export default function VideoGallery({ videos }) {
   className="mt-2 w-full bg-black text-white rounded-full py-1 text-xs font-semibold hover:bg-gray-800 transition"
 >
   Kup plakat 🖼️
-</button>
+    </button>
 
 
-</div>
+  </div>  
 
     </article>
   );
-})}
+    })}
 
       </div>
 
@@ -353,10 +375,10 @@ export default function VideoGallery({ videos }) {
 
             <button
               onClick={closeModal}
-              className="absolute top-4 right-4 bg-white/20 hover:bg-white/40 text-white rounded-full px-3 py-1 transition"
+              className="absolute top-4 right-4 bg-white/20 hover:bg-white/40 text-white rounded-full p-2 transition"
               aria-label="Zamknij"
             >
-              ✕
+              <FiX size={20} />
             </button>
           </div>
 
@@ -369,4 +391,4 @@ export default function VideoGallery({ videos }) {
       )}
     </>
   );
-}
+  }

@@ -12,7 +12,7 @@ import VideoGallery from "../assets/components/VideoGallery";
 // - Delikatne cienie, zaokrąglenia 2xl, duże odstępy – minimalistycznie, ale nowocześnie.
 // - Wszystko oparte o Tailwind.
 
-export default function HomePage() {
+export default function HomePage({ videos = [] }) {
   return (
     <main className="bg-white text-gray-900 ">
       {/* SHAREPOINT-STYLE TOP BAR */}
@@ -150,7 +150,7 @@ export default function HomePage() {
 
         {/* Siatka z Twojego komponentu */}
         <div className="mt-10">
-          <VideoGallery />
+          <VideoGallery videos={videos} />
         </div>
       </section>
 

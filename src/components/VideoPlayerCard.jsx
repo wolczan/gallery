@@ -192,10 +192,10 @@ export default function VideoPlayerCard({
                   ? "border-white/60 ring-2 ring-white/20"
                   : "border-white/10 hover:border-white/30",
               ].join(" ")}
-              style={{ width: 160 }}
+              style={{ width: 140 }}
               aria-label={`Otwórz wideo: ${video.title ?? ""}`}
             >
-              <div className="relative aspect-video w-full bg-black/30">
+              <div className="relative aspect-[1/1] w-full bg-black/30">
                 <picture>
                   {webpSrcSet && (
                     <source type="image/webp" srcSet={webpSrcSet} sizes={sizes} />
@@ -268,7 +268,7 @@ export default function VideoPlayerCard({
               style={{ width: 160 }}
               aria-label={`Otwórz wideo: ${video.title ?? ""}`}
             >
-              <div className="relative aspect-video w-full bg-black/30">
+              <div className="relative aspect-[1/1] w-full bg-black/30 rounded-lg">
                 <picture>
                   {webpSrcSet && (
                     <source type="image/webp" srcSet={webpSrcSet} sizes={sizes} />
