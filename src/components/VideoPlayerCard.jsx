@@ -52,7 +52,7 @@ export default function VideoPlayerCard({
     <section className="mx-auto max-w-[1000px] px-0.5 lg:px-8 py-2 ">
       <div className="relative overflow-hidden rounded-xl bg-black border-none shadow-[0_20px_80px_-20px_rgba(0,0,0,0.6)] ">
         {videos?.length > 0 && selectedVideo != null ? (
-          hasSource ? (
+         
             <div className="relative">
               {/* TŁO VIDEO */}
               <div className="relative aspect-[16/9] w-full  overflow-hidden bg-black">
@@ -63,6 +63,7 @@ export default function VideoPlayerCard({
                     playsInline
                     aria-hidden="true"
                   />
+                  {hasSource ? (
                   <motion.video
                     key={selectedVideo}
                     ref={videoRef}
@@ -98,6 +99,11 @@ export default function VideoPlayerCard({
                       });
                     }}
                   />
+                ) : (
+                  <div className="absolute inset-0 z-10 grid place-items-center bg-black text-white/80">
+                    Brak wideo do odtworzenia
+                  </div>
+                )}
                 </AnimatePresence>
 
                 {/* OVERLAY GRADIENT */}
@@ -151,96 +157,87 @@ export default function VideoPlayerCard({
                 <div className="relative">
 
                         <div
-  id="video-row-1"
-  onScroll={() => updateScrollState("video-row-1", "row1")}
-  className="flex gap-0.5 overflow-x-auto pb-2 no-scrollbar scroll-smooth"
->
-  {scrollState.row1.left && (
-  <button
-    type="button"
-    onClick={() => scrollRow("video-row-1", "row1", -300)}
-    className="absolute left-0 top-0 z-20 h-full w-14 bg-gradient-to-r from-black to-transparent"
-  />
-)}
+                            id="video-row-1"
+                            onScroll={() => updateScrollState("video-row-1", "row1")}
+                            className="flex gap-0.5 overflow-x-auto pb-2 no-scrollbar scroll-smooth"
+                          >
+                            {scrollState.row1.left && (
+                            <button
+                              type="button"
+                              onClick={() => scrollRow("video-row-1", "row1", -300)}
+                              className="absolute left-0 top-0 z-20 h-full w-14 bg-gradient-to-r from-black to-transparent"
+                            />
+                          )}
 
-{scrollState.row1.right && (
-  <button
-    type="button"
-    onClick={() => scrollRow("video-row-1", "row1", 300)}
-    className="absolute right-0 top-0 z-20 h-full w-14 bg-gradient-to-l from-black to-transparent"
-  />
-)}
-                    {firstRow.map((video, index) => {
-                      const webpSrcSet = [
-                        video.thumbWebp320 && `${video.thumbWebp320} 320w`,
-                        video.thumbWebp640 && `${video.thumbWebp640} 640w`,
-                        video.thumbWebp1280 && `${video.thumbWebp1280} 1280w`,
-                      ].filter(Boolean).join(", ");
+                          {scrollState.row1.right && (
+                            <button
+                              type="button"
+                              onClick={() => scrollRow("video-row-1", "row1", 300)}
+                              className="absolute right-0 top-0 z-20 h-full w-14 bg-gradient-to-l from-black to-transparent"
+                            />
+                          )}
+                          {firstRow.map((video, index) => {
+                            const webpSrcSet = [
+                              video.thumbWebp320 && `${video.thumbWebp320} 320w`,
+                              video.thumbWebp640 && `${video.thumbWebp640} 640w`,
+                              video.thumbWebp1280 && `${video.thumbWebp1280} 1280w`,
+                            ].filter(Boolean).join(", ");
 
-                      const sizes = "(min-width:1280px) 180px, (min-width:768px) 160px, 44vw";
-                      const jpgFallback = video.thumb || video.cover || video.image || "";
-                      const isActive = selectedVideo === index;
+                            const sizes = "(min-width:1280px) 180px, (min-width:768px) 160px, 44vw";
+                            const jpgFallback = video.thumb || video.cover || video.image || "";
+                            const isActive = selectedVideo === index;
 
-     return (
-            <button
-              type="button"
-              key={video.id ?? index}
-              onClick={() => setSelectedVideo(index)}
-              className={[
-                "relative shrink-0 overflow-hidden rounded-md border transition",
-                isActive
-                  ? "border-white/60 ring-2 ring-white/20"
-                  : "border-white/10 hover:border-white/30",
-              ].join(" ")}
-              style={{ width: 140 }}
-              aria-label={`Otwórz wideo: ${video.title ?? ""}`}
-            >
-              <div className="relative aspect-[1/1] w-full bg-black/30">
-                <picture>
-                  {webpSrcSet && (
-                    <source type="image/webp" srcSet={webpSrcSet} sizes={sizes} />
-                  )}
-                  <img
-                    src={jpgFallback}
-                    alt={video.title ?? "Miniatura"}
-                    loading="lazy"
-                    decoding="async"
-                    className="absolute inset-0 h-full w-full object-cover"
-                  />
-                </picture>
+            return (
+                    <button
+                      type="button"
+                      key={video.id ?? index}
+                      onClick={() => setSelectedVideo(index)}
+                      className={[
+                        "relative shrink-0 overflow-hidden rounded-md border transition",
+                        isActive
+                          ? "border-white/60 ring-2 ring-white/20"
+                          : "border-white/10 hover:border-white/30",
+                      ].join(" ")}
+                      style={{ width: 140 }}
+                      aria-label={`Otwórz wideo: ${video.title ?? ""}`}
+                    >
+                      <div className="relative aspect-[1/1] w-full bg-black/30">
+                        <picture>
+                          {webpSrcSet && (
+                            <source type="image/webp" srcSet={webpSrcSet} sizes={sizes} />
+                          )}
+                          <img
+                            src={jpgFallback}
+                            alt={video.title ?? "Miniatura"}
+                            loading="lazy"
+                            decoding="async"
+                            className="absolute inset-0 h-full w-full object-cover"
+                          />
+                        </picture>
 
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
-                <div className="absolute inset-x-0 bottom-0 p-3 text-left">
-                  <p className="line-clamp-1 text-xs font-medium text-white">
-                    {video.title ?? ""}
-                  </p>
-                </div>
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
+                        <div className="absolute inset-x-0 bottom-0 p-3 text-left">
+                          <p className="line-clamp-1 text-xs font-medium text-white">
+                            {video.title ?? ""}
+                          </p>
+                        </div>
+                      </div>
+                    </button>
+                  );
+                })}
               </div>
-            </button>
-          );
-        })}
-      </div>
-      {scrollState.row2.left && (
-      <div className="pointer-events-none absolute left-0 top-0 h-full w-10 bg-gradient-to-r from-black to-transparent" />
-      )}
+            
 
-<button
-  type="button"
-  onClick={() => {
-    const row = document.getElementById("video-row-1");
-    row?.scrollBy({ left: 300, behavior: "smooth" });
-  }}
-  className="absolute right-0 top-0 z-20 h-full w-14 bg-gradient-to-l from-black to-transparent"
-/>
-    </div>
+       
+            </div>
 
-    {/* DRUGI RZĄD */}
-    <div className="relative">
-   <div
-      id="video-row-2"
-      onScroll={() => updateScrollState("video-row-2", "row2")}
-      className="flex gap-0.5 overflow-x-auto pb-2 no-scrollbar scroll-smooth"
-    >
+            {/* DRUGI RZĄD */}
+            <div className="relative">
+          <div
+              id="video-row-2"
+              onScroll={() => updateScrollState("video-row-2", "row2")}
+              className="flex gap-0.5 overflow-x-auto pb-2 no-scrollbar scroll-smooth"
+            >
         {secondRow.map((video, rowIndex) => {
           const realIndex = rowIndex + firstRow.length;
 
@@ -294,29 +291,28 @@ export default function VideoPlayerCard({
         })}
       </div>
 
-     {scrollState.row2.left && (
-  <div className="pointer-events-none absolute left-0 top-0 h-full w-10 bg-gradient-to-r from-black to-transparent" />
-)}
-        {scrollState.row2.right && (
-      <button
-        type="button"
-        onClick={() => {
-          const row = document.getElementById("video-row-2");
-          row?.scrollBy({ left: 300, behavior: "smooth" });
-        }}
-        className="absolute right-0 top-0 z-20 h-full w-14 bg-gradient-to-l from-black to-transparent"
-      />
-        )}
+          {scrollState.row2.left && (
+        <button
+          type="button"
+          onClick={() => scrollRow("video-row-2", "row2", -300)}
+          className="absolute left-0 top-0 z-20 h-full w-14 bg-gradient-to-r from-black to-transparent"
+          aria-label="Przewiń w lewo"
+        />
+         )}
+       {scrollState.row2.right && (
+        <button
+          type="button"
+          onClick={() => scrollRow("video-row-2", "row2", 300)}
+          className="absolute right-0 top-0 z-20 h-full w-14 bg-gradient-to-l from-black to-transparent"
+          aria-label="Przewiń w prawo"
+        />
+      )}
     </div>
 
   </div>
 </div>
             </div>
-          ) : (
-            <div className="grid aspect-[4/3] place-items-center bg-black/40 text-white/80">
-              Brak wideo do odtworzenia
-            </div>
-          )
+          
         ) : (
           <div className="grid aspect-[4/3] place-items-center bg-black/40 text-white/80">
             Brak materiałów
