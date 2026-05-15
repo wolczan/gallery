@@ -4,9 +4,10 @@ import PropTypes from "prop-types";
 
 
 export default function Login({ onClose }) { // <-- Przekazujemy funkcję onClose jako prop
-  const { user, signIn, signOut } = useAuth() || {}; // Pobieramy user i funkcje logowania/wylogowania
+  const { user, signIn, signUp, signOut } = useAuth() || {}; // Pobieramy user i funkcje logowania/wylogowania
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isRegisterMode, setIsRegisterMode] = useState(false);
 
   console.log("Czy onClose działa?", onClose);
 
@@ -17,17 +18,22 @@ export default function Login({ onClose }) { // <-- Przekazujemy funkcję onClos
   }, [user]);
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!signIn) return console.error("❌ Błąd: signIn nie istnieje");
+  e.preventDefault();
 
-    try {
+  try {
+    if (isRegisterMode) {
+      await signUp(email, password);
+      console.log("✅ Konto utworzone!");
+    } else {
       await signIn(email, password);
-      console.log("✅ Zalogowano pomyślnie!");
-      onClose(); // Po zalogowaniu zamykamy okno logowania
-    } catch (error) {
-      console.error("❌ Błąd logowania:", error.message);
+      console.log("✅ Zalogowano!");
     }
-  };
+
+    onClose();
+  } catch (error) {
+    console.error("❌ Błąd:", error.message);
+  }
+};
 
   const handleLogout = async () => {
     if (!signOut) return console.error("❌ Błąd: signOut nie istnieje");
@@ -43,57 +49,80 @@ export default function Login({ onClose }) { // <-- Przekazujemy funkcję onClos
 
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black/50 bg-red-500">
-      <div className="bg-red-900 p-6 rounded-lg shadow-lg text-white">
-        {/* Jeśli użytkownik jest zalogowany, pokazujemy przycisk wylogowania */}
-        {user ? (
-          <div className="flex flex-col items-center">
-            <h2 className="text-xl mb-4">Witaj, {user.email}!</h2>
-            <button onClick={handleLogout} className="bg-red-500 text-white p-2 rounded mb-2">
-              Wyloguj
-            </button>
-            <button onClick={onClose} className="bg-gray-600 text-white p-2 rounded">
-              Zamknij
-            </button>
+  <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/70 backdrop-blur-md px-4">
+    <div className="relative w-full max-w-md rounded-3xl border border-white/10 bg-zinc-950/90 p-8 text-white shadow-2xl">
+
+      <button
+        onClick={onClose}
+        className="absolute right-4 top-4 rounded-full bg-white/10 px-3 py-1 text-sm text-white hover:bg-white/20"
+      >
+        ✕
+      </button>
+
+      {user ? (
+        <div className="flex flex-col items-center text-center">
+          <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-emerald-500/20 text-emerald-400">
+            ✓
           </div>
-        ) : (
-          <>
-            <button onClick={onClose} className="bg-gray-600 text-white p-2 rounded mb-4">
-              Zamknij
+
+          <h2 className="mb-2 text-2xl font-semibold">Jesteś zalogowany</h2>
+          <p className="mb-6 max-w-xs text-sm text-white/60">
+            {user.email}
+          </p>
+
+          <button
+            onClick={handleLogout}
+            className="w-full rounded-full bg-white px-5 py-3 font-medium text-black transition hover:bg-white/90"
+          >
+            Wyloguj
+          </button>
+        </div>
+      ) : (
+        <>
+          <div className="mb-6 text-center">
+           <h2 className="text-3xl font-semibold tracking-tight">
+            {isRegisterMode ? "Utwórz konto" : "Zaloguj się"}
+          </h2>
+            <p className="mt-2 text-sm text-white/50">
+              Wejdź do swojego konta galerii
+            </p>
+          </div>
+
+          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+            <input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="rounded-xl border border-white/10 bg-white/10 px-4 py-1.5 text-sm text-white placeholder:text-white/40 outline-none focus:border-white/30"
+            />
+
+            <input
+              type="password"
+              placeholder="Hasło"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="rounded-xl border border-white/10 bg-white/10 px-4 py-1.5 text-sm text-white placeholder:text-white/40 outline-none focus:border-white/30"
+            />
+
+            <button
+              type="submit"
+              className="rounded-xl border border-white/10 bg-white/10 px-4 py-1.5 text-sm text-white placeholder:text-white/40 outline-none focus:border-white/30"
+            >
+              {isRegisterMode ? "Utwórz konto" : "Zaloguj"}
             </button>
-
-            
-
-            <h2 className="text-xl mb-4">Zaloguj się</h2>
-            <form onSubmit={handleSubmit} className="flex flex-col gap-2">
-              <input 
-                type="email" 
-                placeholder="Email" 
-                value={email} 
-                onChange={(e) => setEmail(e.target.value)} 
-                className="border p-2 rounded text-black"
-              />
-              <input 
-                type="password" 
-                placeholder="Hasło" 
-                value={password} 
-                onChange={(e) => setPassword(e.target.value)} 
-                className="border p-2 rounded text-black"
-              />
-              <button type="submit" className="bg-blue-500 text-white p-2 rounded">
-                Zaloguj
+            <button
+                type="button"
+                onClick={() => setIsRegisterMode(!isRegisterMode)}
+                className="text-sm text-white/60 hover:text-white transition"
+              >
+                {isRegisterMode
+                  ? "Masz już konto? Zaloguj się"
+                  : "Nie masz konta? Zarejestruj się"}
               </button>
-              <button onClick={onClose} className="bg-gray-600 text-white p-2 rounded mb-4">
-              Zamknij
-            </button>
-
-            </form>
-          </>
-        )}
-      </div>
+          </form>
+        </>
+      )}
     </div>
-  );
-}
-Login.propTypes = {
-  onClose: PropTypes.func.isRequired, // Wymagamy, aby `onClose` było funkcją
-};
+  </div>
+);}

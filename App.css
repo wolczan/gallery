@@ -16,6 +16,7 @@
 .page-content {
   padding-top: 62px; /* dostosuj: 60–80px w zależności od wysokości navbara */
 }
+
 .flowdoc-brand {
   text-transform: uppercase;
   font-weight: 800;
@@ -501,7 +502,9 @@ video {
   background:linear-gradient(transparent, rgba(0,0,0,.7));
   color:#fff; font-size:14px; padding:24px 8px 8px; font-weight:600;
 }
-
+body {
+  outline: 30px solid rgb(13, 223, 31) !important;
+}
 
 @keyframes logo-spin {
   from {

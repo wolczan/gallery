@@ -1,4 +1,6 @@
 import { useState, useEffect,} from 'react';
+import { onAuthStateChanged } from "firebase/auth";
+import { auth} from "./src/firebase.js";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import ContactForm from './src/assets/ContactForm.jsx';
@@ -88,7 +90,7 @@ function App() {
           minHeight: '100vh',
         }}
       >
-     <MainNavbar setShowLogin={setShowLogin} />
+     <MainNavbar setShowLogin={setShowLogin} user={user} />
 
      <div className="page-content">
         <Routes>

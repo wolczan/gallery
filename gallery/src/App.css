@@ -12,9 +12,30 @@ html, body {
   padding: 0;
 }
 
-.navbar-custom {
-  
+.user-status {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 8px 14px;
+  border-radius: 999px;
+  backdrop-filter: blur(10px);
+  color: white;
+  gap: 10px;
 }
+
+.online-dot {
+  width: 10px;
+  height: 10px;
+  background: #22c55e;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #22c55e;
+}
+
+.user-email {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+
 .btn-custom {
   background-color: #b90b14; /* Netflix red background */
   border-color: #b90b14; /* Netflix red border */

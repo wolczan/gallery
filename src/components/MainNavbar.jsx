@@ -2,8 +2,12 @@ import { Navbar, Container, Nav } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import SearchBar from "./SearchBar";
 import galeria from '../galeria.png';
+import { useAuth } from "../utils/AuthProvider.jsx";
+import './MainNavbar.css';
 
 const MainNavbar = ({ setShowLogin }) => {
+  const { user, signOut } = useAuth();
+  console.log("USER Z AUTH W MAINNAVBAR:", user);
   return (
     <Navbar
       expand="lg"
@@ -106,12 +110,29 @@ const MainNavbar = ({ setShowLogin }) => {
 </div>
 
 {/* Przyciski logowania */}
-<Nav.Link
-  onClick={() => setShowLogin(true)}
-  className="nav-link-custom btn-custom ms-lg-3"
->
-  Zaloguj się
-</Nav.Link>
+{user ? (
+  <div className="d-flex align-items-center ms-lg-3 user-status"
+     >
+    <div className="online-dot"></div>
+
+    <span className="user-email">
+    {user.email}
+      </span>
+
+      <button
+        onClick={signOut}
+        className="logout-btn">
+        Wyloguj
+      </button>
+  </div>
+) : (
+  <Nav.Link
+    onClick={() => setShowLogin(true)}
+    className="nav-link-custom btn-custom ms-lg-3"
+  >
+    Zaloguj się
+  </Nav.Link>
+)}
           </Nav>
         </Navbar.Collapse>
       </Container>

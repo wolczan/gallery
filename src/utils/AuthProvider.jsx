@@ -1,7 +1,11 @@
-import { useEffect, useState } from "react";
-import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut as firebaseSignOut } from "firebase/auth"; 
+import { useEffect, useState, useContext } from "react";
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword,  createUserWithEmailAndPassword, signOut as firebaseSignOut } from "firebase/auth"; 
 import PropTypes from "prop-types";
 import AuthContext from "./authContext"; // ✅ Importujemy kontekst
+
+export function useAuth() {
+  return useContext(AuthContext);
+}
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
@@ -15,6 +19,12 @@ export function AuthProvider({ children }) {
     });
     return () => unsubscribe();
   }, [auth]);
+
+  const signUp = async (email, password) => {
+  const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+  setUser(userCredential.user);
+  return userCredential.user;
+    };
 
   const signIn = async (email, password) => {
     try {
@@ -38,12 +48,12 @@ export function AuthProvider({ children }) {
   };
   
 
-  console.log("✅ Przekazywane wartości w AuthProvider:", { user, signIn, signOut });
+  console.log("✅ Przekazywane wartości w AuthProvider:", { user, signIn, signUp,signOut });
   console.log("✅ AuthProvider renderuje się! user:", user);
   console.log("✅ AuthProvider przekazuje: ", { user, signIn, signOut });
 
   return (
-    <AuthContext.Provider value={{ user, signIn, signOut }}> {/* ✅ Przekazujemy poprawnie */}
+    <AuthContext.Provider value={{ user, signIn, signUp,signOut }}> {/* ✅ Przekazujemy poprawnie */}
       {children}
     </AuthContext.Provider>
   );

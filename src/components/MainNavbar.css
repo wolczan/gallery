@@ -1,16 +1,13 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
-
 .user-status {
   background: rgba(255, 255, 255, 0.08);
   color: white;
   border: 1px solid rgba(255, 255, 255, 0.16);
-  padding: 7px 14px;
+  padding: 8px 14px;
   border-radius: 999px;
   display: flex;
   align-items: center;
   gap: 10px;
+  backdrop-filter: blur(8px);
 }
 
 .online-dot {
@@ -25,4 +22,19 @@
   color: white;
   font-size: 0.85rem;
   font-weight: 500;
+}
+
+.logout-btn {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.2);
+  color: white;
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  transition: all 0.2s ease;
+}
+
+.logout-btn:hover {
+  background: rgba(255,255,255,0.12);
+  transform: translateY(-1px);
 }

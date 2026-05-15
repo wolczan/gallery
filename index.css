@@ -82,6 +82,7 @@
 }
 
 /* Drobny badge „HD” / „Nowość” */
+
 .card-pill {
   position: absolute;
   top: 10px;
@@ -95,4 +96,28 @@
   background: rgba(0,0,0,0.45);
   border: 1px solid rgba(255,255,255,0.25);
   letter-spacing: .2px;
+}
+.user-status {
+  background: rgba(255, 255, 255, 0.08);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  padding: 7px 14px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.online-dot {
+  width: 9px;
+  height: 9px;
+  background: #22c55e;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #22c55e;
+}
+
+.user-email {
+  color: white;
+  font-size: 0.85rem;
+  font-weight: 500;
 }
