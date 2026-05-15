@@ -3,18 +3,25 @@ import PropTypes from 'prop-types';
 import ToDoForm from './ToDoForm';
 import TaskList from './Tasklist'; // Import TaskList component
 import { db } from "@/firebase";
-import { collection, onSnapshot, orderBy, query, addDoc, doc, updateDoc, deleteDoc, serverTimestamp } from "firebase/firestore"; // Import Firestore methods
-
+import { collection, onSnapshot, orderBy, query, addDoc, doc, updateDoc, deleteDoc, serverTimestamp, where } from "firebase/firestore"; // Import Firestore methods
+import { useAuth } from '../utils/useAuth'; // Import useAuth hook
 
 const ToDoWrapper = ({ className }) => {
+  const { user } = useAuth();
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
   // Fetch tasks from Firestore on component mount
   useEffect(() => {
+
+    if (!user?.uid) {
+      setLoading(false);
+      return;
+      }
+
     const tasksCollection = collection(db, "tasks"); 
-    const q = query(tasksCollection, orderBy("timestamp", "desc")); 
+    const q = query(tasksCollection, orderBy("timestamp", "desc"), where("userId", "==", user.uid)); 
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const fetchedTasks = snapshot.docs.map(doc => ({
         id: doc.id,
@@ -30,7 +37,7 @@ const ToDoWrapper = ({ className }) => {
 
     // Cleanup the subscription on unmount
     return () => unsubscribe();
-  }, []);
+  }, [user]);
 
   // Function to add a new task to Firestore
   const handleSubmit = async (taskText) => {
@@ -40,6 +47,7 @@ const ToDoWrapper = ({ className }) => {
     const newTask = {
       text: taskText,
       completed: false,
+      userId: user.uid,
       timestamp: serverTimestamp(),
       createdAt: serverTimestamp(),
       updatedAt: serverTimestamp(),
