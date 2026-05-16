@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from "react";
-import { getAuth, onAuthStateChanged, signInWithEmailAndPassword,  createUserWithEmailAndPassword, signOut as firebaseSignOut } from "firebase/auth"; 
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword,  createUserWithEmailAndPassword,setPersistence, browserSessionPersistence, signOut as firebaseSignOut } from "firebase/auth"; 
 import PropTypes from "prop-types";
 import AuthContext from "./authContext"; // ✅ Importujemy kontekst
 
@@ -27,14 +27,24 @@ export function AuthProvider({ children }) {
     };
 
   const signIn = async (email, password) => {
-    try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      console.log("✅ Zalogowano:", userCredential.user);
-      setUser(userCredential.user);
-    } catch (error) {
-      console.error("❌ Błąd logowania:", error.message);
-    }
-  };
+  try {
+
+    await setPersistence(auth, browserSessionPersistence);
+
+    const userCredential = await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+
+    console.log("✅ Zalogowano:", userCredential.user);
+
+    setUser(userCredential.user);
+
+  } catch (error) {
+    console.error("❌ Błąd logowania:", error.message);
+  }
+};
 
   const signOut = async () => {
     console.log("🔍 Próba wylogowania...");

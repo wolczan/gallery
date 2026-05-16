@@ -21,7 +21,7 @@ const ToDoWrapper = ({ className }) => {
       }
 
     const tasksCollection = collection(db, "tasks"); 
-    const q = query(tasksCollection, orderBy("timestamp", "desc"), where("userId", "==", user.uid)); 
+    const q = query(tasksCollection, where("userId", "==", user.uid)); 
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const fetchedTasks = snapshot.docs.map(doc => ({
         id: doc.id,
@@ -29,18 +29,26 @@ const ToDoWrapper = ({ className }) => {
       }));
       setTasks(fetchedTasks);
       setLoading(false);
-    }, (error) => {
-      console.error("Error fetching tasks:", error);
-      setError("Nie można pobrać zadań. Spróbuj ponownie później.");
+        }, (error) => {
+      console.error("Error fetching tasks:", error.code, error.message);
+      setError(`Nie można pobrać zadań: ${error.code}`);
       setLoading(false);
-    });
+      });
 
     // Cleanup the subscription on unmount
     return () => unsubscribe();
-  }, [user]);
+  }, [user?.uid]);
 
   // Function to add a new task to Firestore
   const handleSubmit = async (taskText) => {
+
+    console.log("SUBMIT USER:", user);
+    console.log("SUBMIT UID:", user?.uid);
+
+    if (!user?.uid) {
+    setError("Musisz być zalogowany.");
+    return;
+     }
 
     if (!taskText.trim()) return;
 
@@ -106,22 +114,29 @@ const ToDoWrapper = ({ className }) => {
     return (
     <div className="galeria   ">
     <div className={`TodoWrapper ${className} `}>
-      <div className="mb-4 p-4 bg-gray-800 text-white rounded-lg shadow-md ">
-        <h2 className="text-xl font-bold mb-2"> Jak dziala lista zadań?</h2>
-        <p className="mb-2">
-                useState i useEffect - do obsługi stanu i efektów ubocznych.
-              PropTypes – do walidacji właściwości (className).
-              ToDoForm – formularz dodawania nowych zadań.
-              TaskList – komponent wyświetlający listę zadań.
-              firebase/firestore – metody do operacji na bazie danych.
-        </p>
-        <p className="mb-2 border-1"></p>
-        <p>Aplikacja wykorzystuje Firebase jako bazę danych do przechowywania zadań oraz Firebase Authentication do zarządzania użytkownikami. Integruje Firebase Storage lub Firestore do przechowywania i wyświetlania zdjęć zalogowanemu użytkownikowi.</p>
-      
-      </div>
+      <div className="mb-4 p-4 bg-gray-800 text-white rounded-lg shadow-md">
+  <h2 className="text-xl font-bold mb-2">
+    Twoja prywatna lista pomysłów i zadań
+  </h2>
+
+  <p className="mb-2 text-white/80">
+    Zarejestruj konto i korzystaj z własnej przestrzeni na zadania, pomysły,
+    plany zdjęciowe, notatki blogowe albo listę rzeczy do zrobienia.
+  </p>
+
+  <p className="mb-2 text-white/80">
+    Każdy użytkownik widzi tylko swoje zadania — możesz wrócić później i
+    kontynuować pracę tam, gdzie skończyłeś.
+  </p>
+
+  <p className="text-sm text-white/60">
+    Przykłady: pomysły na wpisy, lista zdjęć do obróbki, plan posta, checklisty
+    zakupowe, przygotowanie plakatu lub prywatne notatki.
+  </p>
+</div>
 
       <h1 className="mb-[9px] -mt-0.5  ">
-        Together We Achieve! <span className="text-red-500 ml-2 ">❤️</span>
+        Moja przestrzeń zadań <span className="text-red-500 ml-2 ">❤️</span>
       </h1>
 
       {loading && (

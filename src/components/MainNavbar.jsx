@@ -22,13 +22,13 @@ const MainNavbar = ({ setShowLogin }) => {
           to="/"
           className="d-flex align-items-center brand-custom"
         >
-         <img
-              src={galeria}
-              width="35"
-              height="50"
-              className="d-inline-block"
-              alt="Gallery logo"
-            />
+              <img
+        src={galeria}
+        width="28"
+        height="34"
+        className="d-inline-block"
+        alt="Gallery logo"
+         />
 
           <span className="ms-2 brand-text">Galeria</span>
         </Navbar.Brand>
@@ -111,20 +111,20 @@ const MainNavbar = ({ setShowLogin }) => {
 
 {/* Przyciski logowania */}
 {user ? (
-  <div className="d-flex align-items-center ms-lg-3 user-status"
-     >
-    <div className="online-dot"></div>
+ <div className="d-flex align-items-center justify-content-center ms-lg-3 user-status">
+  <div className="online-dot"></div>
 
-    <span className="user-email">
-    {user.email}
-      </span>
+  <span className="user-email">
+    {user.email?.split("@")[0]}
+  </span>
 
-      <button
-        onClick={signOut}
-        className="logout-btn">
-        Wyloguj
-      </button>
-  </div>
+  <button
+    onClick={signOut}
+    className="logout-btn"
+  >
+    Wyloguj
+  </button>
+</div>
 ) : (
   <Nav.Link
     onClick={() => setShowLogin(true)}

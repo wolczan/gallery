@@ -13,7 +13,7 @@
 .online-dot {
   width: 9px;
   height: 9px;
-  background: #22c55e;
+  background: #0fe34e;
   border-radius: 50%;
   box-shadow: 0 0 10px #22c55e;
 }
@@ -27,7 +27,7 @@
 .logout-btn {
   background: transparent;
   border: 1px solid rgba(255,255,255,0.2);
-  color: white;
+  color: rgb(32, 228, 133);
   border-radius: 999px;
   padding: 4px 10px;
   font-size: 0.75rem;
@@ -37,4 +37,91 @@
 .logout-btn:hover {
   background: rgba(255,255,255,0.12);
   transform: translateY(-1px);
+}
+.navbar-custom {
+  min-height: 56px;
+  padding-top: 4px !important;
+  padding-bottom: 4px !important;
+  backdrop-filter: blur(14px);
+}
+
+.brand-custom img {
+  width: 28px;
+  height: 34px;
+  object-fit: contain;
+}
+
+.brand-text {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.navbar-toggler {
+  padding: 4px 8px !important;
+  border-radius: 8px !important;
+  height: 38px;
+  width: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar-toggler-icon {
+  width: 22px;
+  height: 22px;
+}
+.user-status {
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.user-email {
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.logout-btn {
+  border: 1px solid rgba(16, 185, 129, 0.6);
+  background: rgba(16, 185, 129, 0.12);
+  color: #34d399;
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.online-dot {
+  width: 10px;
+  height: 10px;
+  background: #22c55e;
+  border-radius: 999px;
+  box-shadow: 0 0 12px #22c55e;
+}
+
+@media (max-width: 991px) {
+  .navbar-collapse {
+    text-align: center;
+    padding-top: 8px;
+  }
+
+  .navbar-nav {
+    align-items: center !important;
+  }
+
+  .user-status {
+    margin: 10px auto 0 auto;
+    width: fit-content;
+    max-width: 92vw;
+  }
+
+  .user-email {
+    max-width: 190px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 }
