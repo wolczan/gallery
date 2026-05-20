@@ -60,6 +60,44 @@ export default function VideoGallery({ videos }) {
 
   return (
     <>
+     <section className="mx-auto max-w-[1400px] px-4 py-10">
+  <div className="relative h-[520px] overflow-hidden rounded-3xl bg-zinc-950 text-white shadow-2xl md:h-[640px]">
+    <div className="absolute inset-0">
+      <img
+        src="https://firebasestorage.googleapis.com/v0/b/galeriazdjec-f4180.firebasestorage.app/o/resized%2FChatGPT%20Image%2020%20maj%202026%2C%2020_37_58_1280x1280.jpeg?alt=media&token=e1679d94-22c3-4ab0-9ef1-f9e0537c71e5"
+        alt="Cinematic Łódź"
+        loading="eager"
+        fetchPriority="high"
+        className="h-full w-full object-contain object-cover opacity-100"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/35 to-transparent" />
+    </div>
+
+    <div className="relative z-10 flex h-full items-end px-6 pb-8 md:px-12 md:pb-12">
+      <div className="max-w-xl">
+        <p className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-white/70">
+          Poster Collection
+        </p>
+
+        <h2 className="mb-3 text-2xl font-semibold tracking-tight text-white md:text-4xl">
+          Cinematic Łódź Posters
+        </h2>
+
+        <p className="mb-5 max-w-lg text-sm leading-relaxed text-white/80 md:text-base">
+          Minimalistyczna kolekcja plakatów inspirowanych filmowym klimatem Łodzi —
+          neonami, industrialną architekturą i miejską atmosferą po zmroku.
+        </p>
+
+        <button className="rounded-md bg-violet-600 px-5 py-3 text-sm font-bold uppercase tracking-wide text-white transition hover:bg-violet-500">
+          Zobacz kolekcję +
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+
       {/* GRID jak u Ciebie – bez zmian poza handlerem onClick */}
     <div className="
             grid 
@@ -170,7 +208,7 @@ export default function VideoGallery({ videos }) {
     <article
       key={v.id ?? i}
       onClick={() => openModal(v)}
-      className="group w-full max-w-[240px] rounded-lg overflow-hidden bg-white shadow-sm hover:shadow-lg transition-transform duration-300 cursor-pointer "
+      className="group flex h-full w-full max-w-[240px] flex-col overflow-hidden rounded-lg bg-white shadow-sm transition-transform duration-300 hover:shadow-lg cursor-pointer"
     >
       <div className="relative w-full aspect-[16/10] bg-gray-100">
         <picture>
@@ -229,7 +267,7 @@ export default function VideoGallery({ videos }) {
         </picture>
       </div>
 
-   <div className="px-2 pt-1 pb-2">
+   <div className="flex flex-1 flex-col px-2 pt-1 pb-2">
 
   <div className="flex items-center gap-1 mb-1">
     <div className="w-5 h-5 rounded-full bg-gradient-to-r from-pink-500 to-purple-500 flex items-center justify-center text-white text-[10px]">
@@ -260,7 +298,7 @@ export default function VideoGallery({ videos }) {
     e.stopPropagation();              // 👈 nie otwieraj modala
     navigate(`/buy/${v.id}`);         // 👈 przejście do strony zakupu
   }}
-  className="mt-2 w-full bg-black text-white rounded-full py-1 text-xs font-semibold hover:bg-gray-800 transition"
+  className="mt-auto w-full rounded-full bg-black py-1 text-xs font-semibold text-white transition hover:bg-gray-800"
 >
   Kup plakat 🖼️
     </button>
