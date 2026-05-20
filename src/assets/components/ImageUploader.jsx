@@ -50,76 +50,79 @@ const ImageUploader = () => {
   };
 
 return (
-  <div className="w-full">
-    <div className="w-full">
+  <div className="w-full flex justify-center px-4 py-3">
+    <div className="w-full max-w-sm rounded-xl border border-white/10 bg-zinc-950/80 p-2 text-white shadow-2xl backdrop-blur-md ">
 
-      {/* LEWA: Upload */}
       {user && (
-        <div className="grid grid-cols-1 gap-4 items-start">
-          <h1 className="text-sm font-bold text-white mb-2">
-            📸 Prześlij zdjęcie
-          </h1>
+        <div className="flex flex-col gap-2">
+          <div className="text-center">
+            <h1 className="text-lg font-bold">
+              📸 Prześlij zdjęcie
+            </h1>
+            <p className="mt-1 text-sm text-zinc-400">
+              Dodaj zdjęcie, tytuł i krótki opis do swojej galerii.
+            </p>
+          </div>
 
-          <div className="flex flex-col gap-2">
+          <label className="flex cursor-pointer flex-col items-center justify-center rounded-xl border border-dashed border-white/20 bg-white/5 px-1 py-1 text-center hover:bg-white/10 transition">
+            <span className="text-sm text-zinc-300 ">
+              {image ? image.name : "Kliknij, aby wybrać zdjęcie"}
+            </span>
+
             <input
               type="file"
               onChange={handleImageChange}
-              className="border border-white p-1 rounded text-white bg-black"
+              className="hidden"
             />
+          </label>
 
-            <input
-              type="text"
-              placeholder="Tytuł wpisu"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              className="border border-white p-1 rounded text-white bg-black"
-            />
+          <input
+            type="text"
+            placeholder="Tytuł wpisu"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            className="h-8 rounded-xl border border-white/10 bg-white/5 px-3 text-sm text-white placeholder:text-zinc-500 outline-none focus:border-blue-400"
+          />
 
-            <textarea
-              placeholder="Krótki opis"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              rows={2}
-              className="border border-white p-1 rounded text-white bg-black"
-            />
+          <textarea
+            placeholder="Krótki opis"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            rows={2}
+            className="min-h-[30px] resize-none rounded-xl border border-white/10 bg-white/5 px-3 py-1 text-sm text-white placeholder:text-zinc-500 outline-none focus:border-blue-400"
+          />
 
-            <button
-              onClick={handleUpload}
-              className="bg-blue-500 text-white py-1 rounded hover:bg-blue-700 transition"
-              disabled={loading}
-            >
-              {loading ? "⏳ Przesyłanie..." : "🚀 Prześlij"}
-            </button>
-          </div>
+          <button
+            onClick={handleUpload}
+            className="h-8 rounded-xl bg-blue-500 text-sm font-semibold text-white shadow-lg shadow-blue-500/20 transition hover:bg-blue-600 disabled:cursor-not-allowed disabled:opacity-60"
+            disabled={loading}
+          >
+            {loading ? "⏳ Przesyłanie..." : "🚀 Prześlij zdjęcie"}
+          </button>
         </div>
       )}
 
-      {/* PRAWA: Miniatury */}
-    
-    </div>
-
-    {/* Lightbox */}
-    {selectedImage && (
-      <div
-        className="fixed top-0 left-0 w-full h-full bg-black/80 flex items-center justify-center z-50"
-        onClick={() => setSelectedImage(null)}
-      >
-        <img
-          src={selectedImage}
-          alt="Powiększony obraz"
-          className="max-w-[90%] max-h-[90%] rounded-lg shadow-lg"
-        />
-        <button
-          className="absolute top-4 right-4 bg-red-500 text-white px-4 py-2 rounded-full"
+      {selectedImage && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 px-4"
           onClick={() => setSelectedImage(null)}
         >
-          ❌ Zamknij
-        </button>
-      </div>
-    )}
-  </div>
-);
+          <img
+            src={selectedImage}
+            alt="Powiększony obraz"
+            className="max-h-[90vh] max-w-[90vw] rounded-2xl shadow-2xl"
+          />
 
-};
+          <button
+            className="absolute right-4 top-4 rounded-full bg-white/10 px-4 py-2 text-sm text-white hover:bg-white/20"
+            onClick={() => setSelectedImage(null)}
+          >
+            ✕ Zamknij
+          </button>
+        </div>
+      )}
+    </div>
+  </div>
+)};
 
 export default ImageUploader;

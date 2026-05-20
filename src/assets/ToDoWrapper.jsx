@@ -114,22 +114,22 @@ const ToDoWrapper = ({ className }) => {
     return (
     <div className="galeria   ">
     <div className={`TodoWrapper ${className} `}>
-      <div className="mb-4 p-4 bg-gray-800 text-white rounded-lg shadow-md">
-  <h2 className="text-xl font-bold mb-2">
+      <div className="mb-4 p-3 bg-gray-800 text-white rounded-lg shadow-md">
+  <h2 className="text-base font-bold mb-2">
     Twoja prywatna lista pomysłów i zadań
   </h2>
 
-  <p className="mb-2 text-white/80">
+  <p className="mb-1 text-sm text-white/80">
     Zarejestruj konto i korzystaj z własnej przestrzeni na zadania, pomysły,
     plany zdjęciowe, notatki blogowe albo listę rzeczy do zrobienia.
   </p>
 
-  <p className="mb-2 text-white/80">
+  <p className="mb-1 text-sm text-white/80">
     Każdy użytkownik widzi tylko swoje zadania — możesz wrócić później i
     kontynuować pracę tam, gdzie skończyłeś.
   </p>
 
-  <p className="text-sm text-white/60">
+  <p className="text-sm text-white/80">
     Przykłady: pomysły na wpisy, lista zdjęć do obróbki, plan posta, checklisty
     zakupowe, przygotowanie plakatu lub prywatne notatki.
   </p>

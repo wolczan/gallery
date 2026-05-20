@@ -10,50 +10,38 @@ import { FiX } from "react-icons/fi";
 export default function VideoGallery({ videos }) {
   const navigate = useNavigate(); 
   const [selectedVideo, setSelectedVideo] = useState(null);
-  const [isPlaying, setIsPlaying] = useState(false);
   const videoRef = useRef(null);
+
+  useEffect(() => {
+  if (selectedVideo && videoRef.current) {
+    videoRef.current.focus();
+    videoRef.current.play().catch(() => {});
+    }
+    }, [selectedVideo]);
 
   useEffect(() => {
     console.log("[VideoGallery] MOUNT");
     return () => console.log("[VideoGallery] UNMOUNT");
   }, []);
 
-
-  // NEW: po przejściu w tryb odtwarzania – odpal od razu .play()
-  useEffect(() => {
-    if (isPlaying && videoRef.current) {
-      // pokaż kontrolki dopiero gdy user kliknął Play
-      videoRef.current.setAttribute("controls", "");
-      videoRef.current.play().catch(() => {});
-    }
-  }, [isPlaying]);
-
   const openModal = (v) => {
     setSelectedVideo(v);
-    setIsPlaying(false); // startujemy od plakatu + Play
   };
 
   const closeModal = () => {
     if (videoRef.current) {
       try {
         videoRef.current.pause();
-        videoRef.current.removeAttribute("src");
         videoRef.current.load();
       } catch (error) {
         console.warn("Video cleanup failed:", error);
       }
     }
-
-    setIsPlaying(false);
     setSelectedVideo(null);
   };
 
   const onKeyDownModal = (e) => {
     if (e.key === "Escape") closeModal();
-    if (!isPlaying && (e.key === "Enter" || e.key === " ")) {
-      e.preventDefault();
-      setIsPlaying(true);
-    }
   };
 
   VideoGallery.propTypes = {
@@ -89,24 +77,24 @@ export default function VideoGallery({ videos }) {
         >
        {videos.slice(0, 15).map((v, i) => {
 
-  const webpSrcSet = [
-    v.thumbWebp320 && `${v.thumbWebp320} 320w`,
-    v.thumbWebp640 && `${v.thumbWebp640} 640w`,
-    v.thumbWebp1280 && `${v.thumbWebp1280} 1280w`,
-  ].filter(Boolean).join(", ");
+        const webpSrcSet = [
+          v.thumbWebp320 && `${v.thumbWebp320} 320w`,
+          v.thumbWebp640 && `${v.thumbWebp640} 640w`,
+          v.thumbWebp1280 && `${v.thumbWebp1280} 1280w`,
+        ].filter(Boolean).join(", ");
 
-  const jpgFallback =
-  v.cover ||
-  v.thumbWebp640 ||
-  v.thumbWebp320 ||
-  v.thumbWebp1280 ||
-  "";
-  const showPlayOn = "first5";
- 
-  const isHero = i >= 5 && i < 15; // 👈 6–10 kafelek w trybie HERO
-  const isTop5 = i < 5; // 👈 NOWE
-   const showPlay =
-    showPlayOn === "first5" ? isTop5 : i === 0; // i === 0 -> tylko pierwszy
+        const jpgFallback =
+        v.cover ||
+        v.thumbWebp640 ||
+        v.thumbWebp320 ||
+        v.thumbWebp1280 ||
+        "";
+
+        const showPlayOn = "first5";
+        const isHero = i >= 5 && i < 15; // 👈 6–10 kafelek w trybie HERO
+        const isTop5 = i < 5; // 👈 NOWE
+        const showPlay =
+          showPlayOn === "first5" ? isTop5 : i === 0; // i === 0 -> tylko pierwszy
 
   // --- Wariant HERO (overlay jak w Edge) ---
   if (isHero) {
@@ -128,7 +116,8 @@ export default function VideoGallery({ videos }) {
             <img
               src={jpgFallback}
               alt={v.title || "Miniatura"}
-              loading="lazy"
+              loading={i === 0 ? "eager" : "lazy"}
+              fetchPriority={i === 0 ? "high" : "auto"}
               decoding="async"
               width={480}
               height={300}
@@ -195,7 +184,8 @@ export default function VideoGallery({ videos }) {
          <img
             src={jpgFallback}
             alt={v.title || "Miniatura"}
-            loading="lazy"
+            loading={i === 0 ? "eager" : "lazy"}
+            fetchPriority={i === 0 ? "high" : "auto"}
             decoding="async"
             width={480}
             height={300}
@@ -293,53 +283,21 @@ export default function VideoGallery({ videos }) {
           aria-modal="true"
         >
           {/* Backdrop z animacją fade */}
-          <div className="absolute inset-0 bg-black/80" style={{ animation: "fadeIn .18s ease-out" }} onClick={closeModal} />
+          <div className="absolute inset-0 bg-black/85 backdrop-blur-md" style={{ animation: "fadeIn .18s ease-out" }} onClick={closeModal} />
 
           <div
-            className="relative bg-black rounded-2xl overflow-hidden max-w-5xl w-full shadow-2xl"
+            className="relative w-full max-w-5xl overflow-hidden rounded-3xl border border-white/10 bg-zinc-950 shadow-2xl"
             style={{ animation: "zoomIn .18s ease-out" }}
           >
             <div className="relative w-full" style={{ aspectRatio: "16 / 9" }}>
-              {/* Jeśli NIE gramy → pokaż plakat + duży przycisk Play */}
-              {!isPlaying && (
-                <>
-                  <img
-                    src={
-                      selectedVideo.thumbWebp640 ||
-                      selectedVideo.cover ||
-                      selectedVideo.thumb ||
-                      selectedVideo.posterUrl ||
-                      ""
-                    }
-                    alt={selectedVideo.title || "Podgląd wideo"}
-                    className="absolute inset-0 w-full h-full object-cover"
-                  />
-                 <button
-                    onClick={() => setIsPlaying(true)}
-                    className="
-                      absolute inset-0 m-auto h-20 w-20 md:h-24 md:w-24
-                      rounded-full
-                      bg-white/20 backdrop-blur-sm
-                      text-white text-4xl md:text-5xl
-                      ring-1 ring-white/50
-                      shadow-[0_8px_28px_rgba(0,0,0,.45)]
-                      hover:bg-white/30 hover:scale-[1.05]
-                      transition-all duration-300
-                    "
-                    aria-label="Odtwórz wideo"
-                  >
-                    ▶
-                  </button>
-
-                </>
-              )}
-
-              {/* Po kliknięciu Play → renderujemy <video> i od razu .play() w useEffect */}
-              {isPlaying && (
                 <video
                   ref={videoRef}
                   key={selectedVideo.id}
                   playsInline
+                  autoPlay
+                  muted
+                  controls
+                  tabIndex={0}
                   preload="metadata"
                   poster={
                     selectedVideo.thumbWebp640 ||
@@ -359,18 +317,22 @@ export default function VideoGallery({ videos }) {
                     }
                     type="video/mp4"
                   />
+
                   {selectedVideo.videoWebm && (
-                    <source src={selectedVideo.videoWebm} type="video/webm" />
+                    <source
+                      src={selectedVideo.videoWebm}
+                      type="video/webm"
+                    />
                   )}
                 </video>
-              )}
+              
+            </div>
 
-              {/* Fallback, gdy dalej brak URL */}
-              {isPlaying && !(selectedVideo.videoUrl || selectedVideo.video || selectedVideo.url || selectedVideo.mp4) && (
-                <div className="absolute inset-x-0 bottom-0 p-4 text-sm text-white/90 bg-black/60">
-                  Brak adresu wideo w danych (oczekiwane: <code>videoUrl</code> / <code>video</code> / <code>url</code> / <code>mp4</code>).
-                </div>
-              )}
+             {/* TITLE BELOW VIDEO */}
+            <div className="border-t border-white/10 px-5 py-4">
+              <h3 className="text-sm font-semibold text-white">
+                {selectedVideo.title || "Film"}
+              </h3>
             </div>
 
             <button
