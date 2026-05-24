@@ -4,6 +4,6 @@ import AuthContext from "./authContext"; // ✅ Poprawny import
 
 export function useAuth() {
   const context = useContext(AuthContext);
-  console.log("useAuth() zwróciło:", context);
+  //console.log("useAuth() zwróciło:", context);
   return context;
 }

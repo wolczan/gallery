@@ -53,58 +53,65 @@ export default function VideoPlayerCard({
       <div className="relative overflow-hidden rounded-xl bg-black border-none shadow-[0_20px_80px_-20px_rgba(0,0,0,0.6)] ">
         {videos?.length > 0 && selectedVideo != null ? (
          
-            <div className="relative">
-              {/* TŁO VIDEO */}
-              <div className="relative aspect-[16/9] w-full  overflow-hidden bg-black">
-                <AnimatePresence mode="wait">
-                <video className="relative h-full w-full object-cover blur-xl scale-110 opacity-40 pointer-events-none"
-                    src={videoSrc}
-                    muted
-                    playsInline
-                    aria-hidden="true"
-                  />
+          <div className="relative">
+            {/* TŁO VIDEO */}
+            <div className="relative aspect-[16/9] w-full  overflow-hidden bg-black">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={videoSrc || selectedVideo?.id || selectedVideo?.title || "video-player"}
+                className="absolute inset-0"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.45 }}
+            >
+                <video
+                  className="relative h-full w-full scale-110 object-cover opacity-40 blur-xl pointer-events-none"
+                  src={videoSrc}
+                  muted
+                  playsInline
+                  aria-hidden="true"
+                />
+
                   {hasSource ? (
-                  <motion.video
-                    key={selectedVideo}
-                    ref={videoRef}
-                    className="absolute inset-0 h-full w-full object-contain"
-                    controls
-                    playsInline
-                    preload="metadata"
-                    poster={posterSrc}
-                    src={videoSrc}
-                    initial={{ opacity: 0, scale: 1.03 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 1.02 }}
-                    transition={{ duration: 0.45 }}
-                    onPlay={() => setPlaying(true)}
-                    onPause={() => setPlaying(false)}
-                    onLoadedMetadata={(e) => {
-                      const v = e.currentTarget;
-                      const p = v.getAttribute("poster") || "";
-                      const hasRealPoster = p && !p.includes("default-poster.jpg");
-                      if (!hasRealPoster) {
-                        try {
-                          v.currentTime = 0.001;
-                        } catch {}
-                      }
-                    }}
-                    onError={(e) => {
-                      const v = e.currentTarget;
-                      console.error("VIDEO ERROR:", {
-                        src: v.currentSrc,
-                        networkState: v.networkState,
-                        readyState: v.readyState,
-                        error: v.error?.message ?? null,
-                      });
-                    }}
-                  />
-                ) : (
-                  <div className="absolute inset-0 z-10 grid place-items-center bg-black text-white/80">
-                    Brak wideo do odtworzenia
-                  </div>
-                )}
-                </AnimatePresence>
+                    <motion.video
+                      ref={videoRef}
+                      className="absolute inset-0 h-full w-full object-contain"
+                      controls
+                      playsInline
+                      preload="metadata"
+                      poster={posterSrc}
+                      src={videoSrc}
+                      onPlay={() => setPlaying(true)}
+                      onPause={() => setPlaying(false)}
+                      onLoadedMetadata={(e) => {
+                        const v = e.currentTarget;
+                        const p = v.getAttribute("poster") || "";
+                        const hasRealPoster = p && !p.includes("default-poster.jpg");
+
+                        if (!hasRealPoster) {
+                          try {
+                            v.currentTime = 0.001;
+                          } catch {}
+                        }
+                      }}
+                      onError={(e) => {
+                        const v = e.currentTarget;
+                        console.error("VIDEO ERROR:", {
+                          src: v.currentSrc,
+                          networkState: v.networkState,
+                          readyState: v.readyState,
+                          error: v.error?.message ?? null,
+                        });
+                      }}
+                    />
+                  ) : (
+                    <div className="absolute inset-0 z-10 grid place-items-center bg-black text-white/80">
+                      Brak wideo do odtworzenia
+                    </div>
+                  )}
+                </motion.div>
+              </AnimatePresence>
 
                 {/* OVERLAY GRADIENT */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />

@@ -32,19 +32,21 @@ export default function HomeRoute({
 
         {showLogin && <Login onClose={() => setShowLogin(false)} />}
 
-        👉 TU WSTAW
-        <VideoPlayerCard
-          videos={videos}
-          selectedVideo={selectedVideo}
-          setSelectedVideo={setSelectedVideo}
-          videoRef={videoRef}
-          playing={playing}
-          setPlaying={setPlaying}
-          handlePlay={handlePlay}
-          posterSrc={posterSrc}
-          videoSrc={videoSrc}
-          hasSource={hasSource}
-        />
+      
+          {selectedVideo && (
+          <VideoPlayerCard
+            videos={videos}
+            selectedVideo={selectedVideo}
+            setSelectedVideo={setSelectedVideo}
+            videoRef={videoRef}
+            playing={playing}
+            setPlaying={setPlaying}
+            handlePlay={handlePlay}
+            posterSrc={posterSrc}
+            videoSrc={videoSrc}
+            hasSource={hasSource}
+          />
+        )}
 
         <ToDoWrapper />
     

@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import { FiX } from "react-icons/fi";
 
-
 export default function VideoGallery({ videos }) {
   const navigate = useNavigate(); 
   const [selectedVideo, setSelectedVideo] = useState(null);
@@ -60,42 +59,43 @@ export default function VideoGallery({ videos }) {
 
   return (
     <>
-     <section className="mx-auto max-w-[1400px] px-4 py-10">
-  <div className="relative h-[520px] overflow-hidden rounded-3xl bg-zinc-950 text-white shadow-2xl md:h-[640px]">
-    <div className="absolute inset-0">
-      <img
-        src="https://firebasestorage.googleapis.com/v0/b/galeriazdjec-f4180.firebasestorage.app/o/resized%2FChatGPT%20Image%2020%20maj%202026%2C%2020_37_58_1280x1280.jpeg?alt=media&token=e1679d94-22c3-4ab0-9ef1-f9e0537c71e5"
-        alt="Cinematic Łódź"
-        loading="eager"
-        fetchPriority="high"
-        className="h-full w-full object-contain object-cover opacity-100"
-      />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-transparent" />
-      <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/35 to-transparent" />
-    </div>
+     <section className="mx-auto max-w-[1700px] px-1 py-1 md:px-6">
+      <div className="relative h-[380px] overflow-hidden rounded-xl bg-zinc-950 text-white shadow-2xl md:h-[460px]">
+        <div className="absolute inset-0">
+          <img
+            src="https://firebasestorage.googleapis.com/v0/b/galeriazdjec-f4180.firebasestorage.app/o/resized%2FChatGPT%20Image%2020%20maj%202026%2C%2020_37_58_1280x1280.jpeg?alt=media&token=e1679d94-22c3-4ab0-9ef1-f9e0537c71e5"
+            alt="Cinematic Łódź"
+            loading="eager"
+            fetchpriority="high"
+            className="h-full w-full object-cover object-center opacity-100"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/15 to-transparent" />
+        </div>
 
-    <div className="relative z-10 flex h-full items-end px-6 pb-8 md:px-12 md:pb-12">
-      <div className="max-w-xl">
-        <p className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-white/70">
-          Poster Collection
-        </p>
+        <div className="relative z-10 flex h-full items-end px-4 pb-6 md:px-10 md:pb-4">
+          <div className="max-w-md">
+            <p className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-white/70">
+              Poster Collection
+            </p>
 
-        <h2 className="mb-3 text-2xl font-semibold tracking-tight text-white md:text-4xl">
-          Cinematic Łódź Posters
-        </h2>
+            <h2 className="mb-1 text-lg font-semibold tracking-tight text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.75)] md:text-3xl">
+              Cinematic Łódź Posters
+            </h2>
 
-        <p className="mb-5 max-w-lg text-sm leading-relaxed text-white/80 md:text-base">
-          Minimalistyczna kolekcja plakatów inspirowanych filmowym klimatem Łodzi —
-          neonami, industrialną architekturą i miejską atmosferą po zmroku.
-        </p>
+            <p className="mb-4 max-w-lg text-xs leading-relaxed text-white/90 md:text-sm drop-shadow-[0_2px_10px_rgba(0,0,0,0.7)]">
+              Minimalistyczna kolekcja plakatów inspirowanych filmowym klimatem Łodzi
+              neonami, industrialną architekturą i miejską atmosferą po zmroku i nie tylko.
+            </p>
 
-        <button className="rounded-md bg-violet-600 px-5 py-3 text-sm font-bold uppercase tracking-wide text-white transition hover:bg-violet-500">
-          Zobacz kolekcję +
-        </button>
+            <button
+              onClick={() => navigate("/Plakaty")}
+              className="rounded-md bg-violet-600 px-3 py-1 text-xs font-bold uppercase tracking-wide text-white transition hover:bg-violet-500">
+              Zobacz kolekcję
+            </button>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
 
       {/* GRID jak u Ciebie – bez zmian poza handlerem onClick */}
@@ -155,7 +155,7 @@ export default function VideoGallery({ videos }) {
               src={jpgFallback}
               alt={v.title || "Miniatura"}
               loading={i === 0 ? "eager" : "lazy"}
-              fetchPriority={i === 0 ? "high" : "auto"}
+              fetchpriority={i === 0 ? "high" : "auto"}
               decoding="async"
               width={480}
               height={300}
@@ -223,7 +223,7 @@ export default function VideoGallery({ videos }) {
             src={jpgFallback}
             alt={v.title || "Miniatura"}
             loading={i === 0 ? "eager" : "lazy"}
-            fetchPriority={i === 0 ? "high" : "auto"}
+            fetchpriority={i === 0 ? "high" : "auto"}
             decoding="async"
             width={480}
             height={300}
