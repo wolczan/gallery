@@ -35,34 +35,6 @@ export default function Plakaty() {
   return (
     <div className="min-h-screen bg-black text-white">
 
-      {/* HERO */}
-      <section className="relative h-[320px] overflow-hidden md:h-[420px]">
-        <img
-          src="https://firebasestorage.googleapis.com/v0/b/galeriazdjec-f4180.firebasestorage.app/o/resized%2FChatGPT%20Image%2020%20maj%202026%2C%2020_37_58_1280x1280.jpeg?alt=media&token=e1679d94-22c3-4ab0-9ef1-f9e0537c71e5"
-          alt="Poster Hero"
-          className="absolute inset-0 h-full w-full object-cover"
-        />
-
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
-
-        <div className="relative z-10 flex h-full items-end px-6 pb-10 md:px-12">
-          <div className="max-w-md">
-            <p className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-white/70">
-              Poster Collection
-            </p>
-
-            <h2 className="mb-1 text-lg font-semibold tracking-tight text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.75)] md:text-3xl">
-              Cinematic Łódź Posters
-            </h2>
-
-            <p className="text-sm text-white/80 md:text-base">
-              Minimalistyczne plakaty inspirowane miejskim klimatem,
-              neonami i industrialną architekturą Łodzi.
-            </p>
-          </div>
-        </div>
-      </section>
-
       {/* INTRO */}
       <section className="mx-auto max-w-6xl px-4 py-10">
         <div className="max-w-2xl">

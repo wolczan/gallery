@@ -47,7 +47,10 @@ export default function VideoPlayerCard({
       updateScrollState(rowId, key);
     }, 350);
   };
- 
+  const selectedIndex = videos.findIndex(
+  (video) => video.id === selectedVideo?.id
+    );
+    
   return (
     <section className="mx-auto max-w-[1000px] px-0.5 lg:px-8 py-2 ">
       <div className="relative overflow-hidden rounded-xl bg-black border-none shadow-[0_20px_80px_-20px_rgba(0,0,0,0.6)] ">
@@ -114,15 +117,15 @@ export default function VideoPlayerCard({
               </AnimatePresence>
 
                 {/* OVERLAY GRADIENT */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
-                <div className="absolute inset-0 bg-gradient-to-r from-black/55 via-transparent to-transparent" />
+                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-black/55 via-transparent to-transparent" />
 
                 {/* TREŚĆ NA VIDEO */}
-                <div className="absolute inset-0 flex items-end">
+              <div className="pointer-events-none absolute inset-0 flex items-end">
                 <div className="w-full p-3 sm:p-6 lg:p-10">
                     <div className="max-w-lg text-left">
                       <span className="inline-flex rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-medium text-white/90 backdrop-blur">
-                        Wideo {selectedVideo + 1} / {videos.length}
+                       Wideo {selectedIndex + 1}/{videos.length}
                       </span>
 
                       <h2 className="mt-1 max-w-[220px] text-base font-bold leading-snug text-white sm:mt-3 sm:max-w-md sm:text-lg lg:max-w-lg lg:text-xl">
@@ -133,7 +136,7 @@ export default function VideoPlayerCard({
                         {current?.description ?? ""}
                       </p>
 
-                      <div className="mt-4 flex flex-wrap items-center gap-3">
+                      <div className="mt-4 flex flex-wrap items-center gap-3 pointer-events-auto">
                         <motion.button
                           onClick={handlePlay}
                           whileHover={{ scale: 1.03 }}

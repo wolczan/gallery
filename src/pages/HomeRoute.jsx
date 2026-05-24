@@ -9,6 +9,7 @@ import ContactSection from "../assets/components/ContactSection.jsx";
 import { FaPlay, FaPause } from "react-icons/fa";
 import { AnimatePresence, motion } from "framer-motion";
 import VideoPlayerCard from "../components/VideoPlayerCard.jsx";
+import HeroBanner from "../components/HeroBanner.jsx";
 
 export default function HomeRoute({
   videos,
@@ -26,32 +27,32 @@ export default function HomeRoute({
   
   
 }) {
-  return (
-    <>
-     <VideoGallery videos={videos} />
+ return (
+  <>
 
-        {showLogin && <Login onClose={() => setShowLogin(false)} />}
+    <HeroBanner />
+    <VideoPlayerCard
+      videos={videos}
+      selectedVideo={selectedVideo || videos?.[0]}
+      setSelectedVideo={setSelectedVideo}
+      videoRef={videoRef}
+      playing={playing}
+      setPlaying={setPlaying}
+      handlePlay={handlePlay}
+      posterSrc={posterSrc}
+      videoSrc={videoSrc}
+      hasSource={hasSource}
+    />
 
-      
-          {selectedVideo && (
-          <VideoPlayerCard
-            videos={videos}
-            selectedVideo={selectedVideo}
-            setSelectedVideo={setSelectedVideo}
-            videoRef={videoRef}
-            playing={playing}
-            setPlaying={setPlaying}
-            handlePlay={handlePlay}
-            posterSrc={posterSrc}
-            videoSrc={videoSrc}
-            hasSource={hasSource}
-          />
-        )}
+    <VideoGallery videos={videos} />
 
-        <ToDoWrapper />
-    
+    {showLogin && (
+      <Login onClose={() => setShowLogin(false)} />
+    )}
 
-      <div className="max-w-screen-xl mx-auto my-6 px-4">
+    <ToDoWrapper />
+
+    <div className="max-w-screen-xl mx-auto my-6 px-4">
       <div className="flex flex-col lg:flex-row gap-6 items-start">
         <div className="w-full lg:w-80">
           <ImageUploader />
@@ -63,12 +64,10 @@ export default function HomeRoute({
       </div>
     </div>
 
+    <RecentPosts />
 
-      <RecentPosts />
+    <ContactSection />
 
-      <ContactSection />
-
-      <Footer />
-    </>
-  );
-}
+    <Footer />
+  </>
+)};
