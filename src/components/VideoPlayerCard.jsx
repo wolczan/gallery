@@ -2,6 +2,7 @@ import { FaPlay, FaPause } from "react-icons/fa";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState} from "react";
 
+
 export default function VideoPlayerCard({
   videos,
   selectedVideo,
@@ -14,6 +15,8 @@ export default function VideoPlayerCard({
   videoSrc,
   hasSource,
 }) {
+  const [mobileFullscreen, setMobileFullscreen] = useState(false);
+  const selectedIndex = selectedVideo;
   const current = videos?.[selectedVideo] ?? null;
   const firstRow = videos?.slice(0, Math.ceil(videos.length / 2)) ?? [];
   const secondRow = videos?.slice(Math.ceil(videos.length / 2)) ?? [];
@@ -47,9 +50,6 @@ export default function VideoPlayerCard({
       updateScrollState(rowId, key);
     }, 350);
   };
-  const selectedIndex = videos.findIndex(
-  (video) => video.id === selectedVideo?.id
-    );
     
   return (
     <section className="mx-auto max-w-[1000px] px-0.5 lg:px-8 py-2 ">
@@ -137,11 +137,21 @@ export default function VideoPlayerCard({
                       </p>
 
                       <div className="mt-4 flex flex-wrap items-center gap-3 pointer-events-auto">
-                        <motion.button
-                          onClick={handlePlay}
+                       <motion.button
+                          onClick={() => {
+                            if (window.innerWidth < 768) {
+                              setMobileFullscreen(true);
+
+                              setTimeout(() => {
+                                videoRef.current?.play();
+                              }, 100);
+                            } else {
+                              handlePlay();
+                            }
+                          }}
                           whileHover={{ scale: 1.03 }}
                           whileTap={{ scale: 0.96 }}
-                         className="inline-flex items-center justify-center gap-1.5 rounded-full bg-white px-3 py-1 text-xs font-semibold text-black shadow-lg transition sm:gap-2 sm:px-5 sm:py-3 sm:text-sm"
+                          className="inline-flex items-center justify-center gap-1.5 rounded-full bg-white px-3 py-1 text-xs font-semibold text-black shadow-lg transition sm:gap-2 sm:px-5 sm:py-3 sm:text-sm"
                         >
                           {playing ? <FaPause /> : <FaPlay />}
                           {playing ? "Pauza" : "Odtwórz"}
@@ -329,6 +339,28 @@ export default function VideoPlayerCard({
           </div>
         )}
       </div>
+                {mobileFullscreen && (
+        <div className="fixed inset-0 z-[99999] bg-black md:hidden">
+          <video
+            className="h-full w-full object-contain"
+            src={videoSrc}
+            poster={posterSrc}
+            controls
+            autoPlay
+            playsInline
+          />
+
+          <button
+            type="button"
+            onClick={() => setMobileFullscreen(false)}
+            className="absolute left-4 top-4 rounded-full bg-black/60 px-4 py-2 text-sm font-semibold text-white"
+          >
+            Wróć
+          </button>
+        </div>
+      )}
+
+
     </section>
   );
 }
