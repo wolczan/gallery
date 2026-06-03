@@ -7,7 +7,7 @@ import './MainNavbar.css';
 
 const MainNavbar = ({ setShowLogin }) => {
   const { user, signOut } = useAuth();
-  console.log("USER Z AUTH W MAINNAVBAR:", user);
+ // console.log("USER Z AUTH W MAINNAVBAR:", user);
   return (
     <Navbar
       expand="lg"

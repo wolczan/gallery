@@ -52,7 +52,7 @@ export default function HomeRoute({
 
     <ToDoWrapper />
 
-    <div className="max-w-screen-xl mx-auto my-6 px-4">
+    <div className="max-w-screen-xl mx-auto my-6 px-1">
       <div className="flex flex-col lg:flex-row gap-6 items-start">
         <div className="w-full lg:w-80">
           <ImageUploader />

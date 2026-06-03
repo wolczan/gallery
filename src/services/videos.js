@@ -4,7 +4,7 @@ import { db } from "../firebase"; // lub odpowiednia ścieżka
 
 // Dodaj parametr diagnostyczny
 export async function fetchVideos({ source = "unknown" } = {}) {
-  console.log(`[fetchVideos] called from: ${source}`);
+ // console.log(`[fetchVideos] called from: ${source}`);
 
   try {
     const q = query(
@@ -21,7 +21,7 @@ export async function fetchVideos({ source = "unknown" } = {}) {
 
     return data;
   } catch (err) {
-    console.error(`[fetchVideos] error (${source}):`, err);
+    // console.error(`[fetchVideos] error (${source}):`, err);
     return [];
   }
 }

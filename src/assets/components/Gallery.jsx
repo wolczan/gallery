@@ -82,7 +82,7 @@ const Gallery = () => {
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto px-6 py-8">
+    <div className="w-full px-1 py-4  md:px-6 ">
 
       <div className="flex items-center justify-between gap-4 mb-6">
         <h2 className="text-2xl font-semibold text-gray-800 drop-shadow-sm">📷 Moja Galeria</h2>
@@ -122,37 +122,48 @@ const Gallery = () => {
       {!loading && images.length > 0 && (
         <>
           {/* Masonry */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
-            {images.map((img) => (
-              <button
-                key={img.id}
-                type="button"
-                className="w-full group text-left"
-                onClick={() => setSelectedId(img.id)}
-              >
-                <div className="rounded-2xl overflow-hidden bg-white/5 border border-white/10 shadow-sm backdrop-blur ...">
-                  <img
-                    src={img.imageUrl}
-                    alt={img.title || "Obraz"}
-                    loading="lazy"
-                    decoding="async"
-                    className="w-full h-40 object-cover"
-                  />
+          <div className="relative">
 
-                  {/* BLOG: tytuł + opis */}
-                  <div className="p-3">
-                    <div className="text-xs text-white/60 line-clamp-2 mt-1">
-                      {img.title || "Tytuł wpisu"}
-                    </div>
-                    <div className="text-xs text-gray-500 line-clamp-2 mt-1">
-                      {img.description || "Krótki opis wpisu…"}
-                    </div>
-                  </div>
-                </div>
+  {/* LEWY FADE */}
+  <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-8 bg-gradient-to-r from-black to-transparent" />
 
-              </button>
-            ))}
+  {/* PRAWY FADE */}
+  <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-8 bg-gradient-to-l from-black to-transparent" />
+
+  <div className="flex gap-2 overflow-x-auto pb-2 no-scrollbar scroll-smooth">
+
+    {images.map((img) => (
+      <button
+        key={img.id}
+        type="button"
+        
+        className="relative shrink-0 overflow-hidden rounded-md text-left"
+        style={{ width: 160 }}
+      >
+        <div className="rounded-2xl overflow-hidden bg-white/5 border border-white/10 shadow-sm backdrop-blur">
+          <img
+            src={img.imageUrl}
+            alt={img.title || "Obraz"}
+            loading="lazy"
+            decoding="async"
+            className="w-full h-40 object-cover"
+          />
+
+          <div className="p-3">
+            <div className="text-xs text-white/60 line-clamp-2 mt-1">
+              {img.title || "Tytuł wpisu"}
+            </div>
+
+            <div className="text-xs text-gray-500 line-clamp-2 mt-1">
+              {img.description || "Krótki opis wpisu…"}
+            </div>
           </div>
+        </div>
+      </button>
+    ))}
+
+  </div>
+</div>
 
           {/* Load more */}
           <div className="mt-6 flex justify-center">
@@ -161,7 +172,7 @@ const Gallery = () => {
               onClick={onLoadMore}
               disabled={!lastDoc || loadingMore}
             >
-              {loadingMore ? "⏳ Dociągam..." : lastDoc ? "Pokaż więcej" : "To już wszystko"}
+              {loadingMore ? "⏳ Dociągam..." : lastDoc ? "Załaduj kolejne zdjęcia" : "To już wszystko"}
             </button>
           </div>
         </>

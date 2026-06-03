@@ -12,7 +12,7 @@ export function AuthProvider({ children }) {
   const auth = getAuth();
 
   useEffect(() => {
-    console.log("✅ AuthProvider zamontowany!");
+    //console.log("✅ AuthProvider zamontowany!");
 
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
@@ -37,7 +37,7 @@ export function AuthProvider({ children }) {
       password
     );
 
-    console.log("✅ Zalogowano:", userCredential.user);
+    //console.log("✅ Zalogowano:", userCredential.user);
 
     setUser(userCredential.user);
 
@@ -47,10 +47,10 @@ export function AuthProvider({ children }) {
 };
 
   const signOut = async () => {
-    console.log("🔍 Próba wylogowania...");
+    //console.log("🔍 Próba wylogowania...");
     try {
       await firebaseSignOut(auth);
-      console.log("🚪 Użytkownik powinien być wylogowany!");
+      //console.log("🚪 Użytkownik powinien być wylogowany!");
       setUser(null); // Resetowanie użytkownika
     } catch (error) {
       console.error("❌ Błąd wylogowania:", error.message);
@@ -58,9 +58,9 @@ export function AuthProvider({ children }) {
   };
   
 
-  console.log("✅ Przekazywane wartości w AuthProvider:", { user, signIn, signUp,signOut });
-  console.log("✅ AuthProvider renderuje się! user:", user);
-  console.log("✅ AuthProvider przekazuje: ", { user, signIn, signOut });
+  //console.log("✅ Przekazywane wartości w AuthProvider:", { user, signIn, signUp,signOut });
+  //console.log("✅ AuthProvider renderuje się! user:", user);
+  //console.log("✅ AuthProvider przekazuje: ", { user, signIn, signOut });
 
   return (
     <AuthContext.Provider value={{ user, signIn, signUp,signOut }}> {/* ✅ Przekazujemy poprawnie */}

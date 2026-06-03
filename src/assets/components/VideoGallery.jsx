@@ -18,10 +18,9 @@ export default function VideoGallery({ videos }) {
     }
     }, [selectedVideo]);
 
-  useEffect(() => {
-    console.log("[VideoGallery] MOUNT");
-    return () => console.log("[VideoGallery] UNMOUNT");
-  }, []);
+      useEffect(() => {
+        return () => {};
+      }, []);
 
   const openModal = (v) => {
     setSelectedVideo(v);

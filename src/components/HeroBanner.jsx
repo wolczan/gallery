@@ -11,7 +11,7 @@ export default function HeroBanner() {
             src="https://firebasestorage.googleapis.com/v0/b/galeriazdjec-f4180.firebasestorage.app/o/resized%2FChatGPT%20Image%2020%20maj%202026%2C%2020_37_58_1280x1280.jpeg?alt=media&token=e1679d94-22c3-4ab0-9ef1-f9e0537c71e5"
             alt="Cinematic Łódź"
             loading="eager"
-            fetchPriority="high"
+            fetchpriority="high"
             className="h-full w-full object-cover object-center opacity-100"
           />
 

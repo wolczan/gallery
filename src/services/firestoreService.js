@@ -13,8 +13,15 @@ export const subscribeImagesPage = ({ pageSize = 12, callback }) => {
 
   // base query: filtr userId jeśli user zalogowany
   const base = user
-    ? query(imagesRef, where("userId", "==", user.uid))
-    : query(imagesRef);
+  ? query(
+      imagesRef,
+      where("userId", "==", user.uid),
+      where("visible", "==", true)
+    )
+  : query(
+      imagesRef,
+      where("visible", "==", true)
+    );
 
   // sort + limit (ważne: createdAt musi istnieć)
   const q = query(base, orderBy("createdAt", "desc"), limit(pageSize));
@@ -36,8 +43,15 @@ export const loadMoreImages = async ({ lastDoc, pageSize = 12 }) => {
 
   const imagesRef = collection(db, "images");
   const base = user
-    ? query(imagesRef, where("userId", "==", user.uid))
-    : query(imagesRef);
+    ? query(
+        imagesRef,
+        where("userId", "==", user.uid),
+        where("visible", "==", true)
+      )
+    : query(
+        imagesRef,
+        where("visible", "==", true)
+      );
 
   const q = query(base, orderBy("createdAt", "desc"), startAfter(lastDoc), limit(pageSize));
   const snap = await getDocs(q);
@@ -74,6 +88,7 @@ export async function uploadImageToFirestore(file, meta = {}) {
       const docRef = await addDoc(collection(db, "images"), {
         userId: user.uid,
         imageUrl: downloadURL,
+        visible: true,
         createdAt: serverTimestamp(),
          title: meta.title || file.name.replace(/\.[^/.]+$/, ""),
           description: meta.description || "",
