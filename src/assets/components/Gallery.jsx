@@ -38,6 +38,25 @@ const Gallery = () => {
 
   const selected = selectedIndex >= 0 ? images[selectedIndex] : null;
 
+  const groupedImages = useMemo(() => {
+  return images.reduce((acc, image) => {
+    const key = image.batchId || "other";
+
+    if (!acc[key]) {
+      acc[key] = {
+        title: image.batchTitle || "Pozostałe",
+        items: [],
+      };
+    }
+
+    acc[key].items.push(image);
+
+    return acc;
+  }, {});
+}, [images]);
+
+
+
   const close = useCallback(() => setSelectedId(null), []);
 
   const prev = useCallback(() => {
@@ -84,7 +103,7 @@ const Gallery = () => {
   return (
     <div className="w-full px-1 py-4  md:px-6 ">
 
-      <div className="flex items-center justify-between gap-4 mb-6">
+      <div className="flex items-center justify-between gap-2 md:gap-3">
         <h2 className="text-2xl font-semibold text-gray-800 drop-shadow-sm">📷 Moja Galeria</h2>
 
         <div className="text-sm text-gray-600">
@@ -121,48 +140,46 @@ const Gallery = () => {
 
       {!loading && images.length > 0 && (
         <>
-          {/* Masonry */}
-          <div className="relative">
+<div className="space-y-6">
+  {Object.entries(groupedImages).map(([batchId, group]) => (
+  <div key={batchId} className="mb-12">
 
-  {/* LEWY FADE */}
-  <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-8 bg-gradient-to-r from-black to-transparent" />
+    <h3 className="text-2xl font-bold mb-6">
+      {group.title}
+    </h3>
 
-  {/* PRAWY FADE */}
-  <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-8 bg-gradient-to-l from-black to-transparent" />
-
-  <div className="flex gap-2 overflow-x-auto pb-2 no-scrollbar scroll-smooth">
-
-    {images.map((img) => (
-      <button
-        key={img.id}
-        type="button"
-        
-        className="relative shrink-0 overflow-hidden rounded-md text-left"
-        style={{ width: 160 }}
-      >
-        <div className="rounded-2xl overflow-hidden bg-white/5 border border-white/10 shadow-sm backdrop-blur">
-          <img
-            src={img.imageUrl}
-            alt={img.title || "Obraz"}
-            loading="lazy"
-            decoding="async"
-            className="w-full h-40 object-cover"
-          />
+   <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+      {group.items.map((img) => (
+        <button
+          key={img.id}
+          type="button"
+          onClick={() => setSelectedId(img.id)}
+          className="group overflow-hidden rounded-2xl bg-white border border-gray-200 shadow-sm hover:shadow-xl transition text-left"
+        >
+          <div className="aspect-[2/3] overflow-hidden">
+            <img
+              src={img.imageUrl}
+              alt={img.title}
+              className="w-full h-full object-cover group-hover:scale-105 transition duration-300"
+            />
+          </div>
 
           <div className="p-3">
-            <div className="text-xs text-white/60 line-clamp-2 mt-1">
-              {img.title || "Tytuł wpisu"}
-            </div>
+            <h4 className="font-semibold text-sm">
+              {img.title}
+            </h4>
 
-            <div className="text-xs text-gray-500 line-clamp-2 mt-1">
-              {img.description || "Krótki opis wpisu…"}
-            </div>
+            <p className="text-xs text-gray-500 mt-1">
+              {img.description}
+            </p>
           </div>
-        </div>
-      </button>
-    ))}
+        </button>
+      ))}
+    </div>
 
   </div>
+))}
+  
 </div>
 
           {/* Load more */}
