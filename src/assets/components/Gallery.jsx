@@ -147,8 +147,7 @@ const Gallery = () => {
     <h3 className="text-2xl font-bold mb-6">
       {group.title}
     </h3>
-
-   <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
       {group.items.map((img) => (
         <button
           key={img.id}
@@ -164,15 +163,11 @@ const Gallery = () => {
             />
           </div>
 
-          <div className="p-3">
-            <h4 className="font-semibold text-sm">
-              {img.title}
-            </h4>
-
-            <p className="text-xs text-gray-500 mt-1">
-              {img.description}
-            </p>
-          </div>
+          <div className="p-2">
+  <h4 className="font-medium text-sm truncate">
+    {img.title}
+  </h4>
+</div>
         </button>
       ))}
     </div>
