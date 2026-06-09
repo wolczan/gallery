@@ -10,6 +10,7 @@ import { FaPlay, FaPause } from "react-icons/fa";
 import { AnimatePresence, motion } from "framer-motion";
 import VideoPlayerCard from "../components/VideoPlayerCard.jsx";
 import HeroBanner from "../components/HeroBanner.jsx";
+import HeroCarousel from "../components/HeroCarousel.jsx";
 
 export default function HomeRoute({
   videos,
@@ -29,8 +30,8 @@ export default function HomeRoute({
 }) {
  return (
   <>
-
-    <HeroBanner />
+      <HeroBanner />
+    <HeroCarousel />
     <VideoPlayerCard
       videos={videos}
       selectedVideo={selectedVideo || videos?.[0]}
@@ -52,13 +53,13 @@ export default function HomeRoute({
 
     <ToDoWrapper />
 
-    <div className="max-w-screen-xl mx-auto my-6 px-1">
-      <div className="flex flex-col lg:flex-row gap-6 items-start">
-        <div className="w-full lg:w-80">
+    <div className="max-w-screen-xl mx-auto my-6 px-4">
+      <div className="flex flex-col gap-6 items-center">
+        <div className="w-full max-w-md">
           <ImageUploader />
         </div>
 
-        <div className="w-full lg:flex-1">
+        <div className="w-full">
           <Gallery />
         </div>
       </div>

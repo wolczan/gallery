@@ -50,9 +50,8 @@ const ImageUploader = () => {
   };
 
 return (
-  <div className="w-full flex justify-center px-4 py-3">
-    <div className="w-full max-w-sm rounded-xl border border-white/10 bg-zinc-950/80 p-2 text-white shadow-2xl backdrop-blur-md ">
-
+  <div className="w-full flex justify-center px-4 py-4">
+    <div className="w-full max-w-md rounded-xl border border-white/10 bg-zinc-950/80 p-4 text-white shadow-2xl backdrop-blur-md">
       {user && (
         <div className="flex flex-col gap-2">
           <div className="text-center">
