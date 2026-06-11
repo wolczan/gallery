@@ -30,8 +30,21 @@ export default function HomeRoute({
 }) {
  return (
   <>
-      <HeroBanner />
+     
     <HeroCarousel />
+
+     <div className="max-w-screen-xl mx-auto my-6 px-4">
+      <div className="flex flex-col gap-6 items-center">
+        <div className="w-full max-w-md">
+          <ImageUploader />
+        </div>
+
+        <div className="w-full">
+          <Gallery />
+        </div>
+      </div>
+    </div>
+
     <VideoPlayerCard
       videos={videos}
       selectedVideo={selectedVideo || videos?.[0]}
@@ -53,17 +66,7 @@ export default function HomeRoute({
 
     <ToDoWrapper />
 
-    <div className="max-w-screen-xl mx-auto my-6 px-4">
-      <div className="flex flex-col gap-6 items-center">
-        <div className="w-full max-w-md">
-          <ImageUploader />
-        </div>
-
-        <div className="w-full">
-          <Gallery />
-        </div>
-      </div>
-    </div>
+   
 
     <RecentPosts />
 

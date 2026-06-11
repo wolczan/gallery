@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { collection, getDocs, addDoc, serverTimestamp, query, orderBy ,  onSnapshot } from "firebase/firestore";
 //import { db } from "../firebase"; // Importuj swoją inicjalizację Firestore
 import { db } from "@/firebase"; // Importuj swoją inicjalizację Firestore
-
+import { limit } from "firebase/firestore";
 import { motion } from "framer-motion";
 import { doc, updateDoc, increment } from "firebase/firestore";
 
@@ -16,7 +16,7 @@ function RecentPosts() {
 
   // Pobieranie istniejących postów z Firestore
       useEffect(() => {
-        const q = query(collection(db, "posts"), orderBy("createdAt", "desc"));
+        const q = query(collection(db, "posts"), orderBy("createdAt", "desc"),limit(6));
 
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
           const postsData = querySnapshot.docs.map((doc) => ({
@@ -95,18 +95,10 @@ const fetchThumbnail = async (url) => {
     await updateDoc(postRef, {
       likes: increment(1),
     });
-
-    // Odśwież dane po kliknięciu serduszka
-    const updatedSnapshot = await getDocs(collection(db, "posts"));
-    const updatedPosts = updatedSnapshot.docs.map((doc) => ({
-      id: doc.id,
-      ...doc.data(),
-    }));
-    setPosts(updatedPosts);
   } catch (error) {
-    console.error("Błąd podczas aktualizacji liczby polubień:", error);
+    console.error("Błąd podczas dodawania polubienia:", error);
   }
-};
+  };
 
   
 

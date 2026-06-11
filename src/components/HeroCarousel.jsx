@@ -7,7 +7,7 @@ const slides = [
     title: "Cinematic Łódź Posters",
     subtitle: "Minimalistyczna kolekcja plakatów inspirowanych filmowym klimatem Łodzi, neonami, industrialną architekturą i miejską atmosferą po zmroku i nie tylko.",
     image:
-      "https://firebasestorage.googleapis.com/v0/b/galeriazdjec-f4180.firebasestorage.app/o/Zdjecia%20salonowe%2Fresized%2Fpietryna_2_1280x1280.webp?alt=media&token=779e3668-16c4-4d22-bf5f-6c4d9d60e9f0",
+      "https://firebasestorage.googleapis.com/v0/b/galeriazdjec-f4180.firebasestorage.app/o/Zdjecia%20salonowe%2Fresized%2FP-street_1280x1280.webp?alt=media&token=ecfe6cb9-0e68-4334-b93f-cdde3e932318",
     button: "Zobacz kolekcję",
     path: "/Plakaty",
   },
@@ -15,7 +15,7 @@ const slides = [
     label: "Interior Posters",
     title: "Plakaty do salonu",
     subtitle: "Modern wall art for living rooms and offices.",
-    image: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85",
+    image: "https://firebasestorage.googleapis.com/v0/b/galeriazdjec-f4180.firebasestorage.app/o/Zdjecia%20salonowe%2Fresized%2Fbannerhero_1_main_1280x1280.jpeg?alt=media&token=6917b503-b98d-4edf-b073-7ba5a5404474",
     button: "Kup plakat",
     path: "/Plakaty",
   },
@@ -23,7 +23,7 @@ const slides = [
     label: "Wall Art",
     title: "Industrial Mood",
     subtitle: "Loft and industrial style wall decor.",
-    image: "https://images.unsplash.com/photo-1494526585095-c41746248156",
+    image: "https://firebasestorage.googleapis.com/v0/b/galeriazdjec-f4180.firebasestorage.app/o/Zdjecia%20salonowe%2Fresized%2Fbannerhero_1_main_1280x1280.jpeg?alt=media&token=6917b503-b98d-4edf-b073-7ba5a5404474",
     button: "Odkryj kolekcję",
     path: "/Plakaty",
   },
@@ -51,7 +51,7 @@ export default function HeroCarousel() {
             src={slide.image}
             alt={slide.title}
             loading="eager"
-            fetchPriority="high"
+            fetchpriority="high"
             className="h-full w-full object-cover object-center opacity-100"
           />
 
