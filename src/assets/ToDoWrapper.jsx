@@ -21,7 +21,7 @@ const ToDoWrapper = ({ className }) => {
       }
 
     const tasksCollection = collection(db, "tasks"); 
-    const q = query(tasksCollection, where("userId", "==", user.uid)); 
+    const q = query(tasksCollection, where("userId", "==", user.uid ), orderBy("createdAt", "desc")); // Query tasks for the current user, ordered by creation time 
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const fetchedTasks = snapshot.docs.map(doc => ({
         id: doc.id,

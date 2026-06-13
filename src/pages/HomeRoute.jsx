@@ -1,15 +1,12 @@
 import VideoGallery from "../assets/components/VideoGallery.jsx";
 import Login from "../assets/components/Login.jsx";
-import ToDoWrapper from "../assets/ToDoWrapper";
+//import ToDoWrapper from "../assets/ToDoWrapper";
 import ImageUploader from "../assets/components/ImageUploader.jsx";
 import Gallery from "../assets/components/Gallery.jsx";
 import RecentPosts from "../RecentPosts.jsx";
 import Footer from "../../Footer.jsx";
 import ContactSection from "../assets/components/ContactSection.jsx";
-import { FaPlay, FaPause } from "react-icons/fa";
-import { AnimatePresence, motion } from "framer-motion";
 import VideoPlayerCard from "../components/VideoPlayerCard.jsx";
-import HeroBanner from "../components/HeroBanner.jsx";
 import HeroCarousel from "../components/HeroCarousel.jsx";
 
 export default function HomeRoute({
@@ -64,7 +61,7 @@ export default function HomeRoute({
       <Login onClose={() => setShowLogin(false)} />
     )}
 
-    <ToDoWrapper />
+    {/* <ToDoWrapper /> */}
 
    
 

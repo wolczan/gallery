@@ -1,9 +1,5 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
-import { IoSaveSharp } from 'react-icons/io5';
-import { FaPenToSquare } from 'react-icons/fa6';
 
 const ToDo = ({ task, toggleComplete, deleteTodo, editTodo }) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -31,7 +27,7 @@ const ToDo = ({ task, toggleComplete, deleteTodo, editTodo }) => {
           type="text"
           value={newText}
           onChange={(e) => setNewText(e.target.value)}
-          onKeyPress={handleKeyPress}
+           onKeyDown={handleKeyPress}
           className="edit-input"
         />
       ) : (
@@ -39,39 +35,41 @@ const ToDo = ({ task, toggleComplete, deleteTodo, editTodo }) => {
       )}
       
       <div className="icon-container">
-        {isEditing ? (
-          <IoSaveSharp
+          {isEditing ? (
+          <button
+            type="button"
             aria-label="Save Task"
-            role="button"
-            tabIndex={0}
             onClick={(e) => {
               e.stopPropagation();
-              handleSaveClick(); // Save the updated task text
+              handleSaveClick();
             }}
-          />
-        ) : (
-          <FaPenToSquare
-            aria-label="Edit Task"
-            role="button"
-            tabIndex={0}
-            onClick={(e) => {
-              e.stopPropagation();
-              handleEditClick(); // Enter edit mode
-            }}
-          />
-        )}
+          >
+            💾
+          </button>
+          ) : (
+                    <button
+              type="button"
+              aria-label="Edit Task"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleEditClick();
+              }}
+            >
+              ✏️
+            </button>
+          )}
 
-        <FontAwesomeIcon
-          icon={faTrashCan}
+       <button
+          type="button"
           aria-label="Delete Task"
-          role="button"
-          tabIndex={0}
           onClick={(e) => {
             e.stopPropagation();
             deleteTodo(task.id);
           }}
-        />
-      </div>
+        >
+          🗑️
+        </button>
+              </div>
     </div>
   );
 };

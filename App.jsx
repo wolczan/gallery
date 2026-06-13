@@ -7,7 +7,6 @@ import ContactForm from './src/assets/ContactForm.jsx';
 import './index.css';
 import Footer from './Footer.jsx';
 import { Circles } from 'react-loader-spinner';
-import { FaPlay, FaPause } from 'react-icons/fa';
 import RecentPosts from './src/RecentPosts.jsx';
 import ImageUploader from "./src/assets/components/ImageUploader.jsx";
 import { getAuth } from "firebase/auth";

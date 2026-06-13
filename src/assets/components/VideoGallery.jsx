@@ -1,10 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import { FiHeart, FiShare2, FiTrendingUp, FiMessageSquare } from "react-icons/fi";
-import { FiCamera, FiVideo, FiImage } from "react-icons/fi";
-import { FaFacebook, FaInstagram, FaYoutube, FaTiktok } from "react-icons/fa";
+import { FiImage } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
-import { FiX } from "react-icons/fi";
 
 export default function VideoGallery({ videos }) {
   const navigate = useNavigate(); 
@@ -156,9 +153,8 @@ export default function VideoGallery({ videos }) {
 
           {/* pasek ikon na samym dole HERO */}
           <div className="absolute left-3 right-3 bottom-1 flex items-center gap-4 text-white/90 text-sm">
-            <span className="inline-flex items-center gap-1"><FiHeart /> {v.likes ?? 15}</span>
-            <span className="inline-flex items-center gap-1"><FiMessageSquare /> {v.comments ?? 5}</span>
-            <span className="ml-auto inline-flex items-center gap-1 opacity-90"><FiTrendingUp /> Trending</span>
+            <span className="inline-flex items-center gap-1">{v.likes ?? 15}</span>
+           
             
           </div>
         </div>
@@ -245,15 +241,7 @@ export default function VideoGallery({ videos }) {
 
   {/* 🔧 ikony + lekki margines między sercem i udostępnij */}
   <div className="mt-0.5 flex items-center text-[11px] text-gray-800 flex-wrap ">
-    <span className="inline-flex items-center gap-0.5">
-      <FiHeart className="text-gray-800" /> {v.likes ?? 12}
-    </span>
-    <span className="inline-flex items-center gap-0.5 ml-2">
-      <FiShare2 className="text-gray-800" /> Udostępnij
-    </span>
-    <span className="ml-auto inline-flex items-center gap-0.5 text-gray-700 truncate">
-      <FiTrendingUp className="text-gray-800" /> Trending
-    </span>
+
   </div>
 
           <button
