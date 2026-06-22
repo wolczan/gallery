@@ -1,12 +1,12 @@
 import VideoGallery from "../assets/components/VideoGallery.jsx";
-import Login from "../assets/components/Login.jsx";
+//import Login from "../assets/components/Login.jsx";
 //import ToDoWrapper from "../assets/ToDoWrapper";
 import ImageUploader from "../assets/components/ImageUploader.jsx";
 import Gallery from "../assets/components/Gallery.jsx";
-import RecentPosts from "../RecentPosts.jsx";
+//import RecentPosts from "../RecentPosts.jsx";
 import Footer from "../../Footer.jsx";
 import ContactSection from "../assets/components/ContactSection.jsx";
-import VideoPlayerCard from "../components/VideoPlayerCard.jsx";
+//import VideoPlayerCard from "../components/VideoPlayerCard.jsx";
 import HeroCarousel from "../components/HeroCarousel.jsx";
 
 export default function HomeRoute({
@@ -33,7 +33,7 @@ export default function HomeRoute({
      <div className="max-w-screen-xl mx-auto my-6 px-4">
       <div className="flex flex-col gap-6 items-center">
         <div className="w-full max-w-md">
-          <ImageUploader />
+         {/* <ImageUploader /> */}
         </div>
 
         <div className="w-full">
@@ -42,7 +42,7 @@ export default function HomeRoute({
       </div>
     </div>
 
-    <VideoPlayerCard
+    {/* <VideoPlayerCard
       videos={videos}
       selectedVideo={selectedVideo || videos?.[0]}
       setSelectedVideo={setSelectedVideo}
@@ -53,19 +53,19 @@ export default function HomeRoute({
       posterSrc={posterSrc}
       videoSrc={videoSrc}
       hasSource={hasSource}
-    />
+    />*/}
 
-    <VideoGallery videos={videos} />
+    {/* <VideoGallery videos={videos} />  */}
 
-    {showLogin && (
+    {/* {showLogin && (
       <Login onClose={() => setShowLogin(false)} />
-    )}
+    )}  */}
 
     {/* <ToDoWrapper /> */}
+    
+     {/* <RecentPosts />*/}
+    
 
-   
-
-    <RecentPosts />
 
     <ContactSection />
 

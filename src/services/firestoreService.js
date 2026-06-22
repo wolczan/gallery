@@ -24,7 +24,11 @@ export const subscribeImagesPage = ({ pageSize = 12, callback }) => {
     );
 
   // sort + limit (ważne: createdAt musi istnieć)
-  const q = query(base, orderBy("createdAt", "desc"), limit(pageSize));
+   const q = query(
+  base,
+  orderBy("createdAt", "desc"),
+  limit(pageSize)
+);
 
   const unsubscribe = onSnapshot(q, (snap) => {
     const items = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
@@ -53,7 +57,12 @@ export const loadMoreImages = async ({ lastDoc, pageSize = 12 }) => {
         where("visible", "==", true)
       );
 
-  const q = query(base, orderBy("createdAt", "desc"), startAfter(lastDoc), limit(pageSize));
+     const q = query(
+  base,
+  orderBy("createdAt", "desc"),
+  startAfter(lastDoc),
+  limit(pageSize)
+);
   const snap = await getDocs(q);
 
   const items = snap.docs.map((d) => ({ id: d.id, ...d.data() }));

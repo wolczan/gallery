@@ -1,12 +1,12 @@
 import { useEffect, useMemo, useState, useCallback } from "react";
 import { subscribeImagesPage, loadMoreImages } from "../../services/firestoreService";
-import { useAuth } from "../../utils/useAuth";
+//import { useAuth } from "../../utils/useAuth";
 import "../components/Gallery.css"; 
 
-const PAGE_SIZE = 12;
+const PAGE_SIZE = 20;
 
 const Gallery = () => {
-  const { user } = useAuth(); // opcjonalnie pod przyszłe feature (delete, etc.)
+  //const { user } = useAuth(); // opcjonalnie pod przyszłe feature (delete, etc.)
   const [images, setImages] = useState([]);
   const [lastDoc, setLastDoc] = useState(null);
 
@@ -104,7 +104,7 @@ const Gallery = () => {
     <div className="w-full px-1 py-4  md:px-6 ">
 
       <div className="flex items-center justify-between gap-2 md:gap-3">
-        <h2 className="text-2xl font-semibold text-gray-800 drop-shadow-sm">📷 Moja Galeria</h2>
+        <h2 className="text-2xl font-semibold text-gray-800 drop-shadow-sm">Plakaty</h2>
 
         <div className="text-sm text-gray-600">
           {images.length > 0 ? (
@@ -142,7 +142,9 @@ const Gallery = () => {
         <>
         <div className="space-y-2">
           {Object.entries(groupedImages).map(([batchId, group]) => (
+            console.log(group.title, group.items.length),
             <div key={batchId} className="">
+          
               <h3 className="text-2xl font-bold mb-6">
                 {group.title}
               </h3>
@@ -175,9 +177,36 @@ const Gallery = () => {
                 </div>
 
                 {/* DRUGI RZĄD */}
-                {group.items.length > 4 && (
+                  {group.items.length > 4 && (
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+                      {group.items.slice(4, 8).map((img) => (
+                        <button
+                          key={img.id}
+                          type="button"
+                          onClick={() => setSelectedId(img.id)}
+                          className="group overflow-hidden rounded-2xl bg-white border border-gray-200 shadow-sm hover:shadow-xl transition text-left"
+                        >
+                          <div className="aspect-[2/3] overflow-hidden">
+                            <img
+                              src={img.imageUrl}
+                              alt={img.title}
+                              className="w-full h-full object-cover group-hover:scale-105 transition duration-300"
+                            />
+                          </div>
+
+                          <div className="p-2">
+                            <h4 className="font-medium text-sm truncate">
+                              {img.title}
+                            </h4>
+                          </div>
+                        </button>
+                      ))}
+                    </div>
+                )}
+                                    {/* TRZECI RZĄD */}
+                {group.items.length > 8 && (
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
-                    {group.items.slice(4, 8).map((img) => (
+                    {group.items.slice(8, 12).map((img) => (
                       <button
                         key={img.id}
                         type="button"
@@ -201,7 +230,12 @@ const Gallery = () => {
                     ))}
                   </div>
                 )}
+                  
+
               </div>
+
+                
+
             </div>
           ))}
         </div>

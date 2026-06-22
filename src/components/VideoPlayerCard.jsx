@@ -1,4 +1,3 @@
-import { FaPlay, FaPause } from "react-icons/fa";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState} from "react";
 
@@ -24,6 +23,18 @@ export default function VideoPlayerCard({
     row1: { left: false, right: true },
     row2: { left: false, right: true },
   });
+
+  const PlayIcon = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M8 5v14l11-7z" />
+  </svg>
+);
+
+  const PauseIcon = () => (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M6 5h4v14H6zm8 0h4v14h-4z" />
+    </svg>
+  );
 
   const updateScrollState = (rowId, key) => {
   const el = document.getElementById(rowId);
@@ -153,7 +164,7 @@ export default function VideoPlayerCard({
                           whileTap={{ scale: 0.96 }}
                           className="inline-flex items-center justify-center gap-1.5 rounded-full bg-white px-3 py-1 text-xs font-semibold text-black shadow-lg transition sm:gap-2 sm:px-5 sm:py-3 sm:text-sm"
                         >
-                          {playing ? <FaPause /> : <FaPlay />}
+                          {playing ? <PauseIcon /> : <PlayIcon />}
                           {playing ? "Pauza" : "Odtwórz"}
                         </motion.button>
 
