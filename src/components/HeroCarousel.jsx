@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+
 const slides = [
   {
     label: "Poster Collection",
@@ -29,7 +30,13 @@ const slides = [
   },
 ];
 
+const minSwipeDistance = 50;
+
+
+
 export default function HeroCarousel() {
+  const [touchStart, setTouchStart] = useState(null);
+  const [touchEnd, setTouchEnd] = useState(null);
   const [current, setCurrent] = useState(0);
   const navigate = useNavigate();
 
@@ -42,10 +49,43 @@ export default function HeroCarousel() {
   }, []);
 
   const slide = slides[current];
+  const onTouchStart = (e) => {
+  setTouchEnd(null);
+  setTouchStart(e.targetTouches[0].clientX);
+};
+
+const onTouchMove = (e) => {
+  setTouchEnd(e.targetTouches[0].clientX);
+};
+
+const onTouchEnd = () => {
+  if (touchStart === null || touchEnd === null) return;
+
+  const distance = touchStart - touchEnd;
+
+  const isLeftSwipe = distance > minSwipeDistance;
+  const isRightSwipe = distance < -minSwipeDistance;
+
+  if (isLeftSwipe) {
+    setCurrent((prev) => (prev + 1) % slides.length);
+  }
+
+  if (isRightSwipe) {
+    setCurrent((prev) =>
+      prev === 0 ? slides.length - 1 : prev - 1
+    );
+  }
+};
+
 
   return (
     <section className="mx-auto max-w-[1700px] px-1 py-1 md:px-6">
-      <div className="relative h-[380px] overflow-hidden rounded-xl bg-zinc-950 text-white shadow-2xl md:h-[460px]">
+            <div
+        className="relative h-[380px] overflow-hidden rounded-xl bg-zinc-950 text-white shadow-2xl md:h-[460px]"
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
+        onTouchEnd={onTouchEnd}
+      >
         <div className="absolute inset-0">
           <img
             src={slide.image}
